@@ -1,9 +1,9 @@
 package com.example.testing.liteormlearn.model.cascade;
 
+import com.example.testing.liteormlearn.model.Model;
 import com.litesuits.orm.db.annotation.Mapping;
 import com.litesuits.orm.db.annotation.Table;
 import com.litesuits.orm.db.enums.Relation;
-import com.litesuits.orm.model.Model;
 
 /**
  * 班级

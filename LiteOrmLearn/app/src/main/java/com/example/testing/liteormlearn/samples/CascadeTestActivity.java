@@ -2,6 +2,14 @@ package com.example.testing.liteormlearn.samples;
 
 import android.os.Bundle;
 import android.os.Environment;
+import com.example.testing.liteormlearn.R;
+import com.example.testing.liteormlearn.model.Person;
+import com.example.testing.liteormlearn.model.cascade.Book;
+import com.example.testing.liteormlearn.model.cascade.Classes;
+import com.example.testing.liteormlearn.model.cascade.School;
+import com.example.testing.liteormlearn.model.cascade.Student;
+import com.example.testing.liteormlearn.model.cascade.Teacher;
+import com.example.testing.liteormlearn.test.SqliteUtils;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.DataBaseConfig;
 import com.litesuits.orm.db.assit.QueryBuilder;
@@ -9,10 +17,6 @@ import com.litesuits.orm.db.assit.WhereBuilder;
 import com.litesuits.orm.db.model.ColumnsValue;
 import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.litesuits.orm.log.OrmLog;
-import com.litesuits.orm.model.Person;
-import com.litesuits.orm.model.cascade.*;
-import com.litesuits.orm.test.SqliteUtils;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -379,5 +383,10 @@ public class CascadeTestActivity extends BaseActivity {
                 makeOrmTest(id);
             }
         };
+    }
+
+    @Override protected void onDestroy() {
+        liteOrm.close();
+        super.onDestroy();
     }
 }

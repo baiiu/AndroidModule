@@ -1,6 +1,13 @@
 package com.example.testing.liteormlearn.samples;
 
 import android.os.Bundle;
+import com.example.testing.liteormlearn.R;
+import com.example.testing.liteormlearn.model.single.Address;
+import com.example.testing.liteormlearn.model.single.Boss;
+import com.example.testing.liteormlearn.model.single.Company;
+import com.example.testing.liteormlearn.model.single.Man;
+import com.example.testing.liteormlearn.model.single.Wife;
+import com.example.testing.liteormlearn.test.SqliteUtils;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.DataBaseConfig;
 import com.litesuits.orm.db.assit.QueryBuilder;
@@ -8,9 +15,6 @@ import com.litesuits.orm.db.assit.WhereBuilder;
 import com.litesuits.orm.db.model.ColumnsValue;
 import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.litesuits.orm.log.OrmLog;
-import com.litesuits.orm.model.single.*;
-import com.litesuits.orm.test.SqliteUtils;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -371,9 +375,9 @@ public class SingleTestActivity extends BaseActivity {
                 .where("address=? AND city=?", new String[]{"香港路", "南京"}));
 
         //AND关系 删掉 南京 的 香港路 第三种写法
-        liteOrm.delete(WhereBuilder
-                .create(Address.class)
-                .where("address=? AND city=?", "香港路", "南京"));
+        //liteOrm.delete(WhereBuilder
+        //        .create(Address.class)
+        //        .where("address=? AND city=?", "香港路", "南京"));
 
         printAllAddress();
 
@@ -526,5 +530,8 @@ public class SingleTestActivity extends BaseActivity {
         System.out.println(uMin);
     }
 
-
+    @Override protected void onDestroy() {
+        liteOrm.close();
+        super.onDestroy();
+    }
 }

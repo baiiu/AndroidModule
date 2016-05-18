@@ -1,10 +1,17 @@
 package com.example.testing.liteormlearn.model;
 
-import com.litesuits.orm.db.annotation.*;
+import com.example.testing.liteormlearn.model.cascade.Book;
+import com.litesuits.orm.db.annotation.Check;
+import com.litesuits.orm.db.annotation.Column;
+import com.litesuits.orm.db.annotation.Default;
+import com.litesuits.orm.db.annotation.Ignore;
+import com.litesuits.orm.db.annotation.Mapping;
+import com.litesuits.orm.db.annotation.NotNull;
+import com.litesuits.orm.db.annotation.PrimaryKey;
+import com.litesuits.orm.db.annotation.Table;
+import com.litesuits.orm.db.annotation.UniqueCombine;
 import com.litesuits.orm.db.enums.AssignType;
 import com.litesuits.orm.db.enums.Relation;
-import com.litesuits.orm.model.cascade.Book;
-
 import java.util.ArrayList;
 
 /**

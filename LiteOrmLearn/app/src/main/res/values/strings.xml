@@ -1,3 +1,32 @@
 <resources>
-  <string name="app_name">LiteOrmLearn</string>
+
+
+  <string name="app_name">LiteOrm</string>
+  <string name="title">LiteLab-ORM</string>
+  <string name="title_single">Single-Operation(only current entity)</string>
+  <string name="title_cascade">Cascade-Operation(all related entity)</string>
+    <string name="sub_title"
+        >see more debug info via log</string>
+  <string name="test_single">single persistence TEST</string>
+  <string name="test_cascade">cascade persistence TEST</string>
+
+  <string-array name="orm_test_case">
+    <item>Save(Insert Or Update)</item>
+    <item>Insert</item>
+    <item>Update</item>
+    <item>Update Column</item>
+    <item>Query All</item>
+    <item>Query By WhereBuilder</item>
+    <item>Query By ID</item>
+    <item>Query Any U Want</item>
+    <item>Mapping Test</item>
+    <item>Delete</item>
+    <item>Delete By Index</item>
+    <item>Delete By WhereBuilder</item>
+    <item>Delete All</item>
+    <item>LiteOrm Faster: Large-scale Test(100,000)</item>
+    <item>SQLiteDatabase: Large-scale Test(100,000)</item>
+  </string-array>
+
+
 </resources>

@@ -5,14 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import com.example.testing.liteormlearn.model.single.Boss;
+import com.example.testing.liteormlearn.model.single.Man;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.SQLiteHelper;
-import com.litesuits.orm.db.assit.Transaction;
 import com.litesuits.orm.log.OrmLog;
-import com.litesuits.orm.model.single.Boss;
-import com.litesuits.orm.model.single.Man;
-
 import java.util.ArrayList;
 import java.util.List;
 
