@@ -10,19 +10,23 @@ import com.example.testing.myapplication.retrofit.http.RetrofitClient;
 public enum ApiFactory {
   INSTANCE;
 
-  private final GitHubAPI gitHubAPI;
-  private final AnotherAPI anotherAPI;
+  private static GitHubAPI gitHubAPI;
+  private static AnotherAPI anotherAPI;
 
   ApiFactory() {
-    gitHubAPI = RetrofitClient.INSTANCE.getRetrofit().create(GitHubAPI.class);
-    anotherAPI = RetrofitClient.INSTANCE.getRetrofit().create(AnotherAPI.class);
   }
 
-  public GitHubAPI gitHubAPI() {
+  public static GitHubAPI gitHubAPI() {
+    if (gitHubAPI == null) {
+      gitHubAPI = RetrofitClient.INSTANCE.getRetrofit().create(GitHubAPI.class);
+    }
     return gitHubAPI;
   }
 
-  public AnotherAPI getAnotherAPI() {
+  public static AnotherAPI getAnotherAPI() {
+    if (anotherAPI == null) {
+      anotherAPI = RetrofitClient.INSTANCE.getRetrofit().create(AnotherAPI.class);
+    }
     return anotherAPI;
   }
 }

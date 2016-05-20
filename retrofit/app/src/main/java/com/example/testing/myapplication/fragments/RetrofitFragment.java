@@ -36,7 +36,7 @@ public class RetrofitFragment extends Fragment {
 
   private void normalGet() {
 
-    Call<User> userCall = ApiFactory.INSTANCE.gitHubAPI().userInfo("baiiu");
+    Call<User> userCall = ApiFactory.gitHubAPI().userInfo("baiiu");
 
     userCall.enqueue(new Callback<User>() {
       @Override public void onResponse(Call<User> call, Response<User> response) {
@@ -57,7 +57,7 @@ public class RetrofitFragment extends Fragment {
   }
 
   private void getWithParams() {
-    ApiFactory.INSTANCE.gitHubAPI().listRepos("baiiu").enqueue(new Callback<List<Repo>>() {
+    ApiFactory.gitHubAPI().listRepos("baiiu").enqueue(new Callback<List<Repo>>() {
       @Override public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
         List<Repo> body = response.body();
         LogUtil.d(body == null ? "body == null" : body.toString());
@@ -70,7 +70,7 @@ public class RetrofitFragment extends Fragment {
   }
 
   private void post() {
-    ApiFactory.INSTANCE.gitHubAPI().createUser(new User()).enqueue(new Callback<User>() {
+    ApiFactory.gitHubAPI().createUser(new User()).enqueue(new Callback<User>() {
       @Override public void onResponse(Call<User> call, Response<User> response) {
         User body = response.body();
         LogUtil.d(body == null ? "body == null" : body.toString());
@@ -84,7 +84,7 @@ public class RetrofitFragment extends Fragment {
 
   private void anotherUrl() {
     String s = "http://gank.io/api/day/history";
-    ApiFactory.INSTANCE.getAnotherAPI().gankIOHistory(s).enqueue(new Callback<GankIOHistory>() {
+    ApiFactory.getAnotherAPI().gankIOHistory(s).enqueue(new Callback<GankIOHistory>() {
       @Override public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
         GankIOHistory body = response.body();
         LogUtil.d(body == null ? "body == null" : body.toString());
@@ -98,7 +98,7 @@ public class RetrofitFragment extends Fragment {
 
   private void getOneDay() {
     String s = "http://gank.io/api/day/2015/08/07";
-    ApiFactory.INSTANCE.getAnotherAPI().getOneDay(s).enqueue(new Callback<GankIODay>() {
+    ApiFactory.getAnotherAPI().getOneDay(s).enqueue(new Callback<GankIODay>() {
       @Override public void onResponse(Call<GankIODay> call, Response<GankIODay> response) {
         GankIODay body = response.body();
         LogUtil.d(body == null ? "body == null" : body.toString());
