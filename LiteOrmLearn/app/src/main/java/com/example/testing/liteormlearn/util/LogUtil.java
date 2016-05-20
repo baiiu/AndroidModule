@@ -1,4 +1,4 @@
-package com.example.testing.liteormlearn.orm;
+package com.example.testing.liteormlearn.util;
 
 import android.util.Log;
 import com.litesuits.orm.BuildConfig;

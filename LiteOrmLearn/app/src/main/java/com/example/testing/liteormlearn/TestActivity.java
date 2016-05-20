@@ -18,7 +18,9 @@ public class TestActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     ModelA modelA = new ModelA("en", "小明", 21, "sky");
+    UOrm.INSTANCE.save(modelA);
 
-    UOrm.INSTANCE.getLiteOrm().save(modelA);
+
+
   }
 }
