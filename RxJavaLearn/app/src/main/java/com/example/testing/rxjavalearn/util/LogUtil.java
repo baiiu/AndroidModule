@@ -1,7 +1,7 @@
-package com.example.testing.rxjavalearn;
+package com.example.testing.rxjavalearn.util;
 
 import android.util.Log;
-
+import com.example.testing.rxjavalearn.BuildConfig;
 
 /**
  * Log工具 <BR>
