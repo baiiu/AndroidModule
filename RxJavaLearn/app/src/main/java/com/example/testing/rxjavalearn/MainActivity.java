@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.example.testing.rxjavalearn.fragments.RetrofitRxFragment;
+
+import com.example.testing.rxjavalearn.bestSample.CacheFragment;
 import com.example.testing.rxjavalearn.util.LogUtil;
+
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -27,9 +29,15 @@ public class MainActivity extends AppCompatActivity {
     //    .commit();
 
     //retrofit结合
+//    getSupportFragmentManager().beginTransaction()
+//        .add(new RetrofitRxFragment(), "convertFragment")
+//        .commit();
+
+
     getSupportFragmentManager().beginTransaction()
-        .add(new RetrofitRxFragment(), "convertFragment")
-        .commit();
+            .add(new CacheFragment(), "convertFragment")
+            .commit();
+
   }
 
   /**
