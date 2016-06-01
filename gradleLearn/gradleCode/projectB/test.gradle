@@ -1,0 +1,6 @@
+//使用gradle -q -b /Users/baiiu/gradleLearn/gradleCode/projectB/test.gradle hello运行
+
+
+task hello << {
+println "hello gradle"
+}

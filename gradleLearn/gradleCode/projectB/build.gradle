@@ -1,0 +1,5 @@
+println "projectB configuration";
+
+task helloProjectB << {
+  println "hello projectB";
+}

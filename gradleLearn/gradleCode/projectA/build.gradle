@@ -1,0 +1,125 @@
+println "projectA , configuration phase"
+
+task configured{
+  println "configured task, configuration phase";
+}
+
+
+//最简单写法
+task helloSimplest << {
+  println "hello gradle , ${name}, execution task" // <<等同于 doLast.
+}
+
+task testBoth {
+    doFirst {
+      println 'testBoth.doFirst, execution phase.'
+    }
+    doLast {
+      println 'testBoth.doLast , execution phase.'
+    }
+    println 'testBoth, configuration phase'
+}
+
+
+
+
+//最原始写法
+def aClosure = {
+  println "hello world"
+  println name;//打印该Task名称，看API
+  println project;
+}
+
+task hello{
+  doLast(aClosure);
+}
+
+//简单写法
+task helloSimple {
+    doLast {
+        println 'Hello world!'
+    }
+}
+
+
+
+
+
+/*
+You can add your own properties to a task.
+To add a property named myProperty, set ext.myProperty to an initial value.
+From that point on, the property can be read and set like a predefined task property.
+
+在extra中定义属性，就像在该task中预先定义了的属性值一样。
+
+Section 16.4.2, “Extra properties”.中说：
+Alternatively, an ext block can be used to add multiple properties at once.
+extra属性值不仅仅用在tasks,projects,source sets,可以同时被多个project共享。
+*/
+//使用属性值，使用extra properties这个作用域
+task myTask{
+  ext.myProperty = "myValue";
+}
+task printMyTaskProperty << {
+  println myTask.myProperty;//可以直接获取extra的属性值
+}
+
+
+
+
+
+//Using methods使用方法，抽出方法，便于共用.为创造工具类提供了途径
+task loadFile << {
+  //file()方法是Project的方法，找了好久。在API里
+  def rootFile = file('../groovyCode');//获取File对象
+  def files = rootFile.listFiles().sort();
+  files.each{
+    if(it.isFile()){
+      println "${it.name}";//groovy遍历，内值对象it,此处相当于file.getName()
+    }
+  }
+
+  println("===================");
+
+  //调用方法
+  fileList("../groovyCode").each{
+    println "${it.name}";
+  }
+}
+
+//创建方法
+File[] fileList(String dir){
+  file(dir).listFiles({file -> file.isFile() } as FileFilter).sort();
+}
+
+def dest = "dest";
+task copy(type: Copy) << {
+    from "source"
+    into dest
+
+    println dest;
+}
+
+
+
+
+
+
+task(helloStyle) << {
+  println "hello another style，名字是 ${name}"
+}
+
+task("helloStyleTwo") << {
+  println "hello another style ， 这个task的名称是： ${name}"
+}
+
+
+
+
+
+
+
+
+
+
+//asdf

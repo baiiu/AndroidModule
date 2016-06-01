@@ -1,0 +1,2 @@
+println "setting.gradle , initialization phase";
+include 'projectA','projectB'
