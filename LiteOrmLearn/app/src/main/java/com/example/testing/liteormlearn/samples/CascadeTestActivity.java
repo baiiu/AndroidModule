@@ -2,6 +2,7 @@ package com.example.testing.liteormlearn.samples;
 
 import android.os.Bundle;
 import android.os.Environment;
+
 import com.example.testing.liteormlearn.R;
 import com.example.testing.liteormlearn.model.Person;
 import com.example.testing.liteormlearn.model.cascade.Book;
@@ -17,6 +18,7 @@ import com.litesuits.orm.db.assit.WhereBuilder;
 import com.litesuits.orm.db.model.ColumnsValue;
 import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.litesuits.orm.log.OrmLog;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +49,7 @@ public class CascadeTestActivity extends BaseActivity {
 
         if (liteOrm == null) {
             // 使用级联操作
-            DataBaseConfig config = new DataBaseConfig(this, DB_NAME);
+            DataBaseConfig config = new DataBaseConfig(this, "liteorm.db");
             config.debugged = true; // open the log
             config.dbVersion = 1; // set database version
             config.onUpdateListener = null; // set database update listener

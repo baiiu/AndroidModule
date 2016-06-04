@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.example.testing.liteormlearn.test;
+package com.example.testing.liteormlearn;
 
 import com.litesuits.orm.db.utils.FieldUtil;
 
@@ -22,7 +22,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by matianyu on 16/4/2.

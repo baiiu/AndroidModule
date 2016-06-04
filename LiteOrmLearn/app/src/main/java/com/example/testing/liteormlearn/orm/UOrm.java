@@ -15,12 +15,12 @@ import java.util.List;
  * date: on 16/5/18 17:43
  * description:
  *
- * 封装数据库,对外提供 CRUD 操作
+ * 封装数据库,对外提供基础操作
  *
  *
  * LiteOrm支持级联查询,对象关系映射为数据库关系
  */
-public enum UOrm implements SQLiteHelper.OnUpdateListener, ApiContant {
+public enum UOrm implements SQLiteHelper.OnUpdateListener, ApiConstant {
   INSTANCE;
 
   private LiteOrm mLiteOrm;

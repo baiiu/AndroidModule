@@ -23,7 +23,7 @@
     </activity>
     <activity android:name=".samples.CascadeTestActivity"/>
     <activity android:name=".samples.SingleTestActivity"/>
-    <activity android:name=".TestActivity"/>
+    <activity android:name=".learn.TestActivity"/>
 
   </application>
 

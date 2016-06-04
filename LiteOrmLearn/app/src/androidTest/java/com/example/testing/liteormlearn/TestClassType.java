@@ -1,7 +1,8 @@
-package com.example.testing.liteormlearn.test;
+package com.example.testing.liteormlearn;
 
 import com.example.testing.liteormlearn.model.single.Boss;
 import com.litesuits.orm.db.utils.FieldUtil;
+
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.List;

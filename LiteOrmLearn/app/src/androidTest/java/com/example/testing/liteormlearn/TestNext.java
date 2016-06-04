@@ -1,4 +1,4 @@
-package com.example.testing.liteormlearn.test;
+package com.example.testing.liteormlearn;
 
 import java.util.ArrayList;
 import java.util.Iterator;

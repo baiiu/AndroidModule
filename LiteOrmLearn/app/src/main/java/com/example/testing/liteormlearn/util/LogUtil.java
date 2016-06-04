@@ -1,7 +1,6 @@
 package com.example.testing.liteormlearn.util;
 
 import android.util.Log;
-import com.litesuits.orm.BuildConfig;
 
 /**
  * Log工具 <BR>
@@ -17,7 +16,7 @@ public class LogUtil {
   private LogUtil() {
   }
 
-  public static boolean allow = BuildConfig.DEBUG;
+  public static boolean allow = true;
 
   private static String getPrefix() {
     String prefix = "%s.%s(L:%d)";

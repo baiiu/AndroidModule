@@ -1,4 +1,4 @@
-package com.example.testing.liteormlearn.test;
+package com.example.testing.liteormlearn;
 
 import com.litesuits.orm.db.assit.CollSpliter;
 

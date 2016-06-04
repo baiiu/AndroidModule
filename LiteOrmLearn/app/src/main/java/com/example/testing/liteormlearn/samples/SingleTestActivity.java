@@ -342,7 +342,6 @@ public class SingleTestActivity extends BaseActivity {
         for (Boss uu : ts) {
             OrmLog.i(this, "query Teacher: " + uu);
         }
-
     }
 
     private void testDelete() {

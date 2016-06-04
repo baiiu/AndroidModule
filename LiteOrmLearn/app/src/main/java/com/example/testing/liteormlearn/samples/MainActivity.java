@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.example.testing.liteormlearn.R;
-import com.example.testing.liteormlearn.TestActivity;
+import com.example.testing.liteormlearn.learn.TestActivity;
 
 /**
  * 2015-9-4，金锁很紧张，紫薇抢食快，为我的鱼儿赋诗一首：紫非嫣然出清水，薇瞰浮游间其中。

@@ -1,10 +1,18 @@
-package com.example.testing.liteormlearn.test;
+package com.example.testing.liteormlearn;
 
 import com.litesuits.orm.db.annotation.MapCollection;
 import com.litesuits.orm.db.utils.ClassUtil;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 

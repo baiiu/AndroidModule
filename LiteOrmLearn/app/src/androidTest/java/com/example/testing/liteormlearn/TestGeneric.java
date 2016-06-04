@@ -1,4 +1,4 @@
-package com.example.testing.liteormlearn.test;
+package com.example.testing.liteormlearn;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
