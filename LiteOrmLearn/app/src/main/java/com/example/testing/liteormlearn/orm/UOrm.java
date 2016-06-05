@@ -62,4 +62,12 @@ public enum UOrm implements SQLiteHelper.OnUpdateListener, ApiConstant {
     mLiteOrm.delete(tClass);
   }
 
+  public <T> List<T> queryAll(Class<T> tClass) {
+    if (tClass == null) {
+      return null;
+    }
+
+    return mLiteOrm.query(tClass);
+  }
+
 }
