@@ -53,6 +53,12 @@ public class LogUtil {
         }
     }
 
+    public static void d(long content) {
+        if (allow) {
+            Log.d(TAG, getPrefix() + " --> " + content);
+        }
+    }
+
     /**
      * Send a ERROR log message and log the exception,红色
      */

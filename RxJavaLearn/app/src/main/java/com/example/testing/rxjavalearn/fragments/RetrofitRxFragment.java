@@ -21,7 +21,7 @@ import rx.schedulers.Schedulers;
 /**
  * author: baiiu
  * date: on 16/5/28 10:59
- * description:
+ * description: 与Retrofit结合
  */
 public class RetrofitRxFragment extends Fragment {
 
