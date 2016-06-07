@@ -13,6 +13,8 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.orhanobut.logger.Logger;
 import com.trello.rxlifecycle.FragmentEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -20,11 +22,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * auther: baiiu
  * time: 16/6/6 06 22:03
- * description:
+ * description: 创建操作符
  */
 public class CreateOperatorFragment extends BaseFragment {
 
@@ -47,9 +51,83 @@ public class CreateOperatorFragment extends BaseFragment {
 
 //        intClick();
 
-        Observable<Long> defer = defer();
-        Observable<Long> just = just();
-        longClick(just);
+//        Observable<Long> defer = defer();
+//        Observable<Long> just = just();
+//        longClick(just);
+
+//        from();
+
+//        interval();
+
+//        repeat();
+
+//        timer();
+
+
+    }
+
+    /**
+     * Returns an Observable that emits a specified item before it begins to emit items emitted by the source
+     * Observable.
+     */
+    private void startWith() {
+        //先发射8
+        Observable
+                .just(6)
+                .startWith(8)
+                .subscribe(LogUtil::d);
+
+    }
+
+    private void timer() {
+        RxView.clicks(bt_create)
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .flatMap(aVoid -> Observable.timer(10, TimeUnit.SECONDS))
+                .subscribe(LogUtil::d, e -> Logger.d(e.toString()));
+    }
+
+
+    /**
+     * Repeat作用在Observable上,会对其重复发射count次
+     */
+    private void repeat() {
+        RxView.clicks(bt_create)
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .compose(bindToLifecycle())
+                .flatMap(aVoid -> Observable.just(6).repeat(5))
+                .subscribe(LogUtil::d, e -> LogUtil.e("error", e));
+    }
+
+    /**
+     * 间隔一定时间发送一个数字,从0开始.本身运行在 Schedulers.computation() 线程内
+     */
+    private void interval() {
+        Subscription subscribe = Observable.interval(1, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> bt_create.setText("" + aLong), e -> Logger.e(e.toString()));
+
+        RxView.clicks(bt_create)
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .compose(bindToLifecycle())
+                .subscribe(aVoid -> subscribe.unsubscribe(), e -> Logger.e(e.toString()));
+    }
+
+
+    /**
+     * from一个一个发送数据,just发送整个集合.
+     */
+    private void from() {
+        RxView.clicks(bt_create)
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .compose(bindToLifecycle())
+                .flatMap(aVoid -> {
+                    List<String> list = new ArrayList<>();
+                    for (int i = 0; i < 10; ++i) {
+                        list.add("item" + i);
+                    }
+                    return Observable.from(list);
+                })
+                .subscribe(Logger::d, e -> Logger.e(e.toString()));
     }
 
 

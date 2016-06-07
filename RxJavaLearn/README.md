@@ -22,8 +22,8 @@ codes of RxJava
 - Range — 创建发射指定范围的整数序列的Observable
 - Interval — 创建一个定时发射整数序列的Observable
 - Repeat — 创建重复发射特定的数据或数据序列的Observable
-- Start — 创建发射一个函数的返回值的Observable
 - Timer — 创建在一个指定的延迟之后发射单个数据的Observable
+- Start — 创建发射一个函数的返回值的Observable
 
 
 
