@@ -1,0 +1,255 @@
+数据库：
+  存储管理数据的仓库。
+
+
+关系型数据库管理系统：RDBMS。使用二维表格来存储数据。
+
+
+SQL： 结构化查询语言，可以操作所有关系型数据库
+不区分大小写，建议使用大写。
+
+分类：
+DDL 数据定义语言
+DML 数据操作语言
+
+
+创建数据库：
+CREATE DATABASE IF NO EXSIT dbName
+
+
+列表型：
+int
+double
+decimal
+char 固定长度字符串类型
+varchar 可变长度字符串类型
+text 大字符串
+blob 大字节
+date 日期类型 yyyy-MM-dd
+time 时间类型 hh:mm:ss
+timestamp: 时间戳类型 yyyy-MM-dd hh:mm:ss + 毫秒
+
+
+---
+
+DDL：对表结构的操作
+
+##对表的操作：
+
+创建表: create table 表名(列名 列类型, 列名 列类型, ....)
+查看所有表： show tables
+查看表结构：desc 表名
+删除表： drop table 表名
+
+修改表：
+- 添加列： alter table 表名 add(列名 列类型，列名 列类型...)
+- 修改列类型： alter table 表名 modify 列名 新类型
+- 修改列名和类型： alter table 表名 change 老列名 新列名 新类型
+- 删除列： alter table 表名 drop 列名
+- 修改表名称: alter table 表名 rename to 新表名
+
+
+DML(数据操作语言):针对表记录的操作
+- 查询表记录： select * from 表名
+- 插入记录： insert into 表名 (列名，列名...) values(列值，列值...)
+- 修改记录:  update 表名 set 列名=列值,列名=列值.... [WHERE 条件]
+        运算符： = , != , < , > , <= , >= , BETWEEN...AND , AND , OR , NOT , IN (...) , IS NULL , IS NOT NULL
+
+- 删除记录：delete from 表名 [WHERE条件]
+          truncate table 表名。 删除该表后重新创建
+
+
+- 查询：
+  查询指定列： select 列名,列名... from 表名
+             select distinct 列名 from表名 (去除完全相同的列)
+  条件查询：WHERE 条件
+
+  模糊查询：where 列名 LIKE ‘张%’
+    下划线_ : 匹配一个任意字符
+    百分号%: 匹配一到N个任意字符
+
+
+
+- 排序：
+  单列排序：orderby 列名 asc/desc
+  多列排序 orderby 列名 asc/desc,列名 asc/desc
+
+- 聚合函数
+  count(): select count(*) from 表名，计算所有有效行行数
+  sum()
+  max()
+  min()
+  avg()
+
+- 分组查询 groupby
+   可以和聚合函数连起来一起用
+
+- limit（x,y） 从第x行开始查询，共查询几行记录
+
+
+select 列
+from 表
+where 分组前条件
+group by 分组信息
+having 分组后条件
+orderby
+limit
+
+
+
+---------------------
+
+约束： 对列的值进行约束
+1. 主键约束
+  非空
+  唯一
+  可引用
+
+  创建表时设置主键:
+    create tabe 表名 (
+      列名 类型 primary key,
+      列名 类型
+    )
+    create tabe 表名 (
+      列名 类型,
+      列名 类型,
+      primary key(列名)
+    )
+
+
+  删除主键：alter table 表名 drop primary key
+  添加主键：alter table 表名 add primary key(表名)
+
+
+2. 主键自增长
+create tabe 表名 (
+  列名 类型 primary key auto_increment,
+  列名 类型
+)
+
+
+3. 非空约束
+  create tabe 表名 (
+    列名 类型 primary key auto_increment,
+    列名 类型 not null,
+    列名 类型
+  )
+
+
+4. 唯一约束
+create tabe 表名 (
+  列名 类型 primary key auto_increment,
+  列名 类型 unique,
+  列名 类型 unique not null
+)
+
+5. 外键约束
+  外键用来引用其他表的主键
+  先删除从表，才能删除主表。
+
+  创建表时：
+    create tabe 表名 (
+      列名 类型 primary key auto_increment,
+      列名 类型 unique,
+      constraint 外键约束名 foreign key (外键名) references 主表名(主键)
+    )
+
+  修改表时：
+    alter table 表名
+    add constraint fk_xxx foreign key (class_id) reference tbl_class(cid);
+
+
+6. check约束
+7. 表于表关系
+  多对一(学生和班级)
+  多对多(学生和老师) 通过中间表
+
+  一对一(夫妻)
+    从表的主键是主表的外键
+
+
+---------------------------
+
+对象关系模型：
+
+
+
+
+--------------------------
+
+多表查询：
+
+  1. 合并结果集
+    两个结果集的列数必须相同，两个结果集的列类型必须一一对应
+    union
+    union all
+
+  2. 连接查询
+    笛卡尔积
+
+    1. 内连接 INNER JOIN
+      列=两表的列数和
+      行=笛卡尔积
+      使用主外键去除笛卡尔积 where条件中判断
+
+      select *
+      from emp e
+      INNER JOIN dept d
+      ON e.外键 = d.主键
+      where xxx
+
+
+
+
+    2. 外连接
+      左外连接 LEFT OUTER JOIN
+        左表都出现，右表不匹配时补NULL
+
+
+      右外连接 RIGHT OUTER JOIN
+
+      全外连接 FULL OUTER JOIN
+
+    3. 子查询
+      from后，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
