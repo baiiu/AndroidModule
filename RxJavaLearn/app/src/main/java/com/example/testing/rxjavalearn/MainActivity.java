@@ -3,7 +3,7 @@ package com.example.testing.rxjavalearn;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.testing.rxjavalearn.fragments.TestFragment;
+import com.example.testing.rxjavalearn.operators.TransformOperatorsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,13 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         getSupportFragmentManager().beginTransaction()
-                .add(new TestFragment(), "convertFragment")
+                .add(android.R.id.content,
+//                        new CreateOperatorFragment(),
+                        new TransformOperatorsFragment(),
+                        "operator")
                 .commit();
-
-
-//        getSupportFragmentManager().beginTransaction()
-//                .add(android.R.id.content, new CreateOperatorFragment(), "convertFragment")
-//                .commit();
 
     }
 
