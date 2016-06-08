@@ -8,7 +8,4 @@ How to use:
 [项目主页](https://github.com/litesuits/android-lite-orm)
 本项目也有相应的samples.
 
-
-How to use better:
-会在实践中慢慢总结出来,封装肯定是必须的.
-
+blog文章：http://blog.csdn.net/u014099894/article/details/51586500

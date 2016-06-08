@@ -1,6 +1,14 @@
 ## RxJavaLearn
 codes of RxJava
 
+Functional Reactive Programming (FRP) offers a fresh perspective on solving modern programming problems. 
+Once understood, it can greatly simplify your project, especially when it comes to code dealing with asynchronous events with nested callbacks, complex list filtering/transformation or timing concerns.
+
+
+On a more conceptual level,Subscribersare supposed to be the thing thatreacts, not the thing thatmutates.
+Subscribers更应该做出响应，而不是变化。
+
+
 
 ### 操作符决策树
 
@@ -14,6 +22,9 @@ codes of RxJava
 
 
 ### 创建操作
+用于创建Observable的操作符
+
+
 - Create — 通过调用观察者的方法从头创建一个Observable
 - Empty/Never/Throw — 创建行为受限的特殊Observable
 - Defer — 在观察者订阅之前不创建这个Observable，为每一个观察者创建一个*新的*Observable
@@ -28,6 +39,9 @@ codes of RxJava
 
 
 ### 变换操作
+对Observable发射的数据进行变换
+
+
 - Buffer — 缓存，可以简单的理解为缓存，它定期从Observable收集数据到一个集合，然后把这些数据集合打包发射，而不是一次发射一个
 - FlatMap — 扁平映射，将Observable发射的数据变换为Observables集合，然后将这些Observable发射的数据平坦化的放进一个单独的Observable，可以认为是一个将嵌套的数据结构展开的过程。
 - GroupBy — 分组，将原来的Observable分拆为Observable集合，将原始Observable发射的数据按Key分组，每一个Observable发射一组不同的数据
@@ -38,6 +52,24 @@ codes of RxJava
 
 
 ### 过滤操作
+转化操作符，能将数据转化为我们想要的格式，但是如果数据集合里面有一些我们想要过滤掉的数据怎么办？
+这时候我们就需要使用过滤操作符:**用于从Observable发射的数据中进行选择.**
+
+
+
+- Debounce — 只有在空闲了一段时间后才发射数据，通俗的说，就是如果一段时间没有操作，就执行一次操作
+- Distinct — 去重，过滤掉重复数据项
+- ElementAt — 取值，取特定位置的数据项
+- Filter — 过滤，过滤掉没有通过谓词测试的数据项，只发射通过测试的
+- First — 首项，只发射满足条件的第一条数据
+- IgnoreElements — 忽略所有的数据，只保留终止通知(onError或onCompleted)
+- Last — 末项，只发射最后一条数据
+- Sample — 取样，定期发射最新的数据，等于是数据抽样，有的实现里叫ThrottleFirst
+- Skip — 跳过前面的若干项数据
+- SkipLast — 跳过后面的若干项数据
+- Take — 只保留前面的若干项数据
+- TakeLast — 只保留后面的若干项数据
+
 
 
 ### 组合操作
