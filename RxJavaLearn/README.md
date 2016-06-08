@@ -56,19 +56,24 @@ Subscribers更应该做出响应，而不是变化。
 这时候我们就需要使用过滤操作符:**用于从Observable发射的数据中进行选择.**
 
 
-
-- Debounce — 只有在空闲了一段时间后才发射数据，通俗的说，就是如果一段时间没有操作，就执行一次操作
-- Distinct — 去重，过滤掉重复数据项
+- throttleWithTimeout 源Observable每次发射出来一个数据后就会进行计时,如果在设定好的时间结束前源Observable有新的数据发射出来，这个数据就会被丢弃，同时重新开始计时。
+- Debounce — 只有在空闲了一段时间后才发射数据，通俗的说，就是如果一段时间没有操作，就执行一次操作.还可以根据一个函数来进行限流。这个函数的返回值是一个临时Observable，
+如果源Observable在发射一个新的数据的时候，上一个数据根据函数所生成的临时Observable还没有结束,没有调用onComplete，那么上一个数据就会被过滤掉。如果是最后一个,还是会发射.
+- Distinct — 去重，过滤掉所有的重复数据项
+- DistinctUtilChanged 过滤掉相邻的重复项
 - ElementAt — 取值，取特定位置的数据项
 - Filter — 过滤，过滤掉没有通过谓词测试的数据项，只发射通过测试的
-- First — 首项，只发射满足条件的第一条数据
+- First — 只取满足条件的第一个数据.可以和BlockingObservable连用.
+可以Observable.toBlocking或者BlockingObservable.from方法来将一个Observable对象转化为BlockingObservable对象
+- Last — 末项，只发射最后一条数据.
 - IgnoreElements — 忽略所有的数据，只保留终止通知(onError或onCompleted)
-- Last — 末项，只发射最后一条数据
 - Sample — 取样，定期发射最新的数据，等于是数据抽样，有的实现里叫ThrottleFirst
+- throttleFirst 会定期发射这个时间段里源Observable发射的第一个数据
 - Skip — 跳过前面的若干项数据
 - SkipLast — 跳过后面的若干项数据
 - Take — 只保留前面的若干项数据
 - TakeLast — 只保留后面的若干项数据
+
 
 
 
