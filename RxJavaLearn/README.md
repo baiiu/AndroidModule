@@ -412,7 +412,38 @@ Subscribers更应该做出响应，而不是变化。
 
 
 ### 连接操作
- 
+一些有精确可控的订阅行为的特殊Observable
+
+什么是Connectable Observable: 
+    就是一种特殊的Observable对象，并不是Subscrib的时候就发射数据，而是只有对其应用connect操作符的时候才开始发射数据，
+    所以可以用来更灵活的控制数据发射的时机。
+    
+使用Publish操作符将Observable转换为Connectable Observable,然后可以通过connect控制何时发射.
+
+- Publish 
+    
+    将一个普通的Observable转换为可连接的
+    Publish操作符就是用来将一个普通的Observable对象转化为一个Connectable Observable。需要注意的是如果发射数据已经开始了再进行订阅只能接收以后发射的数据。
+     
+    
+- Connect 
+    
+    Connect操作符就是用来触发Connectable Observable发射数据的。
+    应用Connect操作符后会返回一个Subscription对象，通过这个Subscription对象，我们可以调用其unsubscribe方法来终止数据的发射。
+    另外，如果还没有订阅者订阅的时候就应用Connect操作符也是可以使其开始发射数据的。
+    
+- RefCount 
+    
+    RefCount操作符就是将一个Connectable Observable 对象再重新转化为一个普通的Observable对象，这时候订阅者进行订阅时就会触发数据的发射。
+
+    
+- Replay 
+
+    Replay操作符返回一个Connectable Observable 对象并且可以缓存其发射过的数据，这样即使有订阅者在其发射数据之后进行订阅也能收到其之前发射过的数据。
+    不过使用Replay操作符我们最好还是限定其缓存的大小，否则缓存的数据太多了可会占用很大的一块内存。
+    对缓存的控制可以从空间和时间两个方面来实现。
+    
+    直接返回一个connectable observable,不用publish
  
 ### 转换操作
 
