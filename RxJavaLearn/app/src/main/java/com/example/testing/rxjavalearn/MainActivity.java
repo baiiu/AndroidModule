@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.testing.rxjavalearn.operators.ErrorHandingFragment;
-import com.example.testing.rxjavalearn.operators.UtilityOperatorsFragment;
+import com.example.testing.rxjavalearn.operators.ConditionalBooleanOperatorsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new ErrorHandingFragment();
 
-        return new UtilityOperatorsFragment();
+//        return new UtilityOperatorsFragment();
+        return new ConditionalBooleanOperatorsFragment();
     }
 
 
