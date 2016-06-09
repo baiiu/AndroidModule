@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.testing.rxjavalearn.operators.FilterOperatorsFragment;
+import com.example.testing.rxjavalearn.operators.ErrorHandingFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
 //        return new CreateOperatorFragment();
 //        return new TransformOperatorsFragment();
 
-        return new FilterOperatorsFragment();
+//        return new FilterOperatorsFragment();
+//        return new CombiningOperatorsFragment();
 
+        return new ErrorHandingFragment();
     }
 
 

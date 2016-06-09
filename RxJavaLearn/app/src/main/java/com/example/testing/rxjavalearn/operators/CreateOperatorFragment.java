@@ -61,6 +61,8 @@ public class CreateOperatorFragment extends BaseFragment {
 
 //        repeat();
 
+        startWith();
+
 //        timer();
 
 
@@ -75,10 +77,14 @@ public class CreateOperatorFragment extends BaseFragment {
         Observable
                 .just(6)
                 .startWith(8)
+                .compose(bindToLifecycle())
                 .subscribe(LogUtil::d);
 
     }
 
+    /**
+     * Timer会在指定时间后发射一个数字0，注意其也是运行在computation Scheduler
+     */
     private void timer() {
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
