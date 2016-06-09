@@ -11,7 +11,7 @@ import rx.functions.Func1;
 /**
  * auther: baiiu
  * time: 16/6/9 09 11:53
- * description:
+ * description: 条件布尔操作符
  */
 public class ConditionalBooleanOperatorsFragment extends BaseFragment {
 

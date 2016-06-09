@@ -389,6 +389,26 @@ Subscribers更应该做出响应，而不是变化。
 
 
 ### 算术和聚合操作
+- Concat
+ 
+    将多个Observable结合成一个Observable并发射数据，并且严格按照先后顺序发射数据，前一个Observable的数据没有发射完，不发射后面Observable的数据
+
+- Count
+    
+    Count操作符用来统计源Observable发射了多少个数据，最后将数目给发射出来；
+    如果源Observable发射错误，则会将错误直接报出来；在源Observable没有终止前，count是不会发射统计数据的。
+ 
+- Reduce
+ 
+    Reduce操作符应用一个函数接收Observable发射的数据和函数的计算结果作为下次计算的参数，输出最后的结果。
+    跟前面我们了解过的scan操作符很类似，只是scan会输出每次计算的结果，而reduce只会输出最后的结果。
+
+
+- Collect
+
+    collect用来将源Observable发射的数据给收集到一个数据结构里面，需要使用两个参数：
+    一个产生收集数据结构的函数
+    一个接收第一个函数产生的数据结构和源Observable发射的数据作为参数的函数。
 
 
 ### 连接操作
