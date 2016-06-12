@@ -34,12 +34,12 @@ public class FilterOperatorsFragment extends BaseFragment {
 //        filter();
 
 //        first();
-//        firstAndBlockingObservable();
+        firstAndBlockingObservable();
 
 //        skip();
 //        take();
-        sample();
-        throttleFirst();
+//        sample();
+//        throttleFirst();
     }
 
     /**
@@ -89,6 +89,8 @@ public class FilterOperatorsFragment extends BaseFragment {
 
     /**
      * Observable.toBlocking或者BlockingObservable.from方法来将一个Observable对象转化为BlockingObservable对象
+     * 这个方法不会对Observable做任何处理，只会阻塞住，当满足条件的数据发射出来的时候才会返回一个BlockingObservable对象。
+     * 可以使用Observable.toBlocking或者BlockingObservable.from方法来将一个Observable对象转化为BlockingObservable对象。BlockingObservable可以和first操作符进行配合使用。
      */
     private void firstAndBlockingObservable() {
 
@@ -103,7 +105,7 @@ public class FilterOperatorsFragment extends BaseFragment {
                                 e.printStackTrace();
                             }
 
-                            LogUtil.d("onNext " + i);
+//                            LogUtil.d("onNext " + i);
                             subscriber.onNext(i);
                         }
 

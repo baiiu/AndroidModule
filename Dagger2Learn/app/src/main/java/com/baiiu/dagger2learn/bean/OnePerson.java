@@ -12,14 +12,25 @@ public class OnePerson {
     public String age;
 
 
-    @Inject
-    public OnePerson() {
+    /*
+        当两者同时都能提供依赖时,优先Module.
+     */
+    @Inject public OnePerson() {
         this.name = "name";
         this.age = "age";
     }
 
-    @Override
-    public String toString() {
+    /*
+        不能添加@Inject注解: Error:(20, 20) 错误: Types may only contain one @Inject constructor.
+
+        通过 @Module 使用 @Provides 注入
+     */
+    public OnePerson(String name, String age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override public String toString() {
         return "OnePerson{" +
                 "name='" + name + '\'' +
                 ", age='" + age + '\'' +

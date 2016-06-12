@@ -2,25 +2,25 @@ package com.baiiu.dagger2learn;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
 import com.baiiu.dagger2learn.bean.OnePerson;
 import com.baiiu.dagger2learn.di.component.DaggerMainComponent;
 import com.baiiu.dagger2learn.di.component.MainComponent;
 import com.baiiu.dagger2learn.di.module.ApplicationModule;
+import com.baiiu.dagger2learn.littleSample.FruitFragment;
 import com.baiiu.dagger2learn.util.LogUtil;
-
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Inject
-    OnePerson onePerson;
+    @Inject OnePerson onePerson;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportFragmentManager().beginTransaction()
+                .add(new FruitFragment(),"littleSample")
+                .commit();
 
         MainComponent mainComponent = DaggerMainComponent.builder()
                 .applicationModule(new ApplicationModule(this))
@@ -29,6 +29,5 @@ public class MainActivity extends AppCompatActivity {
 
         LogUtil.d(onePerson.toString());
     }
-
 
 }

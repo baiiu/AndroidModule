@@ -19,7 +19,20 @@ public class TestFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        filterTest();
+//        filterTest();
+        firstTest();
+    }
+
+    /**
+     * 取满足条件的第一个,如无满足条件数据抛出异常.有null数据时会抛空指针异常,要判空处理
+     * <p>
+     * <p>
+     * takeFirst() 只会调用onComplete
+     */
+    private void firstTest() {
+        Observable.concat(Observable.just(null), Observable.range(0, 8))
+                .first(integer -> integer != null && integer > 8)
+                .subscribe(getSubscriber());
     }
 
     /**
