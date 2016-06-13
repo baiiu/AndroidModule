@@ -1,4 +1,4 @@
-package com.baiiu.dagger2learn.di.module;
+package com.baiiu.dagger2learn.mvpSample;
 
 import com.baiiu.dagger2learn.bean.OnePerson;
 import com.baiiu.dagger2learn.di.scope.PerActivity;
@@ -16,7 +16,7 @@ public class MainModule {
     /*
         通过 @Provides 提供依赖,优先Module中的依赖
      */
-    @Provides @PerActivity public OnePerson privideOnePerson() {
+    @Provides @PerActivity public OnePerson provideOnePerson() {
         return new OnePerson("LiMing", "25");
     }
 }

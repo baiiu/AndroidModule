@@ -1,9 +1,7 @@
 package com.baiiu.dagger2learn.di.module;
 
 import android.content.Context;
-
-import javax.inject.Singleton;
-
+import com.baiiu.dagger2learn.di.scope.PerApp;
 import dagger.Module;
 import dagger.Provides;
 
@@ -20,9 +18,7 @@ public class ApplicationModule {
         this.mContext = context;
     }
 
-    @Provides
-    @Singleton
-    public Context provideContext() {
+    @Provides @PerApp public Context provideContext() {
         return mContext;
     }
 

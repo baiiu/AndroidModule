@@ -1,10 +1,12 @@
 package com.baiiu.dagger2learn;
 
 import android.app.Application;
-
-import com.baiiu.dagger2learn.di.component.ApplicationComponent;
-import com.baiiu.dagger2learn.di.component.DaggerApplicationComponent;
+import android.content.Context;
+import com.baiiu.dagger2learn.di.component.AppComponent;
+import com.baiiu.dagger2learn.di.component.DaggerAppComponent;
 import com.baiiu.dagger2learn.di.module.ApplicationModule;
+import com.baiiu.dagger2learn.util.LogUtil;
+import javax.inject.Inject;
 
 /**
  * author: baiiu
@@ -13,18 +15,26 @@ import com.baiiu.dagger2learn.di.module.ApplicationModule;
  */
 public class MyApplication extends Application {
 
-    ApplicationComponent mApplicationComponent;
+    /*
+        需要是静态吗?
+     */
+    private static AppComponent mAppComponent;
 
-    @Override
-    public void onCreate() {
+    @Inject Context sContext;
+
+    @Override public void onCreate() {
         super.onCreate();
 
-        mApplicationComponent = DaggerApplicationComponent.builder()
+        mAppComponent = DaggerAppComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
+
+        mAppComponent.inject(this);
+
+        LogUtil.d(sContext.toString());
     }
 
-    public ApplicationComponent getApplicationComponent() {
-        return mApplicationComponent;
+    public static AppComponent getApplicationComponent() {
+        return mAppComponent;
     }
 }

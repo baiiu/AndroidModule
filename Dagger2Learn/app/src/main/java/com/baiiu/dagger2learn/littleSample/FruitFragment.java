@@ -3,7 +3,7 @@ package com.baiiu.dagger2learn.littleSample;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import com.baiiu.dagger2learn.qualifier.FruitType;
+import com.baiiu.dagger2learn.di.qualifier.FruitType;
 import com.baiiu.dagger2learn.util.LogUtil;
 import javax.inject.Inject;
 

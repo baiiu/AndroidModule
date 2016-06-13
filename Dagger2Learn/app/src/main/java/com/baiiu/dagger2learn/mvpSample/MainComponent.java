@@ -1,9 +1,8 @@
-package com.baiiu.dagger2learn.di.component;
+package com.baiiu.dagger2learn.mvpSample;
 
 import com.baiiu.dagger2learn.MainActivity;
+import com.baiiu.dagger2learn.di.module.ActivityModule;
 import com.baiiu.dagger2learn.di.module.ApplicationModule;
-
-import com.baiiu.dagger2learn.di.module.MainModule;
 import com.baiiu.dagger2learn.di.scope.PerActivity;
 import dagger.Component;
 
@@ -15,11 +14,13 @@ import dagger.Component;
 @PerActivity
 @Component(
         dependencies = ApplicationModule.class,
-        modules = MainModule.class
+        modules = { MainModule.class, ActivityModule.class }
 
 )
 public interface MainComponent {
 
     void inject(MainActivity mainActivity);
+
+    MainFragmentComponent mainFragmentComponent();
 
 }

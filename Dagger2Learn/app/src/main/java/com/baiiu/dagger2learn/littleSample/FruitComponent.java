@@ -12,7 +12,9 @@ import dagger.Component;
     Component就是一个将Module中的依赖注入到目标类中的注入器(组件)。
  */
 @Component(
-        modules = FruitModule.class)
+        modules = FruitModule.class
+
+)
 public interface FruitComponent {
 
     /*

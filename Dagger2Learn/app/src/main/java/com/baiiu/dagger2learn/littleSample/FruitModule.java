@@ -1,6 +1,6 @@
 package com.baiiu.dagger2learn.littleSample;
 
-import com.baiiu.dagger2learn.qualifier.FruitType;
+import com.baiiu.dagger2learn.di.qualifier.FruitType;
 import dagger.Module;
 import dagger.Provides;
 

@@ -1,4 +1,4 @@
-package com.baiiu.dagger2learn.qualifier;
+package com.baiiu.dagger2learn.di.qualifier;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
