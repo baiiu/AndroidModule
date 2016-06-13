@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 .add(new FruitFragment(), "littleSample")
                 .commit();
 
-
+        /*
+            看源码可以看到如果Module只有有参构造函数,则必须要显示传入Module
+         */
         mainComponent = DaggerMainComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .mainModule(new MainModule())
