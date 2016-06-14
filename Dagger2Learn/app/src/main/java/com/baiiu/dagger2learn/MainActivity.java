@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.baiiu.dagger2learn.bean.OnePerson;
 import com.baiiu.dagger2learn.di.module.ApplicationModule;
+import com.baiiu.dagger2learn.doubleDependenciesSample.DoubleDependenciesFragment;
 import com.baiiu.dagger2learn.littleSample.FruitFragment;
 import com.baiiu.dagger2learn.littleSingleSample.LittleSingleSampleFragment;
 import com.baiiu.dagger2learn.mvpSample.DaggerMainComponent;
@@ -34,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(new FruitFragment(), "littleSample")
                 .commit();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(new DoubleDependenciesFragment(), "littleSample")
+                .commit();
+
 
         /*
             看源码可以看到如果Module只有有参构造函数,则必须要显示传入Module

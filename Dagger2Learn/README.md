@@ -11,7 +11,8 @@ Dagger2的示例代码.
 可参考 littleSample
 
 
-
+3. 提供的依赖还消费别的依赖
+可参考doubleDependenciesSample下的示例.
 
 
 
