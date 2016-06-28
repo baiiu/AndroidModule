@@ -21,92 +21,102 @@ import retrofit2.Response;
  */
 public class RetrofitFragment extends Fragment {
 
-  @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
-    //normalGet();
-    //getWithParams();
-    //post();
+    @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //normalGet();
+        //getWithParams();
+        //post();
 
-    //无缓存
-    anotherUrl();
+        //无缓存
+        anotherUrl();
 
-    //默认缓存
-    getOneDay();
-  }
+        //默认缓存
+        getOneDay();
+    }
 
-  private void normalGet() {
+    private void normalGet() {
 
-    Call<User> userCall = ApiFactory.gitHubAPI().userInfo("baiiu");
+        Call<User> userCall = ApiFactory.gitHubAPI()
+                .userInfo("baiiu");
 
-    userCall.enqueue(new Callback<User>() {
-      @Override public void onResponse(Call<User> call, Response<User> response) {
-        User body = response.body();
-        LogUtil.d(body == null ? "body == null" : body.toString());
-      }
+        userCall.enqueue(new Callback<User>() {
+            @Override public void onResponse(Call<User> call, Response<User> response) {
+                User body = response.body();
+                LogUtil.d(body == null ? "body == null" : body.toString());
+            }
 
-      @Override public void onFailure(Call<User> call, Throwable t) {
-        if (call.isCanceled()) {
-          LogUtil.d("the call is canceled , " + toString());
-        } else {
-          LogUtil.e(t.toString());
-        }
-      }
-    });
+            @Override public void onFailure(Call<User> call, Throwable t) {
+                if (call.isCanceled()) {
+                    LogUtil.d("the call is canceled , " + toString());
+                } else {
+                    LogUtil.e(t.toString());
+                }
+            }
+        });
 
-    //userCall.cancel();
-  }
+        //userCall.cancel();
+    }
 
-  private void getWithParams() {
-    ApiFactory.gitHubAPI().listRepos("baiiu").enqueue(new Callback<List<Repo>>() {
-      @Override public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-        List<Repo> body = response.body();
-        LogUtil.d(body == null ? "body == null" : body.toString());
-      }
+    private void getWithParams() {
+        ApiFactory.gitHubAPI()
+                .listRepos("baiiu")
+                .enqueue(new Callback<List<Repo>>() {
+                    @Override public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+                        List<Repo> body = response.body();
+                        LogUtil.d(body == null ? "body == null" : body.toString());
+                    }
 
-      @Override public void onFailure(Call<List<Repo>> call, Throwable t) {
+                    @Override public void onFailure(Call<List<Repo>> call, Throwable t) {
 
-      }
-    });
-  }
+                    }
+                });
+    }
 
-  private void post() {
-    ApiFactory.gitHubAPI().createUser(new User()).enqueue(new Callback<User>() {
-      @Override public void onResponse(Call<User> call, Response<User> response) {
-        User body = response.body();
-        LogUtil.d(body == null ? "body == null" : body.toString());
-      }
+    private void post() {
+        ApiFactory.gitHubAPI()
+                .createUser(new User())
+                .enqueue(new Callback<User>() {
+                    @Override public void onResponse(Call<User> call, Response<User> response) {
+                        User body = response.body();
+                        LogUtil.d(body == null ? "body == null" : body.toString());
+                    }
 
-      @Override public void onFailure(Call<User> call, Throwable t) {
-        LogUtil.d(t.toString());
-      }
-    });
-  }
+                    @Override public void onFailure(Call<User> call, Throwable t) {
+                        LogUtil.d(t.toString());
+                    }
+                });
+    }
 
-  private void anotherUrl() {
-    String s = "http://gank.io/api/day/history";
-    ApiFactory.getAnotherAPI().gankIOHistory(s).enqueue(new Callback<GankIOHistory>() {
-      @Override public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
-        GankIOHistory body = response.body();
-        LogUtil.d(body == null ? "body == null" : body.toString());
-      }
+    private void anotherUrl() {
+        String s = "http://gank.io/api/day/history";
+        ApiFactory.getAnotherAPI()
+                .gankIOHistory(s)
+                .enqueue(new Callback<GankIOHistory>() {
+                    @Override
+                    public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
+                        GankIOHistory body = response.body();
+                        LogUtil.d(body == null ? "body == null" : body.toString());
+                    }
 
-      @Override public void onFailure(Call<GankIOHistory> call, Throwable t) {
-        LogUtil.e("anotherUrl ," + t.toString());
-      }
-    });
-  }
+                    @Override public void onFailure(Call<GankIOHistory> call, Throwable t) {
+                        LogUtil.e("anotherUrl ," + t.toString());
+                    }
+                });
+    }
 
-  private void getOneDay() {
-    String s = "http://gank.io/api/day/2015/08/07";
-    ApiFactory.getAnotherAPI().getOneDay(s).enqueue(new Callback<GankIODay>() {
-      @Override public void onResponse(Call<GankIODay> call, Response<GankIODay> response) {
-        GankIODay body = response.body();
-        LogUtil.d(body == null ? "body == null" : body.toString());
-      }
+    private void getOneDay() {
+        String s = "http://gank.io/api/day/2015/08/07";
+        ApiFactory.getAnotherAPI()
+                .getOneDay(s)
+                .enqueue(new Callback<GankIODay>() {
+                    @Override public void onResponse(Call<GankIODay> call, Response<GankIODay> response) {
+                        GankIODay body = response.body();
+                        LogUtil.d(body == null ? "body == null" : body.toString());
+                    }
 
-      @Override public void onFailure(Call<GankIODay> call, Throwable t) {
-        LogUtil.e("getOneDay ," + t.toString());
-      }
-    });
-  }
+                    @Override public void onFailure(Call<GankIODay> call, Throwable t) {
+                        LogUtil.e("getOneDay ," + t.toString());
+                    }
+                });
+    }
 }

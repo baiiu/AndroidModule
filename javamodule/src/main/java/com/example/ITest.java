@@ -1,0 +1,19 @@
+package com.example;
+
+/**
+ * author: baiiu
+ * date: on 16/6/28 15:32
+ * description: 之后再学习这块
+ */
+public interface ITest {
+    @GET("String GET")
+    String add(String a, String b);
+
+
+
+    @GET("int GET")
+    int add(int a, int b);
+
+
+
+}

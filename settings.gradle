@@ -1,9 +1,10 @@
 include(
 
-//    'unitTestLearn',
-//    ':LiteOrmLearn',
-//    ':retrofitLearn',
-    ':RxJavaLearn',
-//    ':Dagger2Learn',
+        ':javamodule',
+        //    'unitTestLearn',
+        //    ':LiteOrmLearn',
+        ':retrofitLearn',
+        ':RxJavaLearn',
+        //    ':Dagger2Learn',
 
 )
