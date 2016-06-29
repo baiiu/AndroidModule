@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import com.example.testing.myapplication.fragments.NewsListFragment;
 import com.example.testing.myapplication.fragments.RetrofitFragment;
 import com.example.testing.myapplication.util.NetWorkReceiver;
 
@@ -23,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
         //设置List
-        getSupportFragmentManager().beginTransaction()
-                .add(android.R.id.content, new NewsListFragment(), "newsList")
-                //.addToBackStack(null)
-                .commit();
+        //getSupportFragmentManager().beginTransaction()
+        //        .add(android.R.id.content, new NewsListFragment(), "newsList")
+        //        //.addToBackStack(null)
+        //        .commit();
 
         //String url = "https://api.github.com/users/baiiu";
         //OkHttpUtils.get().url(url).build().execute(new StringCallback() {

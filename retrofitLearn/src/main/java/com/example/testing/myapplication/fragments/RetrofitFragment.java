@@ -13,6 +13,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * auther: baiiu
@@ -24,14 +27,15 @@ public class RetrofitFragment extends Fragment {
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //normalGet();
+        rxGet();
         //getWithParams();
         //post();
 
         //无缓存
-        anotherUrl();
+        //anotherUrl();
 
         //默认缓存
-        getOneDay();
+        //getOneDay();
     }
 
     private void normalGet() {
@@ -55,6 +59,27 @@ public class RetrofitFragment extends Fragment {
         });
 
         //userCall.cancel();
+    }
+
+
+    private void rxGet() {
+        ApiFactory.gitHubAPI()
+                .userInfoRx("baiiu")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<User>() {
+                    @Override public void onCompleted() {
+                        LogUtil.d("onCompleted");
+                    }
+
+                    @Override public void onError(Throwable e) {
+                        LogUtil.e(e.toString());
+                    }
+
+                    @Override public void onNext(User user) {
+                        LogUtil.d(user.toString());
+                    }
+                });
     }
 
     private void getWithParams() {

@@ -7,7 +7,7 @@ package com.example;
  */
 public interface ITest {
     @GET("String GET")
-    String add(String a, String b);
+    String addString(String a, String b);
 
 
 
