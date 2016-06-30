@@ -5,6 +5,7 @@ import com.example.testing.rxjavalearn.operators.BaseFragment;
 import com.example.testing.rxjavalearn.util.LogUtil;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Func2;
 
 /**
  * author: baiiu
@@ -32,12 +33,19 @@ public class TestFragment extends BaseFragment {
                 .onErrorResumeNext(throwable -> {
                     //拦截onError
                     return Observable.just(22);
+
+                    //使用这个时直接调用onComplete(),onNext()并不会走
+                    //return Observable.empty();
                 });
 
         Observable<String> string1 = Observable.just("String1");
 
 
-        Observable.zip(just, string1, (integer, s) -> String.valueOf(integer) + ", " + s)
+        Observable.zip(just, string1, new Func2<Integer, String, String>() {
+            @Override public String call(Integer integer, String s) {
+                return String.valueOf(integer) + ", " + s;
+            }
+        })
                 .subscribe(new Subscriber<String>() {
                     @Override public void onCompleted() {
                         LogUtil.d("onCompleted");
