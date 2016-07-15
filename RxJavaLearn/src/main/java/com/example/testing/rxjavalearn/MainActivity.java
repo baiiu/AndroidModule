@@ -3,13 +3,11 @@ package com.example.testing.rxjavalearn;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-
-import com.example.testing.rxjavalearn.fragments.TestFragment;
+import com.example.testing.rxjavalearn.operators.CustomOperatorsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -19,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
         //    .commit();
 
         //retrofit结合
-//    getSupportFragmentManager().beginTransaction()
-//        .add(new RetrofitRxFragment(), "convertFragment")
-//        .commit();
+        //    getSupportFragmentManager().beginTransaction()
+        //        .add(new RetrofitRxFragment(), "convertFragment")
+        //        .commit();
 
 
         getSupportFragmentManager().beginTransaction()
@@ -33,26 +31,27 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment getFragment() {
 
-//        return new CreateOperatorFragment();
+        //return new CreateOperatorFragment();
 
-//        return new TransformOperatorsFragment();
+        //return new TransformOperatorsFragment();
 
-//        return new FilterOperatorsFragment();
+        //return new FilterOperatorsFragment();
 
-//        return new CombiningOperatorsFragment();
+        //return new CombiningOperatorsFragment();
 
-//        return new ErrorHandingFragment();
+        //return new ErrorHandingFragment();
 
-//        return new UtilityOperatorsFragment();
+        //return new UtilityOperatorsFragment();
 
-//        return new ConditionalBooleanOperatorsFragment();
+        //return new ConditionalBooleanOperatorsFragment();
 
-//        return new AggregateOperatorsFragment();
+        //return new AggregateOperatorsFragment();
 
-//        return new ConnectOperatorsFragment();
+        //return new ConnectOperatorsFragment();
 
-        return new TestFragment();
+        //return new TestFragment();
+
+        return new CustomOperatorsFragment();
     }
-
 
 }
