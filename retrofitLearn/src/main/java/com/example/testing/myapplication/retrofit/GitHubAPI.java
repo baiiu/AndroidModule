@@ -42,6 +42,7 @@ public interface GitHubAPI {
    */
     @GET("users/{user}") Call<User> userInfo(@Path("user") String user);
 
+    @GET("users/{user}") Call<String> userInfoString(@Path("user") String user);
 
     @GET("users/{user}") Observable<User> userInfoRx(@Path("user") String user);
 

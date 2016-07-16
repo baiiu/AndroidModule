@@ -3,7 +3,7 @@ package com.example.testing.rxjavalearn;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.example.testing.rxjavalearn.operators.CustomOperatorsFragment;
+import com.example.testing.rxjavalearn.operators.SubjectFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         //return new TestFragment();
 
-        return new CustomOperatorsFragment();
+        //return new CustomOperatorsFragment();
+
+
+        return new SubjectFragment();
+
     }
 
 }

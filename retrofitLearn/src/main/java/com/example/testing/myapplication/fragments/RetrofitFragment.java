@@ -26,7 +26,8 @@ public class RetrofitFragment extends Fragment {
 
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //normalGet();
+        normalGet();
+        stringGet();
         rxGet();
         //getWithParams();
         //post();
@@ -36,6 +37,20 @@ public class RetrofitFragment extends Fragment {
 
         //默认缓存
         //getOneDay();
+    }
+
+    private void stringGet() {
+        ApiFactory.gitHubAPI()
+                .userInfoString("baiiu")
+                .enqueue(new Callback<String>() {
+                    @Override public void onResponse(Call<String> call, Response<String> response) {
+                        LogUtil.d(response.body());
+                    }
+
+                    @Override public void onFailure(Call<String> call, Throwable t) {
+                        LogUtil.d(t.toString());
+                    }
+                });
     }
 
     private void normalGet() {
