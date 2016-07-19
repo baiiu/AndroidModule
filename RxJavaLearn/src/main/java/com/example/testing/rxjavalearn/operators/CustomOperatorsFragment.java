@@ -9,7 +9,7 @@ import rx.functions.Func1;
 /**
  * author: baiiu
  * date: on 16/7/15 16:10
- * description:
+ * description: 自定义操作符
  */
 public class CustomOperatorsFragment extends BaseFragment {
 

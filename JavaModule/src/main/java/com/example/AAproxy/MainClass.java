@@ -1,23 +1,19 @@
-package com.example;
+package com.example.AAproxy;
 
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class MyClass {
-
+/**
+ * 动态代理练习代码,仿Retrofit.
+ */
+public class MainClass {
 
     public static void main(String[] args) {
-
-
         ITest test = (ITest) Proxy.newProxyInstance(
 
-                ITest.class.getClassLoader(),
-
-                new Class[] { ITest.class },
-
-                new InvocationHandler() {
+                ITest.class.getClassLoader(), new Class[] { ITest.class }, new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         String methodName = method.getName();
@@ -44,8 +40,6 @@ public class MyClass {
                             System.out.println(method.getGenericReturnType());
 
                             return a + " ," + b;
-
-
                         }
 
                         return null;
@@ -54,7 +48,6 @@ public class MyClass {
 
         System.out.println("返回值: " + test.add(1, 3));
         System.out.println("返回值: " + test.addString("1", "3"));
-
     }
 
 }
