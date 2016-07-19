@@ -10,7 +10,7 @@ package com.example.SimpleFactory.sample01;
  *
  * Sunny软件公司图表库设计人员希望为应用系统开发人员提供一套灵活易用的图表库，而且可以较为方便地对图表库进行扩展，以便能够在将来增加一些新类型的图表。
  */
-public class MainClass {
+public class ZZMainClass {
 
     public static void main(String[] args) {
         /**

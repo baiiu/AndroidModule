@@ -9,7 +9,7 @@ package com.example.SimpleFactory.sample02;
  * 每个几何图形都具有绘制draw()和擦除erase()两个方法，
  * 要求在绘制不支持的几何图形时，提示一个UnSupportedShapeException。
  */
-public class MainClass {
+public class ZZMainClass {
 
     public static void main(String[] args) {
         Paint paint = Paint.getPaint(Paint.PAINT_CIRCLE);

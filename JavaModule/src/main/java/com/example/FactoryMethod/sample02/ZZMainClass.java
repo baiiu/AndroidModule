@@ -8,7 +8,7 @@ package com.example.FactoryMethod.sample02;
  * 针对每一种图片格式都设计一个图片读取器，如GIF图片读取器用于读取GIF格式的图片、JPG图片读取器用于读取JPG格式的图片。
  * 需充分考虑系统的灵活性和可扩展性。
  */
-public class MainClass {
+public class ZZMainClass {
     public static void main(String[] args) {
 
         JPGReaderFactory readerFactory = new JPGReaderFactory();

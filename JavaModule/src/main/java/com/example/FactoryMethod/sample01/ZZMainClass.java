@@ -18,7 +18,7 @@ package com.example.FactoryMethod.sample01;
  * 工厂方法相比较于简单工厂模式,将工厂细分到每个对应的实体产品类上,方便实例化每个对象的复杂逻辑操作.
  * 并且这样易扩展,降低耦合,弥补了简单工厂的不足.
  */
-public class MainClass {
+public class ZZMainClass {
 
     public static void main(String[] args) {
         //可通过文件读取方式获取工厂实例
