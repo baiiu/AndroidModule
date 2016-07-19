@@ -6,3 +6,4 @@ This project is mean to learn something in Android, now there are:
 - liteOrm
 - retrofit
 - RxJava
+- Design Patterns in JavaModule
