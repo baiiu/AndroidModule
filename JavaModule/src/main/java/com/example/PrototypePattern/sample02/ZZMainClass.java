@@ -16,8 +16,6 @@ public class ZZMainClass {
         customer.address.string = "在哪里";
 
         Customer clone = customer.clone();
-
-
     }
 
 }

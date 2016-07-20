@@ -29,7 +29,7 @@ public class Customer implements Cloneable, Serializable {
     //}
 
 
-    @Override protected Customer clone() throws CloneNotSupportedException {
+    @Override protected Customer clone() {
         try {
             //将对象写入流中
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
