@@ -19,6 +19,5 @@ public abstract class Builder {
     public Product getProduct() {
         return product;
     }
-
 }
 
