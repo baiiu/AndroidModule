@@ -6,6 +6,7 @@ package com.example;
  * description:
  */
 public class ZZMainClass {
+
     public static void main(String[] args) {
 
     }
