@@ -5,6 +5,6 @@ package com.example.AbstractFactory.sample01;
  * date: on 16/7/19 11:47
  * description:
  */
-public interface Button {
+ interface Button {
     void display();
 }
