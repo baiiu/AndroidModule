@@ -17,8 +17,8 @@ public class TestFragment extends BaseFragment {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //        filterTest();
-        //        firstTest();
+                filterTest();
+                firstTest();
 
         //zipTest();
         //zipTest2();
