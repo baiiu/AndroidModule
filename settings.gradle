@@ -6,5 +6,5 @@ include(
         //        ':retrofitLearn',
         //        ':RxJavaLearn',
         //    ':Dagger2Learn',
-        ':MyApplication'
+//        ':MyApplication'
 )
