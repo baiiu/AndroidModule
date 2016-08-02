@@ -1,11 +1,17 @@
-include ':MyApplication'
 include(
 
-        ':JavaModule',
+        //        ':JavaModule',
         'unitTestLearn',
         //    ':LiteOrmLearn',
         //        ':retrofitLearn',
         //        ':RxJavaLearn',
         //    ':Dagger2Learn',
-        //        ':MyApplication'
+
+)
+
+include(
+
+        ':someApplications:MyApplication',
+        ":someApplications:ptr-lib"
+
 )
