@@ -1,7 +1,7 @@
 include(
 
         //        ':JavaModule',
-        'unitTestLearn',
+        //        'unitTestLearn',
         //    ':LiteOrmLearn',
         //        ':retrofitLearn',
         //        ':RxJavaLearn',
