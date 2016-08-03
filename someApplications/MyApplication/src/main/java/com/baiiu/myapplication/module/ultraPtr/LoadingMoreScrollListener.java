@@ -2,7 +2,6 @@ package com.baiiu.myapplication.module.ultraPtr;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.baiiu.myapplication.util.LogUtil;
 
 /**
  * author: baiiu
@@ -19,7 +18,6 @@ public class LoadingMoreScrollListener extends RecyclerView.OnScrollListener {
     private static final int COUNT_TO_LOAD_MORE = 3;
 
     @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        LogUtil.d("onScrolled");
         if (!isLoading) {
             return;
         }
@@ -41,11 +39,11 @@ public class LoadingMoreScrollListener extends RecyclerView.OnScrollListener {
     /**
      * 数据加载更多完成后一定要设置为true
      */
-    public void onLoadmoreComplete() {
+    public void onLoadMoreComplete() {
         setLoading(true);
     }
 
-    private void setLoading(boolean loading) {
+    public void setLoading(boolean loading) {
         isLoading = loading;
     }
 

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyApplication</string>
+
+
+    <string name="load_more">加载更多</string>
+    <string name="load_error">网络请求失败</string>
+    <string name="load_no_more">全部内容加载完毕</string>
 </resources>

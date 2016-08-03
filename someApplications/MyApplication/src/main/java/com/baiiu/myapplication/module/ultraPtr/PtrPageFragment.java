@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import com.baiiu.myapplication.R;
-import com.baiiu.myapplication.module.fastscrooll.SimpleTextAdapter;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -27,7 +26,8 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
     private PtrClassicFrameLayout mPtr;
     private RecyclerView mRecyclerView;
     private LoadingMoreScrollListener mLoadingMoreScrollListener;
-    private SimpleTextAdapter mAdapter;
+    private SimpleTextAdapterM mAdapter;
+    //private FooterDecoratorAdapter footerDecoratorAdapter;
 
     @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
@@ -38,7 +38,16 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new SimpleTextAdapter(getContext(), 0);
+
+
+        mAdapter = new SimpleTextAdapterM(getContext(), 0);
+        mAdapter.setOnErrorClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
+                loadingMore();
+            }
+        });
+        //footerDecoratorAdapter = new FooterDecoratorAdapter(getContext(), mAdapter);
         mRecyclerView.setAdapter(mAdapter);
 
         //下拉刷新
@@ -63,6 +72,14 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
                     }
                 });
 
+        //SwipeRefreshLayout使用方式
+        //final SwipeRefreshLayout s = new SwipeRefreshLayout(getContext());
+        //s.setRefreshing(true);
+        //s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        //    @Override public void onRefresh() {
+        //        s.setRefreshing(false);//即onRefreshComplete()
+        //    }
+        //});
 
         return view;
     }
@@ -72,18 +89,30 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
             @Override public void run() {
                 frame.refreshComplete();
                 mAdapter.setCount(20);
+                //footerDecoratorAdapter.notifyDataSetChanged();
+                mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
             }
         }, 1000);
     }
 
+    private int time;
+
     @Override public void loadingMore() {
         mRecyclerView.postDelayed(new Runnable() {
             @Override public void run() {
-                mLoadingMoreScrollListener.onLoadmoreComplete();
-                mAdapter.setCount(mAdapter.getItemCount() + 20);
+                mAdapter.setCount(mAdapter.getRealItemCount() + 20);
+                ++time;
+                if (time == 2) {
+                    mAdapter.bindFooter(FooterViewHolder.ERROR);
+                } else if (time == 4) {
+                    mAdapter.bindFooter(FooterViewHolder.NO_MORE);
+                } else {
+                    mLoadingMoreScrollListener.onLoadMoreComplete();
+                    mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
+                }
+                //footerDecoratorAdapter.notifyDataSetChanged();
             }
         }, 1000);
-
     }
 
     @Override public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
