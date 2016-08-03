@@ -96,8 +96,8 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
                 frame.refreshComplete();
 
                 //testEmpty();
-                //testError();
-                ok();
+                testError();
+                //ok();
 
             }
         }, 1000);
@@ -123,6 +123,7 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
             @Override public void onClick(View view) {
                 Toast.makeText(getContext(), "点击了", Toast.LENGTH_SHORT)
                         .show();
+                ok();
             }
         });
 
