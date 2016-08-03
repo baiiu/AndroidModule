@@ -1,4 +1,4 @@
-package com.baiiu.myapplication.module.ultraPtr;
+package com.baiiu.myapplication.module.ultraPtr.base;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

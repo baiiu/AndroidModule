@@ -1,4 +1,4 @@
-package com.baiiu.myapplication.module.ultraPtr;
+package com.baiiu.myapplication.module.ultraPtr.base;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

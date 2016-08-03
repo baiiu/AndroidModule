@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="textView" type="id"/>
+    <item name="progressBar" type="id"/>
+
+    <item name="tv_error" type="id"/>
+    <item name="tv_retry" type="id"/>
+    <item name="tv_empty" type="id"/>
+</resources>

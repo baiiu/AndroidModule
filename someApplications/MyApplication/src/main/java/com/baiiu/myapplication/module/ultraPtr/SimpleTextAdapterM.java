@@ -1,72 +1,48 @@
 package com.baiiu.myapplication.module.ultraPtr;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 import com.baiiu.myapplication.module.fastscrooll.SimpleTextViewHolder;
-import java.util.List;
+import com.baiiu.myapplication.module.ultraPtr.base.BaseViewHolder;
+import com.baiiu.myapplication.module.ultraPtr.base.FooterRecyclerAdapter;
 
 /**
  * author: baiiu
  * date: on 16/7/1 19:47
  * description:
  */
-class SimpleTextAdapterM extends RecyclerView.Adapter<BaseViewHolder> {
-
-    private static final int TYPE_FOOTER = -1;
+class SimpleTextAdapterM extends FooterRecyclerAdapter {
 
     private Context mContext;
     private int mCount;
-    private FooterViewHolder footerViewHolder;
 
     public SimpleTextAdapterM(Context context, int count) {
         mContext = context;
         mCount = count;
     }
 
-    @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_FOOTER:
-                return getFooterHolder();
-        }
-
-        return new SimpleTextViewHolder(mContext, parent);
-    }
-
-    @Override public void onBindViewHolder(BaseViewHolder holder, int position) {
-        if (holder instanceof FooterViewHolder) {
-            return;
-        }
-
-        holder.bind(position);
+    public Context getContext() {
+        return mContext;
     }
 
     @Override public int getItemCount() {
         if (mCount == 0) {
             return 0;
         }
-        return mCount + 1;
+
+        return super.getItemCount();
     }
 
-    public int getRealItemCount() {
+    @Override protected int getInnerItemCount() {
         return mCount;
     }
 
-    @Override public int getItemViewType(int position) {
-        if (position >= getItemCount() - 1) {
-            return TYPE_FOOTER;
-        }
-
-        return 0;
+    @Override protected BaseViewHolder onCreateInnerViewHolder(ViewGroup parent, int viewType) {
+        return new SimpleTextViewHolder(mContext, parent);
     }
 
-    public FooterViewHolder getFooterHolder() {
-        if (footerViewHolder == null) {
-            footerViewHolder = new FooterViewHolder(mContext);
-            footerViewHolder.getRootView().setLayoutParams(new RecyclerView.LayoutParams(-1, -2));
-        }
-        return footerViewHolder;
+    @Override protected void onBindInnerViewHolder(BaseViewHolder holder, int position) {
+        holder.bind(position);
     }
 
     public void setCount(int mCount) {
@@ -81,21 +57,4 @@ class SimpleTextAdapterM extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public void bindFooter(@FooterViewHolder.FooterState int state) {
-        getFooterHolder().bind(state);
-    }
-
-    public void bindFooter(List<?> list) {
-        if (list == null) {
-            getFooterHolder().bind(FooterViewHolder.ERROR);
-        } else if (list.size() < 20) {
-            getFooterHolder().bind(FooterViewHolder.NO_MORE);
-        } else {
-            getFooterHolder().bind(FooterViewHolder.HAS_MORE);
-        }
-    }
-
-    public void setOnErrorClickListener(View.OnClickListener onClickListener) {
-        getFooterHolder().setOnErrorClickListener(onClickListener);
-    }
 }

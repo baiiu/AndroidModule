@@ -10,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 import com.baiiu.myapplication.R;
+import com.baiiu.myapplication.module.ultraPtr.base.FooterViewHolder;
+import com.baiiu.myapplication.module.ultraPtr.base.LoadingFrameRecyclerAdapter;
+import com.baiiu.myapplication.module.ultraPtr.base.LoadingMoreScrollListener;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -27,7 +31,7 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
     private RecyclerView mRecyclerView;
     private LoadingMoreScrollListener mLoadingMoreScrollListener;
     private SimpleTextAdapterM mAdapter;
-    //private FooterDecoratorAdapter footerDecoratorAdapter;
+    private LoadingFrameRecyclerAdapter loadingFrameRecyclerAdapter;
 
     @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
@@ -41,14 +45,16 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
 
 
         mAdapter = new SimpleTextAdapterM(getContext(), 0);
+        loadingFrameRecyclerAdapter = new LoadingFrameRecyclerAdapter(getContext(), mAdapter);
+
+
         mAdapter.setOnErrorClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
                 mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
                 loadingMore();
             }
         });
-        //footerDecoratorAdapter = new FooterDecoratorAdapter(getContext(), mAdapter);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(loadingFrameRecyclerAdapter);
 
         //下拉刷新
         mPtr.setPtrHandler(this);
@@ -88,19 +94,51 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
         frame.postDelayed(new Runnable() {
             @Override public void run() {
                 frame.refreshComplete();
-                mAdapter.setCount(20);
-                //footerDecoratorAdapter.notifyDataSetChanged();
-                mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
+
+                //testEmpty();
+                //testError();
+                ok();
+
             }
         }, 1000);
     }
+
+    private void ok() {
+        mAdapter.setCount(20);
+        mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
+        loadingFrameRecyclerAdapter.showContent();
+    }
+
+    private void testEmpty() {
+        loadingFrameRecyclerAdapter.setEmpty(true);
+        loadingFrameRecyclerAdapter.setEmptyText("空的");
+        loadingFrameRecyclerAdapter.notifyItemChanged(0);
+    }
+
+
+    private void testError() {
+        loadingFrameRecyclerAdapter.setError(true);
+        loadingFrameRecyclerAdapter.setErrorText("哈哈错误了");
+        loadingFrameRecyclerAdapter.setOnErrorClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                Toast.makeText(getContext(), "点击了", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        loadingFrameRecyclerAdapter.notifyItemChanged(0);
+    }
+
 
     private int time;
 
     @Override public void loadingMore() {
         mRecyclerView.postDelayed(new Runnable() {
             @Override public void run() {
-                mAdapter.setCount(mAdapter.getRealItemCount() + 20);
+
+                loadingFrameRecyclerAdapter.notifyItemRangeInserted(mAdapter.getInnerItemCount(), 20);
+                mAdapter.setCount(mAdapter.getInnerItemCount() + 20);
+
                 ++time;
                 if (time == 2) {
                     mAdapter.bindFooter(FooterViewHolder.ERROR);
@@ -110,7 +148,7 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
                     mLoadingMoreScrollListener.onLoadMoreComplete();
                     mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
                 }
-                //footerDecoratorAdapter.notifyDataSetChanged();
+
             }
         }, 1000);
     }

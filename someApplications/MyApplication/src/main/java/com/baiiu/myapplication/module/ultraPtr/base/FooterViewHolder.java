@@ -1,4 +1,4 @@
-package com.baiiu.myapplication.module.ultraPtr;
+package com.baiiu.myapplication.module.ultraPtr.base;
 
 import android.content.Context;
 import android.support.annotation.IntDef;
@@ -39,7 +39,7 @@ public class FooterViewHolder extends BaseViewHolder<Integer> {
         super(UIUtil.inflate(context, R.layout.holder_footer, parent));
     }
 
-    @Override public synchronized void bind(Integer data) {
+    @Override public void bind(Integer data) {
         mRootView.setVisibility(data == GONE ? View.GONE : View.VISIBLE);
 
         if (mCurrentState == data) {

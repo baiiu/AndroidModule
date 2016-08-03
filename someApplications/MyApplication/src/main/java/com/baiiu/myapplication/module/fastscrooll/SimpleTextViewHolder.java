@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.baiiu.myapplication.module.ultraPtr.BaseViewHolder;
+import com.baiiu.myapplication.module.ultraPtr.base.BaseViewHolder;
 
 /**
  * author: baiiu
