@@ -2,6 +2,7 @@
 <resources>
     <item name="textView" type="id"/>
     <item name="progressBar" type="id"/>
+    <item name="loadFrameLayout" type="id"/>
 
     <item name="tv_error" type="id"/>
     <item name="tv_retry" type="id"/>

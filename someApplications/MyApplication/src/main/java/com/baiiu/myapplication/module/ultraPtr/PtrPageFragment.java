@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.baiiu.myapplication.R;
 import com.baiiu.myapplication.module.ultraPtr.base.FooterViewHolder;
-import com.baiiu.myapplication.module.ultraPtr.base.LoadingFrameRecyclerAdapter;
+import com.baiiu.myapplication.module.ultraPtr.base.LoadFrameLayout;
 import com.baiiu.myapplication.module.ultraPtr.base.LoadingMoreScrollListener;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -27,34 +29,49 @@ import in.srain.cube.views.ptr.PtrHandler;
  */
 public class PtrPageFragment extends Fragment implements LoadingMoreScrollListener.OnLoadingMoreListener, PtrHandler {
 
-    private PtrClassicFrameLayout mPtr;
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.ptr) PtrClassicFrameLayout mPtr;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.loadFrameLayout) LoadFrameLayout mLoadFrameLayout;
+
     private LoadingMoreScrollListener mLoadingMoreScrollListener;
     private SimpleTextAdapterM mAdapter;
-    private LoadingFrameRecyclerAdapter loadingFrameRecyclerAdapter;
+
 
     @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_ptr, container, false);
-
-        mPtr = (PtrClassicFrameLayout) view.findViewById(R.id.ptr);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        ButterKnife.bind(this, view);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
         mAdapter = new SimpleTextAdapterM(getContext(), 0);
-        loadingFrameRecyclerAdapter = new LoadingFrameRecyclerAdapter(getContext(), mAdapter);
-
-
+        mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
         mAdapter.setOnErrorClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
                 mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
                 loadingMore();
             }
         });
-        mRecyclerView.setAdapter(loadingFrameRecyclerAdapter);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mLoadFrameLayout.setOnErrorClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                mLoadFrameLayout.bind(LoadFrameLayout.CONTENT);
+
+                Toast.makeText(getContext(), "点击了", Toast.LENGTH_SHORT)
+                        .show();
+
+                mPtr.showLoadingIndicator();
+                mPtr.postDelayed(new Runnable() {
+                    @Override public void run() {
+                        mPtr.refreshComplete();
+                        ok();
+                    }
+                }, 1000);
+            }
+        });
+
 
         //下拉刷新
         mPtr.setPtrHandler(this);
@@ -105,29 +122,14 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
 
     private void ok() {
         mAdapter.setCount(20);
-        mAdapter.bindFooter(FooterViewHolder.HAS_MORE);
-        loadingFrameRecyclerAdapter.showContent();
     }
 
     private void testEmpty() {
-        loadingFrameRecyclerAdapter.setEmpty(true);
-        loadingFrameRecyclerAdapter.setEmptyText("空的");
-        loadingFrameRecyclerAdapter.notifyItemChanged(0);
+        mLoadFrameLayout.bind(LoadFrameLayout.EMPTY);
     }
 
-
     private void testError() {
-        loadingFrameRecyclerAdapter.setError(true);
-        loadingFrameRecyclerAdapter.setErrorText("哈哈错误了");
-        loadingFrameRecyclerAdapter.setOnErrorClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                Toast.makeText(getContext(), "点击了", Toast.LENGTH_SHORT)
-                        .show();
-                ok();
-            }
-        });
-
-        loadingFrameRecyclerAdapter.notifyItemChanged(0);
+        mLoadFrameLayout.bind(LoadFrameLayout.ERROR);
     }
 
 
@@ -136,8 +138,6 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
     @Override public void loadingMore() {
         mRecyclerView.postDelayed(new Runnable() {
             @Override public void run() {
-
-                loadingFrameRecyclerAdapter.notifyItemRangeInserted(mAdapter.getInnerItemCount(), 20);
                 mAdapter.setCount(mAdapter.getInnerItemCount() + 20);
 
                 ++time;

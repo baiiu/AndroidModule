@@ -1,9 +1,11 @@
-package com.baiiu.myapplication.module.ultraPtr.base;
+package com.baiiu.myapplication.module.ultraPtr.sthElse;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import com.baiiu.myapplication.R;
+import com.baiiu.myapplication.module.ultraPtr.base.BaseViewHolder;
+import com.baiiu.myapplication.module.ultraPtr.base.LoadFrameLayout;
 
 /**
  * auther: baiiu

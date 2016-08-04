@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<in.srain.cube.views.ptr.PtrClassicFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ptr"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical"
     >
 
-
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout
-        android:id="@+id/ptr"
+    <com.baiiu.myapplication.module.ultraPtr.base.LoadFrameLayout
+        android:id="@id/loadFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -20,8 +19,6 @@
             android:layout_height="match_parent"
             />
 
+    </com.baiiu.myapplication.module.ultraPtr.base.LoadFrameLayout>
 
-    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
-
-
-</FrameLayout>
+</in.srain.cube.views.ptr.PtrClassicFrameLayout>

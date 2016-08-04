@@ -1,14 +1,16 @@
-package com.baiiu.myapplication.module.ultraPtr.base;
+package com.baiiu.myapplication.module.ultraPtr.sthElse;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import com.baiiu.myapplication.module.ultraPtr.base.BaseViewHolder;
+import com.baiiu.myapplication.module.ultraPtr.base.LoadFrameLayout;
 
 /**
  * auther: baiiu
  * time: 16/8/3 03 21:52
- * description:
+ * description: 使用装饰模式,并不推荐使用.需要同时操作两个adapter来展示数据
  */
 public class LoadingFrameRecyclerAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public static final int TYPE_FRAME_LOADING = -2;
