@@ -24,7 +24,7 @@ public class LoadFrameLayout extends FrameLayout {
     public static final int ERROR = 1;
     public static final int EMPTY = 2;
     public static final int CONTENT = 3;
-    public static final int NO_GONE = 3;
+    public static final int NO_GONE = 4g;
 
 
     @IntDef({ LOADING, ERROR, EMPTY, CONTENT, NO_GONE })
