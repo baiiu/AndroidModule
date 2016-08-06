@@ -4,6 +4,11 @@ import os
 # import shutil
 
 
+
+PackageName = 'com.baiiu.zhihudaily'
+LauncherActivity = 'newsList.view.NewsListActivity'
+Root_SDK_Dir = '/Users/baiiu/Library/Android/sdk'
+
 # 1.设置目录
 base_file_dir = '/Users/baiiu/Desktop'
 create_dir_name='AndroidApp'
@@ -60,7 +65,8 @@ else:
 
 ##########################################################################################
 #4. gradle assemble打包命令，需要生成local.properties文件
-def createLocalPropertiesFile(sourceDir,fileName):
+
+def createLocalPropertiesFile(sourceDir,fileName,root_sdk_dir):
     if not os.path.exists(sourceDir):
         return
 
@@ -70,11 +76,11 @@ def createLocalPropertiesFile(sourceDir,fileName):
         return
 
     f = open(fileDir,'w');
-    f.write('sdk.dir=/Users/baiiu/Library/Android/sdk')
+    f.write('sdk.dir=' + root_sdk_dir)
     f.close()
 
 # 生成local.properties文件
-createLocalPropertiesFile(code_dir,'local.properties')
+createLocalPropertiesFile(code_dir,'local.properties',Root_SDK_Dir)
 
 # 打包
 print('\n')
@@ -132,10 +138,10 @@ print(apkPath)
 
 os.system('adb install -r ' + apkPath)
 
-##########################################################################################
+#########################################################################################
 # 7.打开APK
 
 # 先关闭该进程
-os.system('adb shell am force-stop com.baiiu.zhihudaily')
-# 打开该A
-os.system('adb shell am start -n com.baiiu.zhihudaily/com.baiiu.zhihudaily.newsList.view.NewsListActivity')
+os.system('adb shell am force-stop ' + PackageName)
+# 打开该LauncherActivity
+os.system('adb shell am start -n '+ PackageName +'/' + PackageName + '.' + LauncherActivity)
