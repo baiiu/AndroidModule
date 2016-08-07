@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
+try:
+    import xml.etree.cElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
 
 
 
@@ -37,18 +41,7 @@ def createLocalPropertiesFile(sourceDir,fileName):
     f.write('sdk.dir=/Users/baiiu/Library/Android/sdk')
     f.close()
 
-
 # createLocalPropertiesFile('/Users/baiiu/Desktop/test','local.properties')
-
-
-
-
-
-
-
-
-
-
 
 
 #

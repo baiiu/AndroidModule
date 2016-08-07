@@ -4,15 +4,17 @@
 import os
 # import shutil
 import ConfigParser
+try:
+    import xml.etree.cElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
 
 cf = ConfigParser.ConfigParser();
 #替换为绝对路径
-cf.read('/Users/baiiu/Desktop/1.config')
+cf.read('/Users/baiiu/Desktop/auto.config')
 
 
 Root_SDK_Dir = cf.get('app','Root_SDK_Dir')
-PackageName = cf.get('app','PackageName')
-LauncherActivity = cf.get('app','LauncherActivity')
 git_clone_address = cf.get('app','git_clone_address')
 
 # 1.设置目录
@@ -24,7 +26,6 @@ create_apk_dir_name = cf.get('optional','create_apk_dir_name')
 file_dir = base_file_dir + '/' + create_dir_name    #/Users/baiiu/Desktop/AndroidApp
 code_dir = file_dir + '/' + create_code_dir_name      #/Users/baiiu/Desktop/AndroidApp/SourceCode
 apk_dir = file_dir + '/' + create_apk_dir_name      #/Users/baiiu/Desktop/AndroidApp/Apk
-
 
 
 ##########################################################################################
@@ -68,6 +69,9 @@ if not os.listdir(code_dir):
 else:
     #已经clone过
     os.system('git pull')
+
+
+
 
 ##########################################################################################
 #4. gradle assemble打包命令，需要生成local.properties文件
@@ -147,7 +151,42 @@ os.system('adb install -r ' + apkPath)
 #########################################################################################
 # 7.打开APK
 
+#获取PackageName,launcherActivity
+def findLauncherActivityName(ele,targetString):
+    for childElem in ele:
+        if len(list(childElem)) == 0:
+            if cmp(childElem.get('{http://schemas.android.com/apk/res/android}name'),"'" + targetString +"'"):
+                return True
+            else:
+                return False
+        else:
+            # print('has child, ' + childElem.tag, childElem.attrib)
+            return findLauncherActivityName(childElem,targetString)
+
+def getLauncherActivity(xmlFileDir):
+    tree = ET.ElementTree(file=xmlFileDir)
+
+    root = tree.getroot()
+    packageName = root.get('package')
+
+    for elem in tree.iter(tag = 'activity'):
+        if findLauncherActivityName(elem,'android.intent.action.MAIN'): #if has
+            if(findLauncherActivityName(elem,'android.intent.category.LAUNCHER')):
+                return packageName,elem.get('{http://schemas.android.com/apk/res/android}name')
+
+    return 'NULL'
+
+PackageName,LauncherActivity = getLauncherActivity(code_dir + '/app/src/main/AndroidManifest.xml')
+
+print PackageName + '  ' + LauncherActivity
+
+# PackageName = cf.get('app','PackageName')
+# LauncherActivity = cf.get('app','LauncherActivity')
+
 # 先关闭该进程
 os.system('adb shell am force-stop ' + PackageName)
 # 打开该LauncherActivity
-os.system('adb shell am start -n '+ PackageName +'/' + PackageName + '.' + LauncherActivity)
+if PackageName in LauncherActivity:
+    os.system('adb shell am start -n '+ PackageName +'/' + LauncherActivity)
+else:
+    os.system('adb shell am start -n '+ PackageName +'/' + PackageName + LauncherActivity)
