@@ -1,25 +1,31 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 import os
 # import shutil
+import ConfigParser
+
+cf = ConfigParser.ConfigParser();
+#替换为绝对路径
+cf.read('/Users/baiiu/Desktop/1.config')
 
 
-
-PackageName = 'com.baiiu.zhihudaily'
-LauncherActivity = 'newsList.view.NewsListActivity'
-Root_SDK_Dir = '/Users/baiiu/Library/Android/sdk'
+Root_SDK_Dir = cf.get('app','Root_SDK_Dir')
+PackageName = cf.get('app','PackageName')
+LauncherActivity = cf.get('app','LauncherActivity')
+git_clone_address = cf.get('app','git_clone_address')
 
 # 1.设置目录
-base_file_dir = '/Users/baiiu/Desktop'
-create_dir_name='AndroidApp'
-create_code_dir_name = 'SourceCode'
-create_apk_dir_name = 'Apk'
+base_file_dir = cf.get('dir','base_file_dir')
+create_dir_name = cf.get('dir','create_dir_name')
+create_code_dir_name = cf.get('optional','create_code_dir_name')
+create_apk_dir_name = cf.get('optional','create_apk_dir_name')
 
 file_dir = base_file_dir + '/' + create_dir_name    #/Users/baiiu/Desktop/AndroidApp
 code_dir = file_dir + '/' + create_code_dir_name      #/Users/baiiu/Desktop/AndroidApp/SourceCode
 apk_dir = file_dir + '/' + create_apk_dir_name      #/Users/baiiu/Desktop/AndroidApp/Apk
 
-git_clone_address = "https://github.com/baiiu/ZhihuDaily.git";
+
 
 ##########################################################################################
 #2. 在桌面上创建目录
