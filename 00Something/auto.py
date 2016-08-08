@@ -14,7 +14,8 @@ except ImportError:
     import xml.etree.ElementTree as ET
 
 
-Auto_Config_Path = '/Users/baiiu/Desktop/auto.config'
+# 保持auto.py 和 auto.config在同一级目录下
+Auto_Config_Path = os.path.dirname(__file__) + '/auto.config'
 
 try:
     cf = configparser.ConfigParser();
@@ -188,6 +189,8 @@ os.system('adb install -r ' + apkPath)
 
 #########################################################################################
 # 7.打开APK
+def cmp(a, b):
+    return (a > b) - (a < b)
 
 #获取PackageName,launcherActivity
 def findLauncherActivityName(ele,targetString):
