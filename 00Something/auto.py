@@ -3,7 +3,11 @@
 
 import os
 # import shutil
-import ConfigParser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser
+
 try:
     import xml.etree.cElementTree as ET
 except ImportError:
@@ -12,7 +16,12 @@ except ImportError:
 
 Auto_Config_Path = '/Users/baiiu/Desktop/auto.config'
 
-cf = ConfigParser.ConfigParser();
+try:
+    cf = configparser.ConfigParser();
+except Exception as e:
+    cf = ConfigParser.ConfigParser();
+
+# cf = configparser.ConfigParser();
 #替换为绝对路径
 cf.read(Auto_Config_Path)
 
