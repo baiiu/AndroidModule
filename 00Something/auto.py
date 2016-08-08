@@ -18,10 +18,12 @@ Auto_Config_Path = '/Users/baiiu/Desktop/auto.config'
 
 try:
     cf = configparser.ConfigParser();
+    print('python 3')
 except Exception as e:
     cf = ConfigParser.ConfigParser();
+    print('python 2')
 
-# cf = configparser.ConfigParser();
+
 #替换为绝对路径
 cf.read(Auto_Config_Path)
 
@@ -214,7 +216,7 @@ def getLauncherActivity(xmlFileDir):
 
 PackageName,LauncherActivity = getLauncherActivity(code_dir + '/app/src/main/AndroidManifest.xml')
 
-print PackageName + '  ' + LauncherActivity
+print (PackageName + '  ' + LauncherActivity)
 
 # PackageName = cf.get('app','PackageName')
 # LauncherActivity = cf.get('app','LauncherActivity')
