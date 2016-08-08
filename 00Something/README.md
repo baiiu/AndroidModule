@@ -8,7 +8,7 @@ Once run it, it will clone the project and run into your devices.
 
 ## Usage
 Fist
-- open the `auto.py`, modify the `Auto_Config_Path` to the absolute path of `auto.config` on your machine.
+- put the `auto.py` and `auto.config` in the same directory
 
 Then, config the `auto.config` file:
 
@@ -22,7 +22,7 @@ Then, config the `auto.config` file:
 after config these properties,you can run this script with the python command line. Wait for a while to assemble apk, then will install on your devices automaticly.
 
 
-1.首先修改`auto.py`文件中的`Auto_Config_Path`为你机器上该文件绝对路径。
+1.将`auto.py` 和 `auto.config` 文件放在同一级目录下。
 
 2.然后配置`auto.config`文件：
 `Root_SDK_Dir` 是你的SDK的绝对路径
