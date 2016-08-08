@@ -9,13 +9,18 @@ try:
 except ImportError:
     import xml.etree.ElementTree as ET
 
+
+Auto_Config_Path = '/Users/baiiu/Desktop/auto.config'
+
 cf = ConfigParser.ConfigParser();
 #替换为绝对路径
-cf.read('/Users/baiiu/Desktop/auto.config')
+cf.read(Auto_Config_Path)
 
 
 Root_SDK_Dir = cf.get('app','Root_SDK_Dir')
 git_clone_address = cf.get('app','git_clone_address')
+git_branch_name = cf.get('app','git_branch_name')
+assembleRelease = cf.getboolean('app','assembleRelease')
 
 # 1.设置目录
 base_file_dir = cf.get('dir','base_file_dir')
@@ -48,6 +53,20 @@ print('进入AndroidApp： ' + os.getcwd())
 if not os.path.exists(code_dir):
     os.mkdir(create_code_dir_name)
 
+def removeFileInFirstDir(targetDir):#删除一级目录下的所有文件
+    for file in os.listdir(targetDir):
+        targetFile = os.path.join(targetDir,  file)
+        if os.path.isfile(targetFile):
+            os.remove(targetFile)
+    # os.remove(targetDir)
+
+source_apk_dir = code_dir + '/' + 'app/build/outputs/apk'
+if os.path.exists(source_apk_dir):
+    removeFileInFirstDir(source_apk_dir)
+
+if(os.path.exists(apk_dir)):
+    removeFileInFirstDir(apk_dir)
+
 if not os.path.exists(apk_dir):
     os.mkdir(create_apk_dir_name)
 
@@ -60,12 +79,14 @@ print('进入SourceCode下： ' + os.getcwd())
 
 print('\n')
 print('=============================================')
-print('git clone or git pull')
+gitCommandLine = 'git clone ' + git_clone_address + ' ' + code_dir + ' -b ' + git_branch_name
+print('git clone or git pull: ')
+print(gitCommandLine)
 print('=============================================')
 
 if not os.listdir(code_dir):
     #空文件夹
-    os.system('git clone ' + git_clone_address +' ' + code_dir)
+    os.system('git clone ' + git_clone_address + ' ' + code_dir + ' -b ' + git_branch_name)
 else:
     #已经clone过
     os.system('git pull')
@@ -101,9 +122,15 @@ os.system('gradle clean');
 
 print('\n')
 print('=============================================')
-print('gradle assembleDebug, generate apk')
+print('gradle assemble, generate apk')
 print('=============================================')
-os.system('gradle assembleDebug')
+
+if(assembleRelease):
+    print('assembleRelease apk')
+    os.system('gradle assembleRelease')
+else:
+    print('assembleDebug apk')
+    os.system('gradle assembleDebug')
 
 ##########################################################################################
 #5.移动.apk文件到Apk目录，方便查找
@@ -117,7 +144,7 @@ def moveFiles(sourceDir,  targetDir):#复制一级目录下的所有文件到指
          if os.path.isfile(sourceFile) and ('unaligned' not in os.path.basename(sourceFile)):
              open(targetFile,"wb").write(open(sourceFile,"rb").read())
 
-source_apk_dir = code_dir + '/' + 'app/build/outputs/apk'
+# source_apk_dir = code_dir + '/' + 'app/build/outputs/apk'
 if os.path.exists(source_apk_dir):
     moveFiles(source_apk_dir,apk_dir)
 
@@ -144,7 +171,7 @@ def getFileName(sourceDir):
 
 apkName = getFileName(apk_dir)
 apkPath = apk_dir + '/' + apkName
-print(apkPath)
+print('apkPath: '+ apkPath)
 
 os.system('adb install -r ' + apkPath)
 
