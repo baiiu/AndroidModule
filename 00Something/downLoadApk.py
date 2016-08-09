@@ -1,14 +1,26 @@
 import urllib.request
 import http.cookiejar
 import json
+import configparser
+import os
+
+
+Auto_Config_Path = os.path.dirname(__file__) + '/downLoadApk.config'
+
+
+cf = configparser.ConfigParser()
+cf.read(Auto_Config_Path)
+remote_address_path = cf.get('remote','remote_address_path')
+password = cf.get('remote','password')
+app_name = cf.get('app','app_name')
 
 try:
-    url = 'http://download.fir.im/159600'
+    url = 'http://download.fir.im/' + remote_address_path
     request = urllib.request.Request(url)
-    request.add_header('Passwd','baiiu')
+    request.add_header('Passwd', password)
 
 
-    cookie = http.cookiejar.MozillaCookieJar()
+    cookie = http.cookiejar.CookieJar()
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie))
 
     # send a request
@@ -56,12 +68,26 @@ try:
     print('download_url: '+download_url)
 
 
-    urllib.request.urlretrieve(download_url,'/Users/baiiu/Desktop/1.apk')
 
+    apkPath = os.path.dirname(__file__) + '/' + app_name + '.apk'
+    print('apkPath: '+ apkPath)
+    urllib.request.urlretrieve(download_url, apkPath)
 
+    print('================================================')
+    print('安装APK')
+    print('================================================')
+    os.system('adb install -r ' + apkPath)
 
+    PackageName = cf.get('app','package_name')
+    LauncherActivity = cf.get('app','launcher_activity')
 
-
+    # 先关闭该进程
+    os.system('adb shell am force-stop ' + PackageName)
+    # 打开该Launch erActivity
+    if PackageName in LauncherActivity:
+        os.system('adb shell am start -n '+ PackageName +'/' + LauncherActivity)
+    else:
+        os.system('adb shell am start -n '+ PackageName +'/' + PackageName + LauncherActivity)
 
 
 
