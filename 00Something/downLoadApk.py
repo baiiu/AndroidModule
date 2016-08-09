@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import urllib.request
 import http.cookiejar
 import json
@@ -12,7 +14,7 @@ cf = configparser.ConfigParser()
 cf.read(Auto_Config_Path)
 remote_address_path = cf.get('remote','remote_address_path')
 password = cf.get('remote','password')
-app_name = cf.get('app','app_name')
+
 
 try:
     url = 'http://download.fir.im/' + remote_address_path
@@ -58,7 +60,7 @@ try:
     }).encode('utf-8')
     get_response = opener.open(getApkurl, postdata)
 
-    # after 302,use response.geturl() acheving the real apk address
+    # after 302,use response.geturl() acheving the real apk address,but useless
     apk_download_address = get_response.geturl()
     print('after 302: ' + apk_download_address)
 
@@ -67,14 +69,16 @@ try:
     download_url = apkJson['url']
     print('download_url: '+download_url)
 
+    part = download_url.partition('filename')[2]
+    app_name = part[1:len(part)]
 
-
-    apkPath = os.path.dirname(__file__) + '/' + app_name + '.apk'
-    print('apkPath: '+ apkPath)
+    apkPath = os.path.dirname(__file__) + '/' + app_name
     urllib.request.urlretrieve(download_url, apkPath)
 
     print('================================================')
     print('安装APK')
+    print('app_name = ' + app_name)
+    print('apkPath: '+ apkPath)
     print('================================================')
     os.system('adb install -r ' + apkPath)
 
