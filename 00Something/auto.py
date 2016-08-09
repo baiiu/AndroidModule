@@ -72,10 +72,6 @@ def removeFileInFirstDir(targetDir):#删除一级目录下的所有文件
             os.remove(targetFile)
     # os.remove(targetDir)
 
-source_apk_dir = code_dir + '/' + 'app/build/outputs/apk'
-if os.path.exists(source_apk_dir):
-    removeFileInFirstDir(source_apk_dir)
-
 if(os.path.exists(apk_dir)):
     removeFileInFirstDir(apk_dir)
 
@@ -156,7 +152,10 @@ def moveFiles(sourceDir,  targetDir):#复制一级目录下的所有文件到指
          if os.path.isfile(sourceFile) and ('unaligned' not in os.path.basename(sourceFile)):
              open(targetFile,"wb").write(open(sourceFile,"rb").read())
 
-# source_apk_dir = code_dir + '/' + 'app/build/outputs/apk'
+source_apk_dir = code_dir + '/' + 'app/build/outputs/apk'
+# if os.path.exists(source_apk_dir):
+#     removeFileInFirstDir(source_apk_dir)
+
 if os.path.exists(source_apk_dir):
     moveFiles(source_apk_dir,apk_dir)
 
