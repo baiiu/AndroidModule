@@ -2,9 +2,12 @@
 
 the file `auto.py` and `auto.config` is a Python script to get the project code with Git 、 assemble android APK 、 install on the divices and then start the app.
 Once run it, it will clone the project and run into your devices.
+`downLoadApk.py` can get Apk file from fir.im with your password.
+
 
 `auto.py`和`auto.config`是使用Python写的脚本，主要用来从Git拉项目代码后打包，安装到机器并自动启动。
 运行后将会自动拉取代码，并打包后安装到机器自动打开。
+
 
 ## Usage
 Fist
