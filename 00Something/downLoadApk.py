@@ -5,6 +5,7 @@ import http.cookiejar
 import json
 import configparser
 import os
+import sys
 
 
 Auto_Config_Path = os.path.dirname(__file__) + '/downLoadApk.config'
@@ -72,8 +73,16 @@ try:
     part = download_url.partition('filename')[2]
     app_name = part[1:len(part)]
 
+    def reporthook(a, b, c):    # a:已经下载的数据大小; b:数据大小; c:远程文件大小;
+        # if c > 1000000:
+        per = (100.0 * a * b) / c
+        if per>100: per=100
+        sys.stdout.write("%d"%per)
+        sys.stdout.write("%\r")
+        sys.stdout.flush()
+
     apkPath = os.path.dirname(__file__) + '/' + app_name
-    urllib.request.urlretrieve(download_url, apkPath)
+    urllib.request.urlretrieve(download_url, apkPath,reporthook)
 
     print('================================================')
     print('安装APK')
