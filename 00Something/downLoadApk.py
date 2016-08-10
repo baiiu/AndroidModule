@@ -51,7 +51,7 @@ try:
     downLoadId = data['app']['releases']['master']['id']
 
     getApkurl = 'http://download.fir.im/apps/'+appId+'/install?download_token' + downLoadToken + '&release_id=' + downLoadId
-    print(getApkurl)
+    print('getApkurl: '+ getApkurl)
 
 
     postdata =urllib.parse.urlencode({
@@ -63,15 +63,22 @@ try:
 
     # after 302,use response.geturl() acheving the real apk address,but useless
     apk_download_address = get_response.geturl()
+    print('\n')
     print('after 302: ' + apk_download_address)
 
     apkStr = get_response.read().decode('utf-8')
     apkJson = json.loads(apkStr)
     download_url = apkJson['url']
+    print('\n')
     print('download_url: '+download_url)
 
-    part = download_url.partition('filename')[2]
+    part = download_url.partition('attname')[2]
     app_name = part[1:len(part)]
+    print('\n')
+    print('app_name = ' + app_name)
+
+    if len(app_name) == 0:
+        app_name = 'debug.apk'
 
     def reporthook(a, b, c):    # a:已经下载的数据大小; b:数据大小; c:远程文件大小;
         # if c > 1000000:
@@ -82,7 +89,7 @@ try:
         sys.stdout.flush()
 
     apkPath = os.path.dirname(__file__) + '/' + app_name
-    urllib.request.urlretrieve(download_url, apkPath,reporthook)
+    urllib.request.urlretrieve(download_url, apkPath, reporthook)
 
     print('================================================')
     print('安装APK')
