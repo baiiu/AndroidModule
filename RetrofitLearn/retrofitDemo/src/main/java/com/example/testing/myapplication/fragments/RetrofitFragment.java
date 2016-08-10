@@ -40,6 +40,18 @@ public class RetrofitFragment extends Fragment {
         //getOneDay();
     }
 
+    /**
+     * 无网络状态下:
+     *
+     * 没设置缓存,onError:java.net.UnknownHostException: Unable to resolve host "api.github.com": No address
+     * associated with hostname
+     *
+     * 设置了缓存:
+     * 1. 有缓存,读取缓存
+     * 2. 没有缓存,onErroretrofit2.adapter.rxjava.HttpException: HTTP 504 Unsatisfiable Request
+     * (only-if-cached)
+     * 和缓存策略相关
+     */
     private void stringGet() {
         ApiFactory.gitHubAPI()
                 .userInfoString("baiiu")
@@ -133,7 +145,8 @@ public class RetrofitFragment extends Fragment {
         ApiFactory.getAnotherAPI()
                 .gankIOHistory(s)
                 .enqueue(new Callback<GankIOHistory>() {
-                    @Override public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
+                    @Override
+                    public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
                         GankIOHistory body = response.body();
                         LogUtil.d(body == null ? "body == null" : body.toString());
                     }

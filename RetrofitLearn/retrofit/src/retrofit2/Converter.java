@@ -37,42 +37,42 @@ import retrofit2.http.QueryMap;
  * into the {@link Retrofit} instance.
  */
 public interface Converter<F, T> {
-  T convert(F value) throws IOException;
+    T convert(F value) throws IOException;
 
-  /** Creates {@link Converter} instances based on a type and target usage. */
-  abstract class Factory {
-    /**
-     * Returns a {@link Converter} for converting an HTTP response body to {@code type}, or null if
-     * {@code type} cannot be handled by this factory. This is used to create converters for
-     * response types such as {@code SimpleResponse} from a {@code Call<SimpleResponse>}
-     * declaration.
-     */
-    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
-        Retrofit retrofit) {
-      return null;
-    }
+    /** Creates {@link Converter} instances based on a type and target usage. */
+    abstract class Factory {
+        /**
+         * Returns a {@link Converter} for converting an HTTP response body to {@code type}, or null if
+         * {@code type} cannot be handled by this factory. This is used to create converters for
+         * response types such as {@code SimpleResponse} from a {@code Call<SimpleResponse>}
+         * declaration.
+         */
+        public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
+                Retrofit retrofit) {
+            return null;
+        }
 
-    /**
-     * Returns a {@link Converter} for converting {@code type} to an HTTP request body, or null if
-     * {@code type} cannot be handled by this factory. This is used to create converters for types
-     * specified by {@link Body @Body}, {@link Part @Part}, and {@link PartMap @PartMap}
-     * values.
-     */
-    public Converter<?, RequestBody> requestBodyConverter(Type type,
-        Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
-      return null;
-    }
+        /**
+         * Returns a {@link Converter} for converting {@code type} to an HTTP request body, or null if
+         * {@code type} cannot be handled by this factory. This is used to create converters for types
+         * specified by {@link Body @Body}, {@link Part @Part}, and {@link PartMap @PartMap}
+         * values.
+         */
+        public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations,
+                Annotation[] methodAnnotations, Retrofit retrofit) {
+            return null;
+        }
 
-    /**
-     * Returns a {@link Converter} for converting {@code type} to a {@link String}, or null if
-     * {@code type} cannot be handled by this factory. This is used to create converters for types
-     * specified by {@link Field @Field}, {@link FieldMap @FieldMap} values,
-     * {@link Header @Header}, {@link HeaderMap @HeaderMap}, {@link Path @Path},
-     * {@link Query @Query}, and {@link QueryMap @QueryMap} values.
-     */
-    public Converter<?, String> stringConverter(Type type, Annotation[] annotations,
-        Retrofit retrofit) {
-      return null;
+        /**
+         * Returns a {@link Converter} for converting {@code type} to a {@link String}, or null if
+         * {@code type} cannot be handled by this factory. This is used to create converters for types
+         * specified by {@link Field @Field}, {@link FieldMap @FieldMap} values,
+         * {@link Header @Header}, {@link HeaderMap @HeaderMap}, {@link Path @Path},
+         * {@link Query @Query}, and {@link QueryMap @QueryMap} values.
+         */
+        public Converter<?, String> stringConverter(Type type, Annotation[] annotations,
+                Retrofit retrofit) {
+            return null;
+        }
     }
-  }
 }

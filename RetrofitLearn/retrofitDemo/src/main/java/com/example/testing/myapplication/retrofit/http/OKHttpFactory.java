@@ -3,11 +3,12 @@ package com.example.testing.myapplication.retrofit.http;
 import com.example.testing.myapplication.MyApplication;
 import com.example.testing.myapplication.retrofit.http.interceptor.OnOffLineCachedInterceptor;
 import com.example.testing.myapplication.retrofit.http.interceptor.UserAgentInterceptor;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+
+//import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 /**
  * author: baiiu
@@ -34,7 +35,7 @@ enum OKHttpFactory {
                 .addInterceptor(interceptor)
 
                 //stetho,可以在chrome中查看请求
-                .addNetworkInterceptor(new StethoInterceptor())
+                //.addNetworkInterceptor(new StethoInterceptor())
 
                 //添加UA
                 .addInterceptor(new UserAgentInterceptor(HttpHelper.getUserAgent()))

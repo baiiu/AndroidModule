@@ -2,7 +2,7 @@ package com.example.testing.myapplication;
 
 import android.app.Application;
 import android.content.Context;
-import com.facebook.stetho.Stetho;
+//import com.facebook.stetho.Stetho;
 
 /**
  * author: baiiu
@@ -11,13 +11,13 @@ import com.facebook.stetho.Stetho;
  */
 public class MyApplication extends Application {
 
-  public static Context mContext;
+    public static Context mContext;
 
-  @Override public void onCreate() {
-    super.onCreate();
+    @Override public void onCreate() {
+        super.onCreate();
 
-    mContext = this;
+        mContext = this;
 
-    Stetho.initializeWithDefaults(this);
-  }
+        //Stetho.initializeWithDefaults(this);
+    }
 }
