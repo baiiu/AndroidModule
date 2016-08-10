@@ -1,9 +1,10 @@
 package com.example.testing.myapplication.retrofit.http;
 
+import com.example.testing.myapplication.mClass.gsonConverter.GsonConverterFactory;
+import com.example.testing.myapplication.mClass.stringConverter.StringConverter;
 import com.example.testing.myapplication.retrofit.ApiContants;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * author: baiiu
@@ -22,6 +23,9 @@ public enum RetrofitClient implements ApiContants {
 
                 //baseUrl
                 .baseUrl(GITHUB_BASEURL)
+
+                //string转化器
+                .addConverterFactory(StringConverter.create())
 
                 //gson转化器
                 .addConverterFactory(GsonConverterFactory.create())

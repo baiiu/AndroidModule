@@ -7,7 +7,7 @@ package com.example.testing.myapplication.retrofit.http;
  */
 public class HttpHelper {
 
-  public static String getUserAgent() {
-    return "UA";
-  }
+    public static String getUserAgent() {
+        return "UA";
+    }
 }

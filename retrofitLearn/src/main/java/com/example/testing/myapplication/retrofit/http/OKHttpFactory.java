@@ -16,47 +16,47 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 enum OKHttpFactory {
 
-  INSTANCE;
+    INSTANCE;
 
-  private final OkHttpClient okHttpClient;
+    private final OkHttpClient okHttpClient;
 
-  private static final int TIMEOUT_READ = 25;
-  private static final int TIMEOUT_CONNECTION = 25;
+    private static final int TIMEOUT_READ = 25;
+    private static final int TIMEOUT_CONNECTION = 25;
 
-  OKHttpFactory() {
-    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+    OKHttpFactory() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    Cache cache = new Cache(MyApplication.mContext.getCacheDir(), 10 * 1024 * 1024);
+        Cache cache = new Cache(MyApplication.mContext.getCacheDir(), 10 * 1024 * 1024);
 
-    okHttpClient = new OkHttpClient.Builder()
-        //打印请求log
-        .addInterceptor(interceptor)
+        okHttpClient = new OkHttpClient.Builder()
+                //打印请求log
+                .addInterceptor(interceptor)
 
-        //stetho,可以在chrome中查看请求
-        .addNetworkInterceptor(new StethoInterceptor())
+                //stetho,可以在chrome中查看请求
+                .addNetworkInterceptor(new StethoInterceptor())
 
-        //添加UA
-        .addInterceptor(new UserAgentInterceptor(HttpHelper.getUserAgent()))
+                //添加UA
+                .addInterceptor(new UserAgentInterceptor(HttpHelper.getUserAgent()))
 
-        //必须是设置Cache目录
-        .cache(cache)
+                //必须是设置Cache目录
+                .cache(cache)
 
-        //走缓存
-        .addInterceptor(new OnOffLineCachedInterceptor())
-        .addNetworkInterceptor(new OnOffLineCachedInterceptor())
+                //走缓存
+                .addInterceptor(new OnOffLineCachedInterceptor())
+                .addNetworkInterceptor(new OnOffLineCachedInterceptor())
 
-        //失败重连
-        .retryOnConnectionFailure(true)
+                //失败重连
+                .retryOnConnectionFailure(true)
 
-        //time out
-        .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
-        .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
+                //time out
+                .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
+                .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
 
-        .build();
-  }
+                .build();
+    }
 
-  public OkHttpClient getOkHttpClient() {
-    return okHttpClient;
-  }
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
+    }
 }

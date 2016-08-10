@@ -25,33 +25,34 @@ import retrofit2.Response;
  */
 public class NewsListFragment extends ListFragment {
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_list, container, false);
-  }
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_list, container, false);
+    }
 
-  @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
+    @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-    String s = "http://news-at.zhihu.com/api/4/news/before/20160517";
-    ApiFactory.INSTANCE.getAnotherAPI().getNewsList(s).enqueue(new Callback<Daily>() {
-      @Override public void onResponse(Call<Daily> call, Response<Daily> response) {
-        List<Story> stories = response.body().stories;
+        String s = "http://news-at.zhihu.com/api/4/news/before/20160517";
+        ApiFactory.getAnotherAPI()
+                .getNewsList(s)
+                .enqueue(new Callback<Daily>() {
+                    @Override public void onResponse(Call<Daily> call, Response<Daily> response) {
+                        List<Story> stories = response.body().stories;
 
-        List<String> list = new ArrayList<String>();
-        for (Story story : stories) {
-          list.add(story.title);
-        }
+                        List<String> list = new ArrayList<String>();
+                        for (Story story : stories) {
+                            list.add(story.title);
+                        }
 
-        LogUtil.d(list.toString());
+                        LogUtil.d(list.toString());
 
-        setListAdapter(
-            new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list));
-      }
+                        setListAdapter(
+                                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, list));
+                    }
 
-      @Override public void onFailure(Call<Daily> call, Throwable t) {
+                    @Override public void onFailure(Call<Daily> call, Throwable t) {
 
-      }
-    });
-  }
+                    }
+                });
+    }
 }

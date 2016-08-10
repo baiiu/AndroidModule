@@ -1,0 +1,36 @@
+
+/*
+Retrofit遍历集合寻找能适配的responseBodyConverter，所以你需要在你的Convert中根据type来判断是否要进行处理
+如果不在此Converter中处理返回null即可
+
+可以通过type和Annotation来判断是否要进行处理,参考StringConverter
+
+所以添加的Converter的顺序对解析有影响
+
+Returns a {@link Converter} for converting an HTTP response body to {@code type}, or null if
+{@code type} cannot be handled by this factory.
+
+*/
+
+public <T> Converter<ResponseBody, T> responseBodyConverter(Type type, Annotation[] annotations) {
+    return nextResponseBodyConverter(null, type, annotations);
+}
+
+public <T> Converter<ResponseBody, T> nextResponseBodyConverter(Converter.Factory skipPast,
+    Type type, Annotation[] annotations) {
+  checkNotNull(type, "type == null");
+  checkNotNull(annotations, "annotations == null");
+
+  int start = converterFactories.indexOf(skipPast) + 1;
+  for (int i = start, count = converterFactories.size(); i < count; i++) {
+    Converter<ResponseBody, ?> converter =
+        converterFactories.get(i).responseBodyConverter(type, annotations, this);
+    if (converter != null) {
+      //noinspection unchecked
+      return (Converter<ResponseBody, T>) converter;
+    }
+  }
+
+  print ("Could not locate ResponseBody converter for ")
+  throw new IllegalArgumentException(builder.toString());
+}

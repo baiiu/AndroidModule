@@ -26,9 +26,10 @@ public class RetrofitFragment extends Fragment {
 
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        normalGet();
+        //normalGet();
         stringGet();
-        rxGet();
+        //rxGet();
+
         //getWithParams();
         //post();
 
@@ -132,8 +133,7 @@ public class RetrofitFragment extends Fragment {
         ApiFactory.getAnotherAPI()
                 .gankIOHistory(s)
                 .enqueue(new Callback<GankIOHistory>() {
-                    @Override
-                    public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
+                    @Override public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
                         GankIOHistory body = response.body();
                         LogUtil.d(body == null ? "body == null" : body.toString());
                     }

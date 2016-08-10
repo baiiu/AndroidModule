@@ -4,8 +4,9 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.example.testing.myapplication.fragments.RetrofitFragment;
+import com.example.testing.myapplication.fragments.ErrorTestFragment;
 import com.example.testing.myapplication.util.NetWorkReceiver;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         //请求网络
         getSupportFragmentManager().beginTransaction()
-                .add(new RetrofitFragment(), "retrofit")
+                .add(getFragment(), "retrofit")
                 .commit();
 
         //设置List
@@ -39,6 +40,18 @@ public class MainActivity extends AppCompatActivity {
         //});
     }
 
+    public Fragment getFragment() {
+        return
+
+                //new RetrofitFragment()
+
+
+                new ErrorTestFragment()
+
+                ;
+    }
+
+
     private NetWorkReceiver netWorkReceiver;
 
     private void initBroadCast() {
@@ -51,4 +64,5 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(netWorkReceiver);
         super.onDestroy();
     }
+
 }
