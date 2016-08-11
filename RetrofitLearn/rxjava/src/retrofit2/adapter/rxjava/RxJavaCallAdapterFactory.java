@@ -119,7 +119,7 @@ public final class RxJavaCallAdapterFactory extends CallAdapter.Factory {
         Type observableType = getParameterUpperBound(0, (ParameterizedType) returnType);
         Class<?> rawObservableType = getRawType(observableType);
         if (rawObservableType == Response.class) {
-            if (!(observableType instanceof ParameterizedType)) {
+             if (!(observableType instanceof ParameterizedType)) {
                 throw new IllegalStateException(
                         "Response must be parameterized" + " as Response<Foo> or Response<? extends Foo>");
             }

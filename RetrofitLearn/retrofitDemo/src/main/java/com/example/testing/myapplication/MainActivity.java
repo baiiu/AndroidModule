@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import com.example.testing.myapplication.fragments.ConverterTestFragment;
+import com.example.testing.myapplication.fragments.ErrorTestFragment;
 import com.example.testing.myapplication.util.NetWorkReceiver;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,7 +47,11 @@ public class MainActivity extends AppCompatActivity {
                 //new RetrofitFragment()
 
 
-                new ConverterTestFragment()
+                //new ConverterTestFragment()
+
+
+                new ErrorTestFragment()
+
 
                 ;
     }

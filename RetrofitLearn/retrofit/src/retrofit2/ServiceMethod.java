@@ -161,13 +161,13 @@ final class ServiceMethod<T> {
         }
 
         public ServiceMethod build() {
-            callAdapter = createCallAdapter();
+            callAdapter = createCallAdapter();//创建CallAdapter,根据class
             responseType = callAdapter.responseType();
             if (responseType == Response.class || responseType == okhttp3.Response.class) {
                 throw methodError("'" + Utils.getRawType(responseType)
                         .getName() + "' is not a valid response body type. Did you mean ResponseBody?");
             }
-            responseConverter = createResponseConverter();
+            responseConverter = createResponseConverter();//创建responseConverter
 
             for (Annotation annotation : methodAnnotations) {
                 parseMethodAnnotation(annotation);

@@ -1,7 +1,6 @@
 package com.example.testing.myapplication.retrofit.http;
 
 import com.example.testing.myapplication.MyApplication;
-import com.example.testing.myapplication.retrofit.http.interceptor.OnOffLineCachedInterceptor;
 import com.example.testing.myapplication.retrofit.http.interceptor.UserAgentInterceptor;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
@@ -41,11 +40,11 @@ enum OKHttpFactory {
                 .addInterceptor(new UserAgentInterceptor(HttpHelper.getUserAgent()))
 
                 //必须是设置Cache目录
-                .cache(cache)
+                //.cache(cache)
 
                 //走缓存
-                .addInterceptor(new OnOffLineCachedInterceptor())
-                .addNetworkInterceptor(new OnOffLineCachedInterceptor())
+                //.addInterceptor(new OnOffLineCachedInterceptor())
+                //.addNetworkInterceptor(new OnOffLineCachedInterceptor())
 
                 //失败重连
                 .retryOnConnectionFailure(true)

@@ -3,6 +3,7 @@ package com.example.testing.myapplication.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import com.example.testing.myapplication.bean.User;
 import com.example.testing.myapplication.retrofit.ApiFactory;
 import com.example.testing.myapplication.util.LogUtil;
@@ -11,6 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -28,12 +30,22 @@ public class ConverterTestFragment extends Fragment {
         rxGet();
     }
 
-
+    //转换为string
     private void rxGet() {
         ApiFactory.gitHubAPI()
                 .userInfoRxS("baiiu")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .filter(new Func1<String, Boolean>() {
+                    @Override public Boolean call(String s) {
+                        LogUtil.d("filter...");
+
+                        if (TextUtils.isEmpty(s)) {
+                            return false;
+                        }
+                        return true;
+                    }
+                })
                 .subscribe(new Subscriber<String>() {
                     @Override public void onCompleted() {
                         LogUtil.d("onCompleted");

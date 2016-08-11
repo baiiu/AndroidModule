@@ -10,8 +10,8 @@ include(
 
 include(
 
-        //        ':someApplications:MyApplication',
-        //        ":someApplications:ptr-lib"
+        ':someApplications:MyApplication',
+        ":someApplications:ptr-lib"
 
 )
 
