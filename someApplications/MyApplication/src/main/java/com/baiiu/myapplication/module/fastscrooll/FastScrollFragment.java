@@ -1,5 +1,6 @@
 package com.baiiu.myapplication.module.fastscrooll;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import com.baiiu.myapplication.R;
 import com.baiiu.myapplication.util.LogUtil;
+import com.baiiu.myapplication.view.RecyclerViewDivider;
 
 /**
  * author: baiiu
@@ -48,6 +50,9 @@ public class FastScrollFragment extends Fragment implements View.OnClickListener
                         LogUtil.d("显示这么多个: " + mVisibleCount);
                     }
                 });
+
+        recyclerView.addItemDecoration(
+                new RecyclerViewDivider(getContext(), LinearLayoutManager.VERTICAL, 20, Color.BLUE));
 
 
         view.findViewById(R.id.fast_top)
