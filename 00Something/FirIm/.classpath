@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/apk-parser-1.7.3.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/AXMLPrinter.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/commons-compress-1.6.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/fluent-hc-4.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/httpclient-4.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/httpclient-cache-4.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/httpcore-4.2.4.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/httpmime-4.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/json.org.jar"/>
+	<classpathentry kind="lib" path="/Users/baiiu/eclipse/FirIm/libs/xz-1.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
