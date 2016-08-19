@@ -22,12 +22,11 @@ public class LogUtil {
     private static String getPrefix() {
         String prefix = "%s.%s(L:%d)";
 
-        StackTraceElement caller = Thread.currentThread().getStackTrace()[4];
+        StackTraceElement caller = Thread.currentThread()
+                .getStackTrace()[4];
         String callerClazzName = caller.getClassName();
-        callerClazzName = callerClazzName.substring(callerClazzName
-                .lastIndexOf(".") + 1);
-        prefix = String.format(prefix, callerClazzName, caller.getMethodName(),
-                caller.getLineNumber());
+        callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
+        prefix = String.format(prefix, callerClazzName, caller.getMethodName(), caller.getLineNumber());
 
         return prefix;
     }

@@ -3,23 +3,23 @@ include(
         //        ':JavaModule',
         //        'unitTestLearn',
         //    ':LiteOrmLearn',
-        //                ':RxJavaLearn',
+        ':RxJavaLearn'
         //    ':Dagger2Learn',
 
 )
 
-include(
-
-        ':someApplications:MyApplication',
-        ":someApplications:ptr-lib"
-
-)
-
-include(
-
-        ':RetrofitLearn:retrofitDemo',
-        ':RetrofitLearn:retrofit',
-        ':RetrofitLearn:rxjava'
-
-)
+//include(
+//
+//        ':someApplications:MyApplication',
+//        ":someApplications:ptr-lib"
+//
+//)
+//
+//include(
+//
+//        ':RetrofitLearn:retrofitDemo',
+//        ':RetrofitLearn:retrofit',
+//        ':RetrofitLearn:rxjava'
+//
+//)
 

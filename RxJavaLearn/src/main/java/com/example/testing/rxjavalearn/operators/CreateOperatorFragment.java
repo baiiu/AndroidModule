@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.testing.rxjavalearn.R;
-import com.example.testing.rxjavalearn.util.LogUtil;
 import com.jakewharton.rxbinding.view.RxView;
 import com.orhanobut.logger.Logger;
 import com.trello.rxlifecycle.FragmentEvent;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
+import com.example.testing.rxjavalearn.util.LogUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
@@ -32,38 +31,35 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 public class CreateOperatorFragment extends BaseFragment {
 
-    @BindView(R.id.bt_create)
-    Button bt_create;
+    @BindView(R.id.bt_create) Button bt_create;
 
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
 
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        intClick();
+        //        intClick();
 
-//        Observable<Long> defer = defer();
-//        Observable<Long> just = just();
-//        longClick(just);
+        //        Observable<Long> defer = defer();
+        //        Observable<Long> just = just();
+        //        longClick(just);
 
-//        from();
+        //        from();
 
-//        interval();
+        //        interval();
 
-//        repeat();
+        //        repeat();
 
         startWith();
 
-//        timer();
+        //        timer();
 
 
     }
@@ -74,8 +70,7 @@ public class CreateOperatorFragment extends BaseFragment {
      */
     private void startWith() {
         //先发射8
-        Observable
-                .just(6)
+        Observable.just(6)
                 .startWith(8)
                 .compose(bindToLifecycle())
                 .subscribe(LogUtil::d);
@@ -100,7 +95,8 @@ public class CreateOperatorFragment extends BaseFragment {
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .compose(bindToLifecycle())
-                .flatMap(aVoid -> Observable.just(6).repeat(5))
+                .flatMap(aVoid -> Observable.just(6)
+                        .repeat(5))
                 .subscribe(LogUtil::d, e -> LogUtil.e("error", e));
     }
 
@@ -142,7 +138,7 @@ public class CreateOperatorFragment extends BaseFragment {
     private void longClick(Observable<Long> observable) {
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
+                .compose(bindUntilEvent(FragmentEvent.DESTROY))
                 .flatMap(aVoid -> observable)
                 .subscribe(LogUtil::d);
     }
@@ -165,22 +161,19 @@ public class CreateOperatorFragment extends BaseFragment {
     private void intClick() {
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
-//                .flatMap(aVoid -> createOperator())
+                .compose(bindUntilEvent(FragmentEvent.DESTROY))
+                //                .flatMap(aVoid -> createOperator())
                 .flatMap(aVoid -> rangeOperator())
                 .subscribe(new Subscriber<Integer>() {
-                    @Override
-                    public void onCompleted() {
+                    @Override public void onCompleted() {
                         Logger.d("onCompleted");
                     }
 
-                    @Override
-                    public void onError(Throwable e) {
+                    @Override public void onError(Throwable e) {
                         Logger.d("onError " + e.toString());
                     }
 
-                    @Override
-                    public void onNext(Integer integer) {
+                    @Override public void onNext(Integer integer) {
                         Logger.d("" + integer);
                     }
                 });
@@ -200,8 +193,7 @@ public class CreateOperatorFragment extends BaseFragment {
      */
     private Observable<Integer> createOperator() {
         return Observable.create(new Observable.OnSubscribe<Integer>() {
-            @Override
-            public void call(Subscriber<? super Integer> subscriber) {
+            @Override public void call(Subscriber<? super Integer> subscriber) {
                 if (!subscriber.isUnsubscribed()) {
                     for (int i = 0; i < 3; ++i) {
                         int temp = new Random().nextInt(10);
@@ -219,6 +211,5 @@ public class CreateOperatorFragment extends BaseFragment {
             }
         });
     }
-
 
 }

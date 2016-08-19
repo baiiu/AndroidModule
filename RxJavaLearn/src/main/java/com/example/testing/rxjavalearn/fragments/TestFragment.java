@@ -17,12 +17,26 @@ public class TestFragment extends BaseFragment {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-                filterTest();
-                firstTest();
+        //filterTest();
+        //firstTest();
 
         //zipTest();
         //zipTest2();
-        filterZip();
+        //filterZip();
+        mapOccureError();
+    }
+
+    private void mapOccureError() {
+        Observable.just(1, 2, 3)
+                .map(integer -> {
+                    if (integer == 2) {
+                        throw new RuntimeException("错误2");
+                    }
+
+                    return String.valueOf(integer) + "哈哈";
+                })
+                .subscribe(getSubscriber());
+
     }
 
     private void filterZip() {
