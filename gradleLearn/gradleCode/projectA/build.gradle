@@ -30,8 +30,14 @@ def aClosure = {
   println project;
 }
 
+
+def releaseTime() {
+    return new Date().format("yyMMddhh", TimeZone.getTimeZone("UTC"))
+}
+
 task hello{
   doLast(aClosure);
+  print releaseTime();
 }
 
 //简单写法
