@@ -2,6 +2,7 @@ package com.example.testing.rxjavalearn.transformer;
 
 import android.os.Bundle;
 import com.example.testing.rxjavalearn.operators.BaseFragment;
+import com.example.testing.rxjavalearn.rxEncapsulated.Transformers;
 import rx.Observable;
 
 /**

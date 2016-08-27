@@ -1,4 +1,4 @@
-package com.example.testing.rxjavalearn.transformer;
+package com.example.testing.rxjavalearn.rxEncapsulated;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -19,5 +19,6 @@ public class Transformers {
     public static <T> Observable.Transformer<T, T> catchExceptionToNull() {
         return observable -> observable.onErrorResumeNext(throwable -> Observable.just(null));
     }
+
 
 }
