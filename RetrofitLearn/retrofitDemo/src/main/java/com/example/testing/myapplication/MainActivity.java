@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.baiiu.library.LogUtil;
 import com.example.testing.myapplication.fragments.RetrofitFragment;
 import com.example.testing.myapplication.util.NetWorkReceiver;
 
@@ -17,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initBroadCast();
-        LogUtil.init(true,"llllog");
+
         //请求网络
         getSupportFragmentManager().beginTransaction()
                 .add(getFragment(), "retrofit")

@@ -53,7 +53,7 @@ public class LogUtil {
 
     private static final int STACK_TRACE_INDEX = 5;
 
-    private static String mGlobalTag = TAG_DEFAULT;
+    public static String mGlobalTag = TAG_DEFAULT;
     private static boolean IS_SHOW_LOG = true;
 
     public static void init(boolean isShowLog) {
@@ -169,7 +169,8 @@ public class LogUtil {
         printLog(true, type, tagStr, objects);
     }
 
-    public static void printLog(boolean showHeadString, @LogType int type, String tagStr, Object... objects) {
+    public static void printLog(boolean showHeadString, @LogType int type, String tagStr,
+            Object... objects) {
         if (!IS_SHOW_LOG) {
             return;
         }

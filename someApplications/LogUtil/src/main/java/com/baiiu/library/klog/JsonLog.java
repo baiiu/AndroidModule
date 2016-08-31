@@ -3,7 +3,7 @@ package com.baiiu.library.klog;
 import android.util.Log;
 
 import com.baiiu.library.LogUtil;
-import com.baiiu.library.Util;
+import com.baiiu.library.LogUtilHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,12 +32,12 @@ public class JsonLog {
             message = msg;
         }
 
-        Util.printLine(tag, true);
+        LogUtilHelper.printLine(tag, true);
         message = headString + LogUtil.LINE_SEPARATOR + message;
         String[] lines = message.split(LogUtil.LINE_SEPARATOR);
         for (String line : lines) {
             Log.d(tag, "║ " + line);
         }
-        Util.printLine(tag, false);
+        LogUtilHelper.printLine(tag, false);
     }
 }

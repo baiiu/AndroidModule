@@ -1,6 +1,7 @@
 package com.example.testing.myapplication.util;
 
 import com.baiiu.library.LogUtil;
+import com.baiiu.library.LogUtilHelper;
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -27,7 +28,7 @@ import static okhttp3.internal.Platform.INFO;
  * date: on 16/8/31 19:09
  * description:
  */
-public final class MHttpLoggingInterceptor implements Interceptor {
+public final class HttpLoggingInterceptorM implements Interceptor {
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
     public enum Level {
@@ -98,11 +99,11 @@ public final class MHttpLoggingInterceptor implements Interceptor {
         };
     }
 
-    public MHttpLoggingInterceptor() {
+    public HttpLoggingInterceptorM() {
         this(Logger.DEFAULT);
     }
 
-    public MHttpLoggingInterceptor(Logger logger) {
+    public HttpLoggingInterceptorM(Logger logger) {
         this.logger = logger;
     }
 
@@ -111,7 +112,7 @@ public final class MHttpLoggingInterceptor implements Interceptor {
     private volatile Level level = Level.NONE;
 
     /** Change the level at which this interceptor logs. */
-    public MHttpLoggingInterceptor setLevel(Level level) {
+    public HttpLoggingInterceptorM setLevel(Level level) {
         if (level == null) throw new NullPointerException("level == null. Use Level.NONE instead.");
         this.level = level;
         return this;
@@ -132,15 +133,39 @@ public final class MHttpLoggingInterceptor implements Interceptor {
         boolean logBody = level == Level.BODY;
         boolean logHeaders = logBody || level == Level.HEADERS;
 
+        /*
+            打印开始开始请求
+         */
         RequestBody requestBody = request.body();
         boolean hasRequestBody = requestBody != null;
 
         Connection connection = chain.connection();
         Protocol protocol = connection != null ? connection.protocol() : Protocol.HTTP_1_1;
-        String requestStartMessage = "--> " + request.method() + ' ' + request.url() + ' ' + protocol;
+        String requestMessage = request.method() + ' ' + request.url() + ' ' + protocol;
+        String requestStartMessage = "--> " + requestMessage;
         if (!logHeaders && hasRequestBody) {
             requestStartMessage += " (" + requestBody.contentLength() + "-byte body)";
         }
+        logger.log("start sending Request: " + requestStartMessage, LogUtil.D);
+
+
+        /*
+            请求中,计算请求时间并打印
+         */
+        long startNs = System.nanoTime();
+        Response response;
+        try {
+            response = chain.proceed(request);
+        } catch (Exception e) {
+            logger.log("<-- HTTP FAILED: " + e, LogUtil.D);
+            throw e;
+        }
+        long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
+
+        /*
+            请求完后打印RequestBody
+         */
+        LogUtilHelper.printDivider();
         logger.log(requestStartMessage, LogUtil.D);
 
         if (logHeaders) {
@@ -178,7 +203,6 @@ public final class MHttpLoggingInterceptor implements Interceptor {
                     charset = contentType.charset(UTF8);
                 }
 
-                logger.log("", LogUtil.D);
                 if (isPlaintext(buffer)) {
                     logger.log(buffer.readString(charset), LogUtil.D);
                     logger.log("--> END " + request.method() + " (" + requestBody.contentLength() + "-byte body)",
@@ -193,16 +217,9 @@ public final class MHttpLoggingInterceptor implements Interceptor {
             }
         }
 
-        long startNs = System.nanoTime();
-        Response response;
-        try {
-            response = chain.proceed(request);
-        } catch (Exception e) {
-            logger.log("<-- HTTP FAILED: " + e, LogUtil.D);
-            throw e;
-        }
-        long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
-
+        /*
+            请求完后打印ResponseBody
+         */
         ResponseBody responseBody = response.body();
         long contentLength = responseBody.contentLength();
         String bodySize = contentLength != -1 ? contentLength + "-byte" : "unknown-length";
@@ -230,7 +247,7 @@ public final class MHttpLoggingInterceptor implements Interceptor {
                     try {
                         charset = contentType.charset(UTF8);
                     } catch (UnsupportedCharsetException e) {
-                        logger.log("", LogUtil.D);
+
                         logger.log("Couldn't decode the response body; charset is likely malformed.", LogUtil.D);
                         logger.log("<-- END HTTP", LogUtil.D);
 
@@ -239,19 +256,21 @@ public final class MHttpLoggingInterceptor implements Interceptor {
                 }
 
                 if (!isPlaintext(buffer)) {
-                    logger.log("", LogUtil.D);
+
                     logger.log("<-- END HTTP (binary " + buffer.size() + "-byte body omitted)", LogUtil.D);
                     return response;
                 }
 
                 if (contentLength != 0) {
-                    logger.log("", LogUtil.D);
+
                     logger.log(buffer.clone()
                                        .readString(charset), LogUtil.JSON);
                 }
 
-                logger.log("<-- END HTTP (" + buffer.size() + "-byte body)", LogUtil.D);
+                logger.log("<-- END HTTP: " + requestMessage + " (" + buffer.size() + "-byte body)", LogUtil.D);
             }
+
+            LogUtilHelper.printDivider();
         }
 
         return response;

@@ -3,7 +3,6 @@ package com.example.testing.myapplication.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import com.baiiu.library.LogUtil;
 import com.example.testing.myapplication.bean.GankIODay;
 import com.example.testing.myapplication.bean.GankIOHistory;
 import com.example.testing.myapplication.bean.Repo;
@@ -26,18 +25,21 @@ public class RetrofitFragment extends Fragment {
 
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        normalGet();
+        //normalGet();
         stringGet();
-        rxGet();
+        //rxGet();
 
         //getWithParams();
         //post();
 
         //无缓存
-        //anotherUrl();
+        anotherUrl();
+        anotherUrl();
+        anotherUrl();
+        anotherUrl();
 
         //默认缓存
-        //getOneDay();
+        getOneDay();
     }
 
     /**
@@ -97,15 +99,15 @@ public class RetrofitFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<User>() {
                     @Override public void onCompleted() {
-                        LogUtil.d("onCompleted");
+                        //LogUtil.d("onCompleted");
                     }
 
                     @Override public void onError(Throwable e) {
-                        LogUtil.e(e.toString());
+                        //LogUtil.e(e.toString());
                     }
 
                     @Override public void onNext(User user) {
-                        LogUtil.d(user.toString());
+                        //LogUtil.d(user.toString());
                     }
                 });
     }
@@ -116,7 +118,7 @@ public class RetrofitFragment extends Fragment {
                 .enqueue(new Callback<List<Repo>>() {
                     @Override public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
                         List<Repo> body = response.body();
-                        LogUtil.d(body == null ? "body == null" : body.toString());
+                        //LogUtil.d(body == null ? "body == null" : body.toString());
                     }
 
                     @Override public void onFailure(Call<List<Repo>> call, Throwable t) {
@@ -130,12 +132,12 @@ public class RetrofitFragment extends Fragment {
                 .createUser(new User())
                 .enqueue(new Callback<User>() {
                     @Override public void onResponse(Call<User> call, Response<User> response) {
-                        User body = response.body();
-                        LogUtil.d(body == null ? "body == null" : body.toString());
+                        //User body = response.body();
+                        //LogUtil.d(body == null ? "body == null" : body.toString());
                     }
 
                     @Override public void onFailure(Call<User> call, Throwable t) {
-                        LogUtil.d(t.toString());
+                        //LogUtil.d(t.toString());
                     }
                 });
     }
@@ -147,12 +149,12 @@ public class RetrofitFragment extends Fragment {
                 .enqueue(new Callback<GankIOHistory>() {
                     @Override
                     public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
-                        GankIOHistory body = response.body();
-                        LogUtil.d(body == null ? "body == null" : body.toString());
+                        //GankIOHistory body = response.body();
+                        //LogUtil.d(body == null ? "body == null" : body.toString());
                     }
 
                     @Override public void onFailure(Call<GankIOHistory> call, Throwable t) {
-                        LogUtil.e("anotherUrl ," + t.toString());
+                        //LogUtil.e("anotherUrl ," + t.toString());
                     }
                 });
     }
@@ -163,12 +165,12 @@ public class RetrofitFragment extends Fragment {
                 .getOneDay(s)
                 .enqueue(new Callback<GankIODay>() {
                     @Override public void onResponse(Call<GankIODay> call, Response<GankIODay> response) {
-                        GankIODay body = response.body();
-                        LogUtil.d(body == null ? "body == null" : body.toString());
+                        //GankIODay body = response.body();
+                        //LogUtil.d(body == null ? "body == null" : body.toString());
                     }
 
                     @Override public void onFailure(Call<GankIODay> call, Throwable t) {
-                        LogUtil.e("getOneDay ," + t.toString());
+                        //LogUtil.e("getOneDay ," + t.toString());
                     }
                 });
     }

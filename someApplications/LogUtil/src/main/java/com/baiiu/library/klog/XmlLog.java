@@ -3,7 +3,7 @@ package com.baiiu.library.klog;
 import android.util.Log;
 
 import com.baiiu.library.LogUtil;
-import com.baiiu.library.Util;
+import com.baiiu.library.LogUtilHelper;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -29,14 +29,14 @@ public class XmlLog {
             xml = headString + LogUtil.NULL_TIPS;
         }
 
-        Util.printLine(tag, true);
+        LogUtilHelper.printLine(tag, true);
         String[] lines = xml.split(LogUtil.LINE_SEPARATOR);
         for (String line : lines) {
-            if (!Util.isEmpty(line)) {
+            if (!LogUtilHelper.isEmpty(line)) {
                 Log.d(tag, "║ " + line);
             }
         }
-        Util.printLine(tag, false);
+        LogUtilHelper.printLine(tag, false);
     }
 
     public static String formatXML(String inputXML) {
