@@ -1,9 +1,9 @@
 package com.example.testing.myapplication.retrofit.http;
 
+import com.baiiu.library.okHttpLog.HttpLoggingInterceptorM;
+import com.baiiu.library.okHttpLog.LogInterceptor;
 import com.example.testing.myapplication.MyApplication;
 import com.example.testing.myapplication.retrofit.http.interceptor.UserAgentInterceptor;
-import com.example.testing.myapplication.util.LogInterceptor;
-import com.example.testing.myapplication.util.HttpLoggingInterceptorM;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;

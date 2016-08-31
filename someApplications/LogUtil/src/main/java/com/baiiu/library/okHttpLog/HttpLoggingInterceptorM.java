@@ -1,4 +1,4 @@
-package com.example.testing.myapplication.util;
+package com.baiiu.library.okHttpLog;
 
 import com.baiiu.library.LogUtil;
 import com.baiiu.library.LogUtilHelper;
