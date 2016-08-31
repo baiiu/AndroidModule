@@ -2,10 +2,11 @@ package com.example.testing.myapplication.retrofit.http;
 
 import com.example.testing.myapplication.MyApplication;
 import com.example.testing.myapplication.retrofit.http.interceptor.UserAgentInterceptor;
+import com.example.testing.myapplication.util.LogInterceptor;
+import com.example.testing.myapplication.util.MHttpLoggingInterceptor;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 //import com.facebook.stetho.okhttp3.StethoInterceptor;
 
@@ -24,8 +25,8 @@ enum OKHttpFactory {
     private static final int TIMEOUT_CONNECTION = 25;
 
     OKHttpFactory() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        MHttpLoggingInterceptor interceptor = new MHttpLoggingInterceptor(LogInterceptor.INSTANCE);
+        interceptor.setLevel(MHttpLoggingInterceptor.Level.BODY);
 
         Cache cache = new Cache(MyApplication.mContext.getCacheDir(), 10 * 1024 * 1024);
 

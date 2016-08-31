@@ -1,6 +1,6 @@
 package com.example.testing.myapplication.mClass.stringConverter;
 
-import com.example.testing.myapplication.util.LogUtil;
+import com.baiiu.library.LogUtil;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;

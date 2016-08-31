@@ -3,9 +3,11 @@ package com.example.testing.rxjavalearn.fragments;
 import android.os.Bundle;
 import com.example.testing.rxjavalearn.operators.BaseFragment;
 import com.example.testing.rxjavalearn.util.LogUtil;
+import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func2;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * author: baiiu
@@ -14,16 +16,37 @@ import rx.functions.Func2;
  */
 public class TestFragment extends BaseFragment {
 
+    //一个Subscription在执行完后就unsubscribe释放自己了,不再存进CompositeSubscription中
+    CompositeSubscription mCompositeSubscription = new CompositeSubscription();
+
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //filterTest();
-        //firstTest();
+        filterTest();
+        firstTest();
 
         //zipTest();
         //zipTest2();
         //filterZip();
-        mapOccureError();
+        //mapOccureError();
+
+        anotherOne();
+    }
+
+    private void anotherOne() {
+        mCompositeSubscription.add(Observable.interval(1, TimeUnit.SECONDS)
+                                           .subscribe(getSubscriber()));
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        LogUtil.d("" + mCompositeSubscription.hasSubscriptions());
+        if (mCompositeSubscription != null
+                && !mCompositeSubscription.isUnsubscribed()
+                && mCompositeSubscription.hasSubscriptions()) {
+
+            mCompositeSubscription.unsubscribe();
+        }
     }
 
     private void mapOccureError() {
@@ -63,11 +86,7 @@ public class TestFragment extends BaseFragment {
         Observable<String> string1 = Observable.just("String1");
 
 
-        Observable.zip(just, string1, new Func2<Integer, String, String>() {
-            @Override public String call(Integer integer, String s) {
-                return String.valueOf(integer) + ", " + s;
-            }
-        })
+        Observable.zip(just, string1, (integer, s) -> String.valueOf(integer) + ", " + s)
                 .onErrorResumeNext(throwable -> {
                     //直接走到null,不会对单个接口处理
                     return Observable.just(null);
@@ -118,9 +137,9 @@ public class TestFragment extends BaseFragment {
      * takeFirst() 只会调用onComplete
      */
     private void firstTest() {
-        Observable.concat(Observable.just(null), Observable.range(0, 8))
-                .first(integer -> integer != null && integer > 8)
-                .subscribe(getSubscriber());
+        mCompositeSubscription.add(Observable.concat(Observable.just(null), Observable.range(0, 10))
+                                           .first(integer -> integer != null && integer > 8)
+                                           .subscribe(getSubscriber()));
     }
 
     /**
@@ -129,21 +148,9 @@ public class TestFragment extends BaseFragment {
     private void filterTest() {
         Integer[] ints = new Integer[] { 1, 2, 3, 4 };
 
-        Observable.from(ints)
-                .filter(integer -> integer < 3)
-                .subscribe(new Subscriber<Integer>() {
-                    @Override public void onCompleted() {
-                        LogUtil.d("onComplete");
-                    }
-
-                    @Override public void onError(Throwable e) {
-                        LogUtil.e(e.toString());
-                    }
-
-                    @Override public void onNext(Integer integer) {
-                        LogUtil.d(integer);
-                    }
-                });
+        mCompositeSubscription.add(Observable.from(ints)
+                                           .filter(integer -> integer < 3)
+                                           .subscribe(getSubscriber()));
 
     }
 }

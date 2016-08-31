@@ -15,11 +15,12 @@ include(
 //
 //)
 //
-//include(
-//
-//        ':RetrofitLearn:retrofitDemo',
-//        ':RetrofitLearn:retrofit',
-//        ':RetrofitLearn:rxjava'
-//
-//)
+include(
+
+        ':RetrofitLearn:retrofitDemo',
+        ':RetrofitLearn:retrofit',
+        ':RetrofitLearn:rxjava',
+        ':someApplications:LogUtil'
+
+)
 

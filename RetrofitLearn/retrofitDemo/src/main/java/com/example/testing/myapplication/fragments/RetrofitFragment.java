@@ -3,12 +3,12 @@ package com.example.testing.myapplication.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import com.baiiu.library.LogUtil;
 import com.example.testing.myapplication.bean.GankIODay;
 import com.example.testing.myapplication.bean.GankIOHistory;
 import com.example.testing.myapplication.bean.Repo;
 import com.example.testing.myapplication.bean.User;
 import com.example.testing.myapplication.retrofit.ApiFactory;
-import com.example.testing.myapplication.util.LogUtil;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,9 +26,9 @@ public class RetrofitFragment extends Fragment {
 
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //normalGet();
+        normalGet();
         stringGet();
-        //rxGet();
+        rxGet();
 
         //getWithParams();
         //post();
@@ -57,11 +57,11 @@ public class RetrofitFragment extends Fragment {
                 .userInfoString("baiiu")
                 .enqueue(new Callback<String>() {
                     @Override public void onResponse(Call<String> call, Response<String> response) {
-                        LogUtil.d(response.body());
+                        //LogUtil.d(response.body());
                     }
 
                     @Override public void onFailure(Call<String> call, Throwable t) {
-                        LogUtil.d(t.toString());
+                        //LogUtil.d(t.toString());
                     }
                 });
     }
@@ -73,15 +73,15 @@ public class RetrofitFragment extends Fragment {
 
         userCall.enqueue(new Callback<User>() {
             @Override public void onResponse(Call<User> call, Response<User> response) {
-                User body = response.body();
-                LogUtil.d(body == null ? "body == null" : body.toString());
+                //User body = response.body();
+                //LogUtil.d(body == null ? "body == null" : body.toString());
             }
 
             @Override public void onFailure(Call<User> call, Throwable t) {
                 if (call.isCanceled()) {
-                    LogUtil.d("the call is canceled , " + toString());
+                    //LogUtil.d("the call is canceled , " + toString());
                 } else {
-                    LogUtil.e(t.toString());
+                    //LogUtil.e(t.toString());
                 }
             }
         });

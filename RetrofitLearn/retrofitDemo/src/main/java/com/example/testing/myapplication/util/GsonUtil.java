@@ -2,6 +2,7 @@ package com.example.testing.myapplication.util;
 
 
 import android.text.TextUtils;
+import com.baiiu.library.LogUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
