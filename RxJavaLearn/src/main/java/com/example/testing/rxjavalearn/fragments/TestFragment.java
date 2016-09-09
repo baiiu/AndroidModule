@@ -6,6 +6,7 @@ import com.example.testing.rxjavalearn.util.LogUtil;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.subscriptions.CompositeSubscription;
 
@@ -22,15 +23,42 @@ public class TestFragment extends BaseFragment {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        filterTest();
-        firstTest();
+        flatmapTest();
+
+        //filterTest();
+        //firstTest();
 
         //zipTest();
         //zipTest2();
         //filterZip();
         //mapOccureError();
 
-        anotherOne();
+        //anotherOne();
+    }
+
+    /*
+        flatmap: 第二个报出异常,直接error
+        有错误直接中断
+     */
+    private void flatmapTest() {
+        //Observable.just("1", "2", "3", "....")
+        Observable.create(new Observable.OnSubscribe<String>() {
+            @Override public void call(Subscriber<? super String> subscriber) {
+                for (int i = 0; i < 10; ++i) {
+                    subscriber.onNext(String.valueOf(i));
+
+                    if (i == 4) {
+                        throw new IllegalStateException("错误");
+                    }
+                }
+            }
+        })
+                .flatMap(new Func1<String, Observable<Integer>>() {
+                    @Override public Observable<Integer> call(String s) {
+                        return Observable.just(Integer.parseInt(s));
+                    }
+                })
+                .subscribe(getSubscriber());
     }
 
     private void anotherOne() {
