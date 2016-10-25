@@ -1,5 +1,6 @@
 include(
 
+        ':JavaTest',
         //        ':JavaModule',
         //        'unitTestLearn',
         //    ':LiteOrmLearn',
