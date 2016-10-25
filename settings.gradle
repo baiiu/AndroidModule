@@ -1,35 +1,35 @@
 include(
 
-        ':JavaTest',
+        //        ':JavaTest',
         //        ':JavaModule',
         //        'unitTestLearn',
-        //    ':LiteOrmLearn',
-        ':RxJavaLearn'
+//        ':LiteOrmLearn',
+        //        ':RxJavaLearn'
         //    ':Dagger2Learn',
 
 )
 
 include(
 
-        ':someApplications:MyApplication',
-        ":someApplications:ptr-lib"
+        ':someApplications:PerformanceApp',
+        //        ':someApplications:MyApplication',
+        //        ":someApplications:ptr-lib"
 
 )
 
 include(
 
-        ':RetrofitLearn:retrofitDemo',
-        ':RetrofitLearn:retrofit',
-        ':RetrofitLearn:rxjava',
-        ':Packaged:LogUtil'
+//        ':RetrofitLearn:retrofitDemo',
+//        ':RetrofitLearn:retrofit',
+//        ':RetrofitLearn:rxjava',
 
 )
 
 include(
 
         ':Packaged:LogUtil',
-        ':Packaged:LogUtilRelease',
-        ':Packaged:Stetho'
+        //        ':Packaged:LogUtilRelease',
+        //        ':Packaged:Stetho'
 
 )
 

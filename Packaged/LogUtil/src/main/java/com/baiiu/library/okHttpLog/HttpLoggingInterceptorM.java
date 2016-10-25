@@ -165,7 +165,7 @@ public final class HttpLoggingInterceptorM implements Interceptor {
         /*
             请求完后打印RequestBody
          */
-        LogUtilHelper.printDivider();
+        LogUtilHelper.printDivider(LogInterceptor.OKHTTP_TAG_STR);
         logger.log(requestStartMessage, LogUtil.D);
 
         if (logHeaders) {
@@ -270,7 +270,7 @@ public final class HttpLoggingInterceptorM implements Interceptor {
                 logger.log("<-- END HTTP: " + requestMessage + " (" + buffer.size() + "-byte body)", LogUtil.D);
             }
 
-            LogUtilHelper.printDivider();
+            LogUtilHelper.printDivider(LogInterceptor.OKHTTP_TAG_STR);
         }
 
         return response;

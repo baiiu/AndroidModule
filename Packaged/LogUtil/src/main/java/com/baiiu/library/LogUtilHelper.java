@@ -20,9 +20,8 @@ public class LogUtilHelper {
         }
     }
 
-    public static void printDivider() {
-        Log.d(LogUtil.mGlobalTag,
-              "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public static void printDivider(String tag) {
+        Log.d(tag, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
     }
 

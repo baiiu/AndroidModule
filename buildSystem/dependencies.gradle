@@ -1,0 +1,162 @@
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+
+        maven { url "https://jitpack.io" }
+    }
+}
+
+ext {
+    compileSdkVersion = 23
+    buildToolsVersion = '23.0.3'
+    supportLibsVersion = '23.4.0'
+    targetSdkVersion = 23
+    minSdkVersion = 15
+    versionCode = releaseTime()
+    versionName = "2.6"
+
+    javaSourceCompatibility = JavaVersion.VERSION_1_8
+    javaTargetCompatibility = JavaVersion.VERSION_1_8
+
+
+    supportLibVersion = '23.4.0'
+
+    retrofitVersion = '2.0.2'
+    okHttpVersion = '3.3.1'
+    okHttpUtilsVersion = '2.6.2'
+
+    rxJavaVersion = '1.1.9'
+    rxAndroidVersion = '1.2.1'
+    rxLifeCycleVersion = '0.7.0'
+    rxBindingVersion = '0.4.0'
+
+    GsonVersion = '2.7'
+    GlideVersion = '3.7.0'
+    ButterKnifeVersion = '8.4.0'
+
+    Dagger2Version = '2.0'
+
+    EventBusVersion = '3.0.0'
+
+    leakCanaryVersion = '1.5'
+    stethoVersion = '1.3.1'
+
+
+    //dependencies
+    support = [
+
+            appcompat   : "com.android.support:appcompat-v7:${supportLibVersion}",
+            design      : "com.android.support:design:${supportLibVersion}",
+            recyclerView: "com.android.support:recyclerview-v7:${supportLibVersion}",
+            cardView    : "com.android.support:cardview-v7:${supportLibVersion}",
+
+    ]
+
+    rx = [
+
+            rxJava                : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid             : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxLifecycle           : "com.trello:rxlifecycle:${rxLifeCycleVersion}",
+            rxLlifecycleAndroid   : "com.trello:rxlifecycle-android:${rxLifeCycleVersion}",
+            rxLlifecycleComponents: "com.trello:rxlifecycle-components:${rxLifeCycleVersion}",
+
+            //常用的只有第一个,用时自取
+            rxBinding             : "com.jakewharton.rxbinding:rxbinding:${rxBindingVersion}",
+            rxBindingSupportV4    : "com.jakewharton.rxbinding:rxbinding-support-v4:${rxBindingVersion}",
+            rxBindingSupportV7    : "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${rxBindingVersion}",
+            rxBindingDesign       : "com.jakewharton.rxbinding:rxbinding-design:${rxBindingVersion}",
+            rxBindingRecyclerView : "com.jakewharton.rxbinding:rxbinding-recyclerview:${rxBindingVersion}",
+
+    ]
+
+    //四大框架:网络,图片,数据库,依赖注入
+    majorFrame = [
+
+            //Realm, LiteOrm etc ...
+
+            //json
+            Gson                  : "com.google.code.gson:gson:${GsonVersion}",
+
+            //okHttp
+            okHttp                : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            loggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            okHttpUtils           : "com.zhy:okhttputils:${okHttpUtilsVersion}",
+
+            //retrofit
+            retrofit              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            converterGson         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            adapterRxJava         : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+
+            //Glide
+            Glide                 : "com.github.bumptech.glide:glide:${GlideVersion}",
+
+            //ButterKnife
+            ButterKnife           : "com.jakewharton:butterknife:${ButterKnifeVersion}",
+            aptButterKnifeCompiler: "com.jakewharton:butterknife-compiler:${ButterKnifeVersion}",
+
+            //Dagger2
+            Dagger2               : "com.google.dagger:dagger:${Dagger2Version}",
+            aptDagger2Compiler    : "com.google.dagger:dagger-compiler:${Dagger2Version}",
+
+            //EventBus
+            EventBus              : "org.greenrobot:eventbus:${EventBusVersion}"
+
+    ]
+
+    //辅助分析
+    assistance = [
+
+            //内存泄露
+            leakCanaryDebug  : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            leakCanaryRelease: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+            leakCanaryTest   : "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+
+            //stetho
+            stetho           : "com.facebook.stetho:stetho:${stethoVersion}",
+            stethoOkHttp     : "com.facebook.stetho:stetho-okhttp3:${stethoVersion}",
+
+            //bugly
+            bugly            : "com.tencent.bugly:crashreport:latest.release",
+            buglyNative      : "com.tencent.bugly:nativecrashreport:latest.release",
+
+            //友盟
+            umeng            : "com.umeng.analytics:analytics:latest.integration",
+
+    ]
+
+
+
+
+
+    //
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 工具方法
+
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
+def releaseTime() {
+    DateFormat df = new SimpleDateFormat("yyMMddHH", Locale.CHINA);
+    return df.format(new Date());
+}

@@ -51,10 +51,10 @@ public class LogUtil {
     @IntDef({ V, D, I, W, E, WTF, JSON, XML })
     public @interface LogType {}
 
-    private static final int STACK_TRACE_INDEX = 5;
+    private static final int STACK_TRACE_INDEX = 6;
 
     public static String mGlobalTag = TAG_DEFAULT;
-    private static boolean IS_SHOW_LOG = true;
+    private static boolean IS_SHOW_LOG = false;
 
     public static void init(boolean isShowLog) {
         IS_SHOW_LOG = isShowLog;
@@ -169,8 +169,7 @@ public class LogUtil {
         printLog(true, type, tagStr, objects);
     }
 
-    public static void printLog(boolean showHeadString, @LogType int type, String tagStr,
-            Object... objects) {
+    public static void printLog(boolean showHeadString, @LogType int type, String tagStr, Object... objects) {
         if (!IS_SHOW_LOG) {
             return;
         }
