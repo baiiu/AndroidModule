@@ -8,19 +8,28 @@ include(
 
 )
 
-//include(
-//
-//        ':someApplications:MyApplication',
-//        ":someApplications:ptr-lib"
-//
-//)
-//
+include(
+
+        ':someApplications:MyApplication',
+        ":someApplications:ptr-lib"
+
+)
+
 include(
 
         ':RetrofitLearn:retrofitDemo',
         ':RetrofitLearn:retrofit',
         ':RetrofitLearn:rxjava',
-        ':someApplications:LogUtil'
+        ':Packaged:LogUtil'
 
 )
+
+include(
+
+        ':Packaged:LogUtil',
+        ':Packaged:LogUtilRelease',
+        ':Packaged:Stetho'
+
+)
+
 
