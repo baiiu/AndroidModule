@@ -30,8 +30,8 @@ include(
         ':lib_component:StethoRelease',
         ':lib_component:LogUtil',
         ':lib_component:LogUtilRelease',
-        ':lib_component:CrashWoodPecker',
-        ':lib_component:CrashWoodPeckerRelease'
+        ':lib_component:CrashWoodpecker',
+        ':lib_component:CrashWoodpeckerRelease'
 
 )
 

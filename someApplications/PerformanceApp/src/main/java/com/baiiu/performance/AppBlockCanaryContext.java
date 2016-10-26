@@ -8,7 +8,7 @@ import com.github.moduth.blockcanary.BlockCanaryContext;
  * description:
  */
 public class AppBlockCanaryContext extends BlockCanaryContext {
-
-
-
+    @Override public int provideBlockThreshold() {
+        return super.provideBlockThreshold();
+    }
 }

@@ -2,6 +2,7 @@ package com.baiiu.performance;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import com.baiiu.performance.fragments.LeakCanaryFragment;
 import com.baiiu.performance.fragments.StrictModeFragment;
@@ -20,8 +21,16 @@ public class MainActivity extends AppCompatActivity {
 
         leakCanary();
         testStrictMode();
-        crashWoodpecker();
+        //crashWoodpecker();
+        blockCanary();
 
+        //Looper.getMainLooper().setMessageLogging(mainLooperPrinter);
+
+
+    }
+
+    private void blockCanary() {
+        SystemClock.sleep(3000);
     }
 
     private void crashWoodpecker() {
