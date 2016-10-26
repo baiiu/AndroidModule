@@ -23,16 +23,17 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    debugCompile project(':Packaged:LogUtil')
     compile rootProject.ext.support.appcompat
     debugCompile rootProject.ext.assistance.leakCanaryDebug
     releaseCompile rootProject.ext.assistance.leakCanaryRelease
     testCompile rootProject.ext.assistance.leakCanaryTest
 
+    debugCompile project(':lib_component:LogUtil')
+    releaseCompile project(':lib_component:LogUtilRelease')
+
     debugCompile 'com.github.markzhai:blockcanary-android:1.3.1'
     releaseCompile 'com.github.markzhai:blockcanary-no-op:1.3.1'
 
-    debugCompile 'me.drakeet.library:crashwoodpecker:1.3.2'
-    releaseCompile 'me.drakeet.library:crashwoodpecker-do-nothing:1.3.2'
-
+    debugCompile project(':lib_component:CrashWoodPecker')
+    releaseCompile project(':lib_component:CrashWoodPeckerRelease')
 }

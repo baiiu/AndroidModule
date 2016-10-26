@@ -3,7 +3,7 @@ include(
         //        ':JavaTest',
         //        ':JavaModule',
         //        'unitTestLearn',
-//        ':LiteOrmLearn',
+        //        ':LiteOrmLearn',
         //        ':RxJavaLearn'
         //    ':Dagger2Learn',
 
@@ -19,17 +19,19 @@ include(
 
 include(
 
-//        ':RetrofitLearn:retrofitDemo',
-//        ':RetrofitLearn:retrofit',
-//        ':RetrofitLearn:rxjava',
+        //        ':RetrofitLearn:retrofitDemo',
+        //        ':RetrofitLearn:retrofit',
+        //        ':RetrofitLearn:rxjava',
 
 )
 
 include(
 
-        ':Packaged:LogUtil',
-        //        ':Packaged:LogUtilRelease',
-        //        ':Packaged:Stetho'
+        ':lib_component:StethoRelease',
+        ':lib_component:LogUtil',
+        ':lib_component:LogUtilRelease',
+        ':lib_component:CrashWoodPecker',
+        ':lib_component:CrashWoodPeckerRelease'
 
 )
 
