@@ -1,7 +1,13 @@
 include(
 
-        //        ':JavaTest',
+                ':TestEffectiveJava',
         //        ':JavaModule',
+
+)
+
+
+include(
+
         //        'unitTestLearn',
         //        ':LiteOrmLearn',
         //        ':RxJavaLearn'
