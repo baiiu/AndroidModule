@@ -2,7 +2,6 @@ package com.baiiu.performance;
 
 import android.app.Application;
 import android.os.StrictMode;
-import com.github.moduth.blockcanary.BlockCanary;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import me.drakeet.library.CrashWoodpecker;
@@ -23,7 +22,7 @@ public class PerformanceApplication extends Application {
         if (BuildConfig.DEBUG) {
             strictMode();
             leakCanary();
-            BlockCanary.install(this, new AppBlockCanaryContext()).start();
+            //BlockCanary.install(this, new AppBlockCanaryContext()).start();
             CrashWoodpecker.flyTo(this);
         }
 
@@ -38,6 +37,7 @@ public class PerformanceApplication extends Application {
     }
 
     private void strictMode() {
+        // adb logcat | grep StrictMode
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll() //全都检测
                                            .penaltyFlashScreen()
                                            .penaltyDialog()
@@ -51,6 +51,5 @@ public class PerformanceApplication extends Application {
     public RefWatcher getRefWatcher() {
         return mRefWatcher;
     }
-
 
 }

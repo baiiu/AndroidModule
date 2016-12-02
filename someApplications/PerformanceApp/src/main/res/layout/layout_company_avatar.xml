@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <ImageView
+        android:id="@+id/company_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:visibility="visible"
+        tools:src="@mipmap/ic_launcher"
+        />
+
+    <ViewStub
+        android:id="@+id/viewStub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inflatedId="@+id/company_name"
+        android:layout="@layout/viewstub_tv"
+        />
+
+    <!--<TextView-->
+    <!--android:id="@+id/company_name"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@android:color/transparent"-->
+    <!--android:gravity="center"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="17sp"-->
+    <!--tools:text="KK"-->
+    <!--tools:textColor="@android:color/black"-->
+    <!--/>-->
+
+    <TextView
+        android:id="@+id/tv_contactedByWorkmate"
+        android:layout_width="match_parent"
+        android:layout_height="19dp"
+        android:layout_gravity="bottom"
+        android:background="@android:drawable/btn_star"
+        android:gravity="center"
+        android:text="正在融资"
+        android:textColor="#123456"
+        android:textSize="10sp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+</merge>

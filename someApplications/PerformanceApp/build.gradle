@@ -12,6 +12,15 @@ android {
         versionName rootProject.ext.versionName as String
     }
 
+    lintOptions {
+        // set to true to turn off analysis progress reporting by lint
+        quiet false
+        // if true, stop the gradle build if errors are found
+        abortOnError false
+        // if true, only report errors
+        ignoreWarnings true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -36,4 +45,7 @@ dependencies {
 
     debugCompile project(':lib_component:CrashWoodpecker')
     releaseCompile project(':lib_component:CrashWoodpeckerRelease')
+
+    compile majorFrame.Glide
+
 }
