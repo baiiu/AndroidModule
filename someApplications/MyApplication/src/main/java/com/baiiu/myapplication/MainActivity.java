@@ -3,6 +3,7 @@ package com.baiiu.myapplication;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import com.baiiu.myapplication.dialog.OneDialogFragment;
 import com.baiiu.myapplication.module.fastscrooll.FastScrollFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +15,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(android.R.id.content, getFragment(), "mainFragemnt")
                 .commit();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(new OneDialogFragment(), OneDialogFragment.class.getName())
+                .commitAllowingStateLoss();
     }
 
     private Fragment getFragment() {

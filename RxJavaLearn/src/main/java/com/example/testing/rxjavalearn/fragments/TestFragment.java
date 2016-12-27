@@ -23,7 +23,8 @@ public class TestFragment extends BaseFragment {
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        flatmapTest();
+        //flatmapTest();
+        testOne();
 
         //filterTest();
         //firstTest();
@@ -34,6 +35,15 @@ public class TestFragment extends BaseFragment {
         //mapOccureError();
 
         //anotherOne();
+    }
+
+    //func中抛出一次
+    private void testOne() {
+        Observable.just(null)
+                .map(o -> {
+                    throw new NullPointerException("为空");
+                })
+                .subscribe(getSubscriber());
     }
 
     /*
