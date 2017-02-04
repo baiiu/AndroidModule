@@ -28,7 +28,7 @@ public class TransformerTestFragment extends BaseFragment {
 
                     return true;
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .compose(Transformers.catchExceptionToNull())
                 .compose(Transformers.switchSchedulers())
                 .subscribe(getSubscriber());
@@ -44,7 +44,7 @@ public class TransformerTestFragment extends BaseFragment {
 
                     return true;
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .compose(Transformers.catchExceptionToNull())
                 .subscribe(getSubscriber());
     }

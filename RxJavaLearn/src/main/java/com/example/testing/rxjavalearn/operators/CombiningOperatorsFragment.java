@@ -49,14 +49,14 @@ public class CombiningOperatorsFragment extends BaseFragment {
     private void zipWith() {
         getIndexObservable(2)
                 .zipWith(getIndexObservable(3), (s, s2) -> s + "--------" + s2)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
     private void zipTwo() {
         Observable
                 .zip(getIndexObservable(2), getIndexObservable(3), (s, s2) -> s + "--------" + s2)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
 
     }
@@ -68,7 +68,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
     private void zip() {
         Observable
                 .zip(Observable.just(1, 2, 3), Observable.just(4, 5), (integer, integer2) -> integer + ", " + integer2)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -91,7 +91,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
                                 }
                             }
                         }))
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -122,7 +122,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
         Observable
                 .just(1, 2, 3)
                 .startWith(-1, 0)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -153,7 +153,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
         Observable
 //                .merge(objectObservable, Observable.range(10, 10))
                 .mergeDelayError(objectObservable, Observable.range(10, 10))
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
 
 
@@ -170,7 +170,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
 
         Observable
                 .merge(just, just1)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -228,7 +228,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
                                 return s + ", " + s2;
                             }
                         })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
 
 
@@ -251,7 +251,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
                         return sum;
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -264,7 +264,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
                         return integer + integer2;
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -309,7 +309,7 @@ public class CombiningOperatorsFragment extends BaseFragment {
                         return integer + integer2;
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 

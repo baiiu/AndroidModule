@@ -20,6 +20,7 @@ public class TestFragment extends BaseFragment {
     //一个Subscription在执行完后就unsubscribe释放自己了,不再存进CompositeSubscription中
     CompositeSubscription mCompositeSubscription = new CompositeSubscription();
 
+
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

@@ -1,7 +1,6 @@
 package com.example.testing.rxjavalearn.operators;
 
 import android.os.Bundle;
-import com.trello.rxlifecycle.FragmentEvent;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
@@ -28,7 +27,7 @@ public class CustomOperatorsFragment extends BaseFragment {
     private void compose() {
         Observable.error(new NullPointerException())
                 .compose(mExceptionTransformer)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -45,7 +44,7 @@ public class CustomOperatorsFragment extends BaseFragment {
      */
     private void lift() {
         Observable.range(1, 5)
-                .compose(bindUntilEvent(FragmentEvent.DESTROY))
+                //.compose(bindUntilEvent(FragmentEvent.DESTROY))
                 .lift(mCustomOperator)
                 .subscribe(getSubscriber());
     }

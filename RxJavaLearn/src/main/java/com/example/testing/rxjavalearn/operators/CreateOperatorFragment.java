@@ -6,19 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.example.testing.rxjavalearn.R;
+import com.example.testing.rxjavalearn.util.LogUtil;
 import com.jakewharton.rxbinding.view.RxView;
 import com.orhanobut.logger.Logger;
-import com.trello.rxlifecycle.FragmentEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import com.example.testing.rxjavalearn.util.LogUtil;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -72,7 +69,7 @@ public class CreateOperatorFragment extends BaseFragment {
         //先发射8
         Observable.just(6)
                 .startWith(8)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(LogUtil::d);
 
     }
@@ -94,7 +91,7 @@ public class CreateOperatorFragment extends BaseFragment {
     private void repeat() {
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .flatMap(aVoid -> Observable.just(6)
                         .repeat(5))
                 .subscribe(LogUtil::d, e -> LogUtil.e("error", e));
@@ -110,7 +107,7 @@ public class CreateOperatorFragment extends BaseFragment {
 
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(aVoid -> subscribe.unsubscribe(), e -> Logger.e(e.toString()));
     }
 
@@ -121,7 +118,7 @@ public class CreateOperatorFragment extends BaseFragment {
     private void from() {
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .flatMap(aVoid -> {
                     List<String> list = new ArrayList<>();
                     for (int i = 0; i < 10; ++i) {
@@ -138,7 +135,7 @@ public class CreateOperatorFragment extends BaseFragment {
     private void longClick(Observable<Long> observable) {
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .compose(bindUntilEvent(FragmentEvent.DESTROY))
+                //.compose(bindUntilEvent(FragmentEvent.DESTROY))
                 .flatMap(aVoid -> observable)
                 .subscribe(LogUtil::d);
     }
@@ -161,7 +158,7 @@ public class CreateOperatorFragment extends BaseFragment {
     private void intClick() {
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .compose(bindUntilEvent(FragmentEvent.DESTROY))
+                //.compose(bindUntilEvent(FragmentEvent.DESTROY))
                 //                .flatMap(aVoid -> createOperator())
                 .flatMap(aVoid -> rangeOperator())
                 .subscribe(new Subscriber<Integer>() {

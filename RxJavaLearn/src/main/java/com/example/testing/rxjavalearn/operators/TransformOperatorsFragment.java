@@ -71,7 +71,7 @@ public class TransformOperatorsFragment extends BaseFragment {
     private void windowByInt() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .window(2, 3)
                 .subscribe(new Action1<Observable<Integer>>() {
                     @Override
@@ -95,7 +95,7 @@ public class TransformOperatorsFragment extends BaseFragment {
     private void scan() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .scan(new Func2<Integer, Integer, Integer>() {
                     @Override
                     public Integer call(Integer integer, Integer integer2) {
@@ -112,7 +112,7 @@ public class TransformOperatorsFragment extends BaseFragment {
         Observable
                 .just(getMan())
                 .doOnNext(person -> LogUtil.d("doOnNext: " + person.getClass().toString()))
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .cast(Man.class)
                 .subscribe(man -> {
                     LogUtil.d("subscriber: " + man + ", " + man.getClass().toString());
@@ -141,7 +141,7 @@ public class TransformOperatorsFragment extends BaseFragment {
     private void map() {
         Observable
                 .range(2, 5)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .map(new Func1<Integer, String>() {
                     @Override
                     public String call(Integer integer) {
@@ -159,7 +159,7 @@ public class TransformOperatorsFragment extends BaseFragment {
     private void groupBy() {
         Observable
                 .range(1, 20)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .groupBy(new Func1<Integer, Integer>() {
                     @Override
                     public Integer call(Integer integer) {
@@ -188,7 +188,7 @@ public class TransformOperatorsFragment extends BaseFragment {
     private void flaMapIterable() {
         Observable
                 .range(3, 9)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .flatMapIterable(new Func1<Integer, Iterable<String>>() {
                     @Override
                     public Iterable<String> call(Integer integer) {
@@ -209,7 +209,7 @@ public class TransformOperatorsFragment extends BaseFragment {
     private void concatMap() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .concatMap(new Func1<Integer, Observable<String>>() {
                     @Override
                     public Observable<String> call(Integer integer) {
@@ -225,7 +225,7 @@ public class TransformOperatorsFragment extends BaseFragment {
     private void flatMap() {
         Observable
                 .range(2, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .flatMap(integer -> Observable.just("Item: " + integer))
                 .subscribe(LogUtil::d);
 
@@ -233,7 +233,7 @@ public class TransformOperatorsFragment extends BaseFragment {
 
     private void bufferClick() {
         RxView.clicks(bt_create)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .buffer(7)
                 .subscribe(voids -> {
                     Toast.makeText(getContext(), "点了7次,开启XXX模式", Toast.LENGTH_SHORT).show();
@@ -243,7 +243,7 @@ public class TransformOperatorsFragment extends BaseFragment {
     private void bufferTime() {
         Observable.interval(1, TimeUnit.SECONDS)
                 .buffer(3, TimeUnit.SECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(longs -> {
                     LogUtil.d(longs.toString());
                 });
@@ -259,7 +259,7 @@ public class TransformOperatorsFragment extends BaseFragment {
      */
     private void buffer() {
         Observable.range(0, 11)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .buffer(2, 5)
                 .subscribe(integers -> {
                     LogUtil.d(integers.toString());

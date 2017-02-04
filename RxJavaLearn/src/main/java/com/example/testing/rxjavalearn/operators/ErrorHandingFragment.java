@@ -43,7 +43,7 @@ public class ErrorHandingFragment extends BaseFragment {
      */
     private void retryWhen() {
         getErrorObservable()
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .retryWhen(new Func1<Observable<? extends Throwable>, Observable<Long>>() {
                     @Override
                     public Observable<Long> call(Observable<? extends Throwable> observable) {
@@ -77,7 +77,7 @@ public class ErrorHandingFragment extends BaseFragment {
      */
     private void retry() {
         getErrorObservable()
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .retry(3)
                 .subscribe(getSubscriber());
     }
@@ -89,7 +89,7 @@ public class ErrorHandingFragment extends BaseFragment {
      */
     private void OnExceptionResumeNext() {
         getErrorObservable()
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .onExceptionResumeNext(Observable.just(9, 10, 11))
                 .subscribe(getSubscriber());
     }
@@ -99,7 +99,7 @@ public class ErrorHandingFragment extends BaseFragment {
      */
     private void onErrorResumeNext() {
         getErrorObservable()
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .onErrorResumeNext(new Func1<Throwable, Observable<? extends Integer>>() {
                     @Override
                     public Observable<? extends Integer> call(Throwable throwable) {
@@ -121,7 +121,7 @@ public class ErrorHandingFragment extends BaseFragment {
                         return 10;
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 

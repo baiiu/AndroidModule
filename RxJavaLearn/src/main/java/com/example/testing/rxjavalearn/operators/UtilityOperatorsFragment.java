@@ -2,12 +2,8 @@ package com.example.testing.rxjavalearn.operators;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.example.testing.rxjavalearn.util.LogUtil;
-import com.trello.rxlifecycle.FragmentEvent;
-
 import java.util.concurrent.TimeUnit;
-
 import rx.Notification;
 import rx.Observable;
 import rx.Subscriber;
@@ -71,7 +67,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
                         animal.relase();
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -129,7 +125,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
                         subscriber.onCompleted();
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .timeout(100, TimeUnit.MILLISECONDS)
                 //Rxjava将Timeout实现为很多不同功能的操作符，比如说超时后用一个备用的Observable继续发射数据等。
 //                .timeout(100,TimeUnit.MILLISECONDS,Observable.just(10,11))
@@ -143,7 +139,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
     private void timeStamp() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .timestamp()
                 .subscribe(integerTimestamped -> {
                     LogUtil.d(integerTimestamped.getValue() + ", " + integerTimestamped.getTimestampMillis());
@@ -156,7 +152,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
     private void timeInterval() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .timeInterval()
                 .subscribe(integerTimeInterval -> {
                     LogUtil.d(integerTimeInterval.getValue() + ", " + integerTimeInterval.getIntervalInMilliseconds());
@@ -166,7 +162,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
     private void dematerialize() {
         Observable
                 .just(1, 2, 3)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .materialize()
                 .dematerialize()
                 .subscribe(getSubscriber());
@@ -178,7 +174,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
     private void materialize() {
         Observable
                 .just(1, 2, 3)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .materialize()
                 .subscribe(new Subscriber<Notification<Integer>>() {
                     @Override
@@ -205,7 +201,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
     private void doOperator() {
         Observable
                 .just(1, 2, 3)
-                .compose(bindUntilEvent(FragmentEvent.DESTROY))
+                //.compose(bindUntilEvent(FragmentEvent.DESTROY))
                 .doOnEach(notification -> LogUtil.d("doOnEach"))
                 .doOnSubscribe(() -> LogUtil.d("doOnSubscribe"))
                 .doOnUnsubscribe(() -> LogUtil.d("doOnUnSubscribe"))
@@ -223,7 +219,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
     private void delaySubscription() {
         Observable
                 .range(5, 3)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .delaySubscription(2, TimeUnit.SECONDS)
                 .subscribe(getSubscriber());
     }
@@ -234,7 +230,7 @@ public class UtilityOperatorsFragment extends BaseFragment {
     private void delay() {
         Observable
                 .just(1, 2)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .delay(2, TimeUnit.SECONDS)
                 .subscribe(getSubscriber());
     }

@@ -51,7 +51,7 @@ public class FilterOperatorsFragment extends BaseFragment {
         Observable
                 //从0开始发射
                 .interval(200, TimeUnit.MILLISECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .throttleFirst(1000, TimeUnit.MILLISECONDS)
                 .subscribe(getSubscriber());
     }
@@ -63,14 +63,14 @@ public class FilterOperatorsFragment extends BaseFragment {
         Observable
                 .interval(200, TimeUnit.MILLISECONDS)
                 .sample(1000, TimeUnit.MILLISECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
     private void take() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .take(5)
                 .subscribe(getSubscriber());
     }
@@ -81,7 +81,7 @@ public class FilterOperatorsFragment extends BaseFragment {
     private void skip() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .skip(5)
                 .subscribe(getSubscriber());
 
@@ -112,7 +112,7 @@ public class FilterOperatorsFragment extends BaseFragment {
                         subscriber.onCompleted();
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .first(integer -> integer > 5)
                 .toBlocking()
                 .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
@@ -135,7 +135,7 @@ public class FilterOperatorsFragment extends BaseFragment {
     private void filter() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .filter(integer -> integer % 2 == 0)
                 .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
     }
@@ -146,7 +146,7 @@ public class FilterOperatorsFragment extends BaseFragment {
     private void elementAt() {
         Observable
                 .range(0, 10)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .elementAt(5)
                 .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
     }
@@ -159,7 +159,7 @@ public class FilterOperatorsFragment extends BaseFragment {
 
         Observable
                 .just(1, 1, 2, 2, 1, 1, 2, 2)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .distinctUntilChanged()
                 .map(integer -> "distinctUntilChanged: " + integer)
                 .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
@@ -171,7 +171,7 @@ public class FilterOperatorsFragment extends BaseFragment {
     private void distinct() {
         Observable
                 .just(1, 1, 2, 2, 1, 1, 2, 2)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .distinct()
                 .map(integer -> "distinct: " + integer)
                 .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
@@ -257,7 +257,7 @@ public class FilterOperatorsFragment extends BaseFragment {
                     }
                 })
                 .throttleWithTimeout(200, TimeUnit.MILLISECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(new Subscriber<Integer>() {
                     @Override
                     public void onCompleted() {

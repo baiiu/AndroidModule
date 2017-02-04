@@ -35,7 +35,7 @@ public class ConnectOperatorsFragment extends BaseFragment {
     private void replay() {
         ConnectableObservable<Long> replay = Observable
                 .interval(1, TimeUnit.SECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 //缓存10个数据,subscriber1订阅时把过去的全部接收到了
 //                .replay(10);
                 //缓存过去10秒数据,subscriber1订阅时把过去的全部接收到了
@@ -121,7 +121,7 @@ public class ConnectOperatorsFragment extends BaseFragment {
     private ConnectableObservable<Long> publishObservable() {
         return Observable
                 .interval(1, TimeUnit.SECONDS)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .publish();
     }
 

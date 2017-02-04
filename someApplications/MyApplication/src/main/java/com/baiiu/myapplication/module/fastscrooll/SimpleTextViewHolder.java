@@ -27,11 +27,11 @@ public class SimpleTextViewHolder extends BaseViewHolder<Integer> {
         ((TextView) itemView).setText("position: " + String.valueOf(position));
 
 
-        if (position % 2 == 0) {
-            itemView.setBackgroundResource(android.R.color.darker_gray);
-        } else {
-            itemView.setBackgroundResource(android.R.color.background_light);
-        }
+        //if (position % 2 == 0) {
+        //    itemView.setBackgroundResource(android.R.color.darker_gray);
+        //} else {
+        //    itemView.setBackgroundResource(android.R.color.background_light);
+        //}
     }
 
     public void bind(String text) {

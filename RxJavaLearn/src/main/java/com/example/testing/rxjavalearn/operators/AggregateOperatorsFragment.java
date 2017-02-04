@@ -50,7 +50,7 @@ public class AggregateOperatorsFragment extends BaseFragment {
                         o.add(integer);
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -67,7 +67,7 @@ public class AggregateOperatorsFragment extends BaseFragment {
                         return integer + integer2;
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -83,7 +83,7 @@ public class AggregateOperatorsFragment extends BaseFragment {
                     }
                     subscriber.onCompleted();
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .count()
                 .subscribe(getSubscriber());
     }
@@ -96,7 +96,7 @@ public class AggregateOperatorsFragment extends BaseFragment {
     private void count() {
         Observable
                 .just(1, 2, 3)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .count()
                 .subscribe(getSubscriber());
     }
@@ -111,7 +111,7 @@ public class AggregateOperatorsFragment extends BaseFragment {
                         Observable.just(1, 2),
                         Observable.range(4, 5)
                 )
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 

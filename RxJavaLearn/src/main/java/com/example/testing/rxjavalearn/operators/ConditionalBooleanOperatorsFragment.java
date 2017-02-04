@@ -49,7 +49,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
                         return integer < 5;
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
 
     }
@@ -67,7 +67,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
                         Observable.interval(1, TimeUnit.SECONDS)
                 )
                 .takeUntil(Observable.timer(5, TimeUnit.SECONDS))
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
 
     }
@@ -84,7 +84,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
                         return integer < 5;
                     }
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -102,7 +102,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
                         Observable.interval(1, TimeUnit.SECONDS)
                 )
                 .skipUntil(Observable.timer(5, TimeUnit.SECONDS))
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -116,7 +116,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
 //                        Observable.just(1, 2, 3)
                         Observable.just(1, 2)
                 )
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -128,7 +128,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
         Observable
                 .create(subscriber -> subscriber.onCompleted())
                 .defaultIfEmpty("default")
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -141,7 +141,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
                 .create(subscriber -> {
                     subscriber.onCompleted();
                 })
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .isEmpty()
                 .subscribe(getSubscriber());
     }
@@ -153,7 +153,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
     private void contains() {
         Observable
                 .just(1, 2, 3)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .contains(3)
                 .subscribe(getSubscriber());
 
@@ -169,7 +169,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
                         Observable.just(1, 2).delay(1000, TimeUnit.MILLISECONDS),
                         Observable.just(3, 4).delay(2000, TimeUnit.MILLISECONDS),
                         Observable.just(5, 6).delay(100, TimeUnit.MILLISECONDS))
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
@@ -182,7 +182,7 @@ public class ConditionalBooleanOperatorsFragment extends BaseFragment {
         Observable
                 .range(0, 10)
                 .all(integer -> integer < 8)
-                .compose(bindToLifecycle())
+                //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
