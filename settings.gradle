@@ -1,11 +1,14 @@
-include(
-
-        ':TestEffectiveJava',
-        //        ':JavaModule',
-
-)
 
 
+/*
+    通用工具类,汇总整理
+*/
+//include ':CommonTool'
+
+
+/*
+    三方框架学习
+*/
 include(
 
         //        'unitTestLearn',
@@ -15,13 +18,6 @@ include(
 
 )
 
-include(
-
-        ':someApplications:PerformanceApp',
-        ':someApplications:MyApplication',
-        ":someApplications:ptr-lib"
-
-)
 
 include(
 
@@ -31,6 +27,17 @@ include(
 
 )
 
+// App
+include(
+
+        ':someApplications:PerformanceApp',
+        ':someApplications:MyApplication',
+        ":someApplications:ptr-lib"
+
+)
+
+
+// 辅助分析包
 include(
 
         ':lib_component:StethoRelease',
@@ -41,8 +48,6 @@ include(
 
 )
 
-// 通用工具类
-include ':CommonTool'
 
 
 
