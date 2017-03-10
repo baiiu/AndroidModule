@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Java JS互调</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="page.css" rel="stylesheet" type="text/css">
+    <script src="page.js" type="text/javascript"></script>
+</head>
+
+
+<body>
+<h1>WebView Java JavaScript Bridge</h1>
+
+<span class="bigTitle">UI</span>
+<br/>
+<br/>
+
+<span class="secondTitle">UI.toast</span>
+<br/>
+<input type="button" value="展示标准提示信息" id="toast" onclick="toastShow('标准提示信息');"/>
+<br/>
+<br/>
+
+<span class="secondTitle">UI.error</span>
+<br/>
+<input type="button" value="展示错误提示信息" id="error" onclick="errorShow('错误提示信息');"/>
+<br/>
+<br/>
+
+<span class="secondTitle">UI.success</span>
+<br/>
+<input type="button" value="展示成功提示信息" id="success" onclick="successShow('成功提示信息');"/>
+<br/>
+<br/>
+
+<span class="bigTitle">Request</span>
+<br/>
+<br/>
+<span>输入你想请求的URL：</span>
+
+<input type="text" name="wantedUrl" id="wantedUrl" value="https://api.github.com/users/baiiu"/>
+<br/>
+<input type="radio" name="method" value="GET" id="get" checked="checked"/>GET
+<input type="radio" name="method" value="POST" id="post"/>POST
+<input type="button" value="发送请求" onclick="onSubmit()"/>
+<div id="responseBody">
+    请求响应内容会显示在这里
+</div>
+</body>
+
+</html>

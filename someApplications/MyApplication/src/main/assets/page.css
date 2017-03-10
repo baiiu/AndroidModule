@@ -1,0 +1,25 @@
+h1 {
+    text-align: center;
+}
+.bigTitle {
+    font-size: 22px;
+    font-weight: bold;
+}
+.secondTitle {
+    font-size: 18px;
+}
+#toast, #error, #success, #wantedUrl {
+    font-size: 16px;
+    margin-top: 5px;
+}
+#wantedUrl {
+    width: 94%;
+}
+#responseBody {
+    overflow:scroll;
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    background-color: grey;
+}

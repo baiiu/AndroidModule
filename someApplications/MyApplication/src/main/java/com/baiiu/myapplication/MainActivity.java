@@ -3,7 +3,7 @@ package com.baiiu.myapplication;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.baiiu.myapplication.module.watermark.WatermarkFragment;
+import com.baiiu.myapplication.module.JavaJsCommunication.JavaJsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
                 //new PtrPageFragment()
 
-                new WatermarkFragment()
+                //new WatermarkFragment()
+
+                new JavaJsFragment()
 
                 ;
     }

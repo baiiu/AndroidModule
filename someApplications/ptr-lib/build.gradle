@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    compileSdkVersion rootProject.ext.compileSdkVersion as Integer
+    buildToolsVersion rootProject.ext.buildToolsVersion as String
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 24
+        minSdkVersion rootProject.ext.minSdkVersion as int
+        targetSdkVersion rootProject.ext.targetSdkVersion as int
     }
 
     lintOptions {

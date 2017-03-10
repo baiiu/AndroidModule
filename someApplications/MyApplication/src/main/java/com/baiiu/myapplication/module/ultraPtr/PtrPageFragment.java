@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.baiiu.myapplication.R;
 import com.baiiu.myapplication.module.ultraPtr.base.FooterViewHolder;
 import com.baiiu.myapplication.module.ultraPtr.base.LoadFrameLayout;
@@ -29,9 +27,9 @@ import in.srain.cube.views.ptr.PtrHandler;
  */
 public class PtrPageFragment extends Fragment implements LoadingMoreScrollListener.OnLoadingMoreListener, PtrHandler {
 
-    @BindView(R.id.ptr) PtrClassicFrameLayout mPtr;
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.loadFrameLayout) LoadFrameLayout mLoadFrameLayout;
+    PtrClassicFrameLayout mPtr;
+    RecyclerView mRecyclerView;
+    LoadFrameLayout mLoadFrameLayout;
 
     private LoadingMoreScrollListener mLoadingMoreScrollListener;
     private SimpleTextAdapterM mAdapter;
@@ -41,7 +39,12 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
             @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_ptr, container, false);
-        ButterKnife.bind(this, view);
+
+        mLoadFrameLayout = (LoadFrameLayout) view.findViewById(R.id.loadFrameLayout);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        mPtr = (PtrClassicFrameLayout) view.findViewById(R.id.ptr);
+
+
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

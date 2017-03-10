@@ -27,7 +27,7 @@ public class Person {
 
     /*
         使用静态代码块来优化代码，提高程序性能。
-        也可以延迟初始化，但请慎用。
+        也可以延迟初始化，但请慎用。这样做会使方法的实现更为复杂，从而无法将性能显著提高到这种水平。
      */
     private static final Date BOOM_START;
     private static final Date BOOM_END;

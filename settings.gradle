@@ -41,4 +41,8 @@ include(
 
 )
 
+// 通用工具类
+include ':CommonTool'
+
+
 

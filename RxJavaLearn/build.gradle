@@ -3,16 +3,17 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'android-apt'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion rootProject.ext.compileSdkVersion as Integer
+    buildToolsVersion rootProject.ext.buildToolsVersion as String
 
     defaultConfig {
         applicationId "com.example.testing.rxjavalearn"
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion rootProject.ext.minSdkVersion as int
+        targetSdkVersion rootProject.ext.targetSdkVersion as int
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,7 +31,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile rootProject.ext.support.appcompat
+
     //butterknife
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'

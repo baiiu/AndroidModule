@@ -1,0 +1,130 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion as Integer
+    buildToolsVersion rootProject.ext.buildToolsVersion as String
+
+    defaultConfig {
+        applicationId "com.example.testing.rxjavalearn"
+        minSdkVersion rootProject.ext.minSdkVersion as int
+        targetSdkVersion rootProject.ext.targetSdkVersion as int
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    //单元测试,local unit test, simple dependencies on Android framework
+    testCompile 'junit:junit:4.12'
+    //    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    //        exclude group: 'com.android.support', module: 'support-annotations'
+    //    })
+    //    testCompile 'org.mockito:mockito-core:1.10.19'
+    //    androidTestCompile 'com.android.support.test:runner:0.5'
+    //    androidTestCompile 'com.android.support.test:rules:0.5'
+    //
+    //    def majorFrame = rootProject.ext.majorFrame
+    //
+    //    compile rootProject.ext.support.appcompat
+    //    compile rootProject.ext.support.recyclerView
+    //    compile majorFrame.Gson
+    //
+    //    //依赖注入
+    //    complie majorFrame.ButterKnife
+    //    apt majorFrame.aptButterKnifeCompiler
+    //    compile majorFrame.Dagger2
+    //    apt majorFrame.aptDagger2Compiler
+    //    compile 'org.glassfish:javax.annotation:10.0-b28'
+    //
+    //    //网络
+    //    compile majorFrame.okHttp
+    //    compile majorFrame.loggingInterceptor
+    //    compile majorFrame.retrofit
+    //    compile majorFrame.converterGson
+    //    compile majorFrame.adapterRxJava
+    //
+    //    def rx = rootProject.ext.rx
+    //
+    //    //Rx
+    //    compile rx.rxJava
+    //    compile rx.rxAndroid
+    //    compile rx.rxLifecycle
+    //    compile rx.rxLlifecycleComponents
+    //    compile rx.rxBinding
+    //
+    //    //    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
+    //    //    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
+    //    //    compile 'com.jakewharton.rxbinding:rxbinding-design:0.4.0'
+    //    //    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0'
+    //    //    compile 'com.hwangjr.rxbus:rxbus:1.0.3'
+    //
+    //    //内存泄露
+    //    debugCompile rootProject.ext.assistance.leakCanaryDebug
+    //    releaseCompile rootProject.ext.assistance.leakCanaryRelease
+    //    testCompile rootProject.ext.assistance.leakCanaryTest
+    //
+    //    compile rootProject.ext.assistance.stetho
+    //    compile rootProject.ext.assistance.stethoOkHttp
+    //
+    //    //logger
+    //    debugCompile project(':lib_component:LogUtil')
+    //    releaseCompile project(':lib_component:LogUtilRelease')
+
+    compile rootProject.ext.support.appcompat
+    compile rootProject.ext.support.recyclerView
+    compile rootProject.ext.support.design
+    compile majorFrame.Gson
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+
+
+    //依赖注入
+    def majorFrame = rootProject.ext.majorFrame
+    compile majorFrame.ButterKnife
+    apt majorFrame.aptButterKnifeCompiler
+    compile majorFrame.Dagger2
+    apt majorFrame.aptDagger2Compiler
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+
+    //网络
+    compile majorFrame.okHttp
+    compile majorFrame.loggingInterceptor
+    compile majorFrame.retrofit
+    compile majorFrame.converterGson
+    compile majorFrame.adapterRxJava
+
+    //Rx
+    compile rx.rxJava
+    compile rx.rxAndroid
+    compile rx.rxLifecycle
+    compile rx.rxLlifecycleComponents
+    compile rx.rxBinding
+//    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
+//    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
+//    compile 'com.jakewharton.rxbinding:rxbinding-design:0.4.0'
+//    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0'
+//    compile 'com.hwangjr.rxbus:rxbus:1.0.3'
+
+    // 内存泄露
+    debugCompile rootProject.ext.assistance.leakCanaryDebug
+    releaseCompile rootProject.ext.assistance.leakCanaryRelease
+    testCompile rootProject.ext.assistance.leakCanaryTest
+
+    compile rootProject.ext.assistance.stetho
+    compile rootProject.ext.assistance.stethoOkHttp
+
+    //logger
+    debugCompile project(':lib_component:LogUtil')
+    releaseCompile project(':lib_component:LogUtilRelease')
+}

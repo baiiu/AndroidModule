@@ -3,8 +3,15 @@
     <item name="textView" type="id"/>
     <item name="progressBar" type="id"/>
     <item name="loadFrameLayout" type="id"/>
+    <item name="listView" type="id"/>
 
     <item name="tv_error" type="id"/>
     <item name="tv_retry" type="id"/>
     <item name="tv_empty" type="id"/>
+
+
+
+    <item name="frameLayoutContainer" type="id"/>
+    <item name="mainContainer" type="id"/>
+
 </resources>
