@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -62,8 +64,31 @@ public class JavaJsFragment extends Fragment implements View.OnClickListener {
         //2. 设置调用接口
         webView.addJavascriptInterface(new JsObject(), "injectedObject");
 
-        //js中调用alert()方法必须要设置这个
-        webView.setWebChromeClient(new WebChromeClient() {});
+        /*
+            js中调用alert()方法必须要设置这个
+
+            可以使用alert(xxx)或者prompt(xxx)来传递信息，使用json封装协议
+         */
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+
+                showToast(message);
+                result.confirm();//必须要调这一句
+                return true;
+
+                //return super.onJsAlert(view, url, message, result);
+            }
+
+            @Override public boolean onJsPrompt(WebView view, String url, String message, String defaultValue,
+                    JsPromptResult result) {
+
+                showToast(message);
+                result.confirm();
+                return true;
+
+                //return super.onJsPrompt(view, url, message, defaultValue, result);
+            }
+        });
 
         webView.setWebViewClient(new WebViewClient() {
             @Override public void onPageFinished(WebView view, String url) {
