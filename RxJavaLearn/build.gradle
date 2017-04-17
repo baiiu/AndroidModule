@@ -45,15 +45,20 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    //Rx
-    compile 'io.reactivex:rxjava:1.1.5'
-    compile 'io.reactivex:rxandroid:1.2.0'
-    compile 'com.trello:rxlifecycle:0.6.1'
-    compile 'com.trello:rxlifecycle-components:0.6.1'
-    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
-    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
-    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
-    compile 'com.jakewharton.rxbinding:rxbinding-design:0.4.0'
-    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0'
-    compile 'com.hwangjr.rxbus:rxbus:1.0.3'
+
+    def majorFrame = rootProject.ext.majorFrame;
+    compile majorFrame.okHttp
+    compile majorFrame.retrofit
+    compile majorFrame.converterGson
+    compile majorFrame.adapterRxJava
+    compile majorFrame.loggingInterceptor
+
+    def rx = rootProject.ext.rx;
+    compile rx.rxJava
+    compile rx.rxAndroid
+    compile rx.rxLifecycle
+    compile rx.rxLlifecycleAndroid
+    compile rx.rxLlifecycleComponents
+    compile rx.rxBinding
+
 }
