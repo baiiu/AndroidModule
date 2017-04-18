@@ -1,4 +1,4 @@
-package com.baiiu.toucheventstudy;
+package com.baiiu.toucheventstudy.simpleSample;
 
 import android.annotation.TargetApi;
 import android.content.Context;

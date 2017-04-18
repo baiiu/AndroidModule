@@ -31,6 +31,10 @@ dependencies {
     compile support.appcompat
     compile support.design
 
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    compile project(':lib_component:LogUtil')
 
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     testCompile 'junit:junit:4.12'

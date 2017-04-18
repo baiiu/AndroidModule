@@ -1,4 +1,4 @@
-package com.baiiu.toucheventstudy;
+package com.baiiu.toucheventstudy.behaviors;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.baiiu.toucheventstudy.simpleSample.TempView;
 
 /**
  * author: baiiu
@@ -45,5 +46,4 @@ public class SimpleBehavior extends CoordinatorLayout.Behavior<TextView> {
         params.topMargin = y;
         view.setLayoutParams(params);
     }
-
 }

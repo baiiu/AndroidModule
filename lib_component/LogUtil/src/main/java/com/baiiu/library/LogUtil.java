@@ -54,7 +54,7 @@ public class LogUtil {
     private static final int STACK_TRACE_INDEX = 6;
 
     public static String mGlobalTag = TAG_DEFAULT;
-    private static boolean IS_SHOW_LOG = false;
+    private static boolean IS_SHOW_LOG = true;
 
     public static void init(boolean isShowLog) {
         IS_SHOW_LOG = isShowLog;
