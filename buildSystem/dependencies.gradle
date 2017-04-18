@@ -20,7 +20,7 @@ ext {
     javaTargetCompatibility = JavaVersion.VERSION_1_8
 
 
-    supportLibVersion = '23.4.0'
+    supportLibVersion = '25.3.1'
 
     retrofitVersion = '2.2.0'
     okHttpVersion = '3.6.0'
