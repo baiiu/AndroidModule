@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.baiiu.toucheventstudy.viewDragHelper.VHLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp"
+    >
+
+    <TextView
+        android:id="@+id/tv_drag"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="#22123456"
+        android:gravity="center"
+        android:text="Drag"
+        android:textSize="22sp"
+        tools:ignore="HardcodedText"
+        />
+
+    <TextView
+        android:id="@+id/tv_release"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="#22654321"
+        android:gravity="center"
+        android:text="Drag"
+        android:textSize="22sp"
+        tools:ignore="HardcodedText"
+        />
+
+    <TextView
+        android:id="@+id/tv_edge"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="#22789654"
+        android:gravity="center"
+        android:text="Drag"
+        android:textSize="22sp"
+        tools:ignore="HardcodedText"
+        />
+
+
+</com.baiiu.toucheventstudy.viewDragHelper.VHLinearLayout>

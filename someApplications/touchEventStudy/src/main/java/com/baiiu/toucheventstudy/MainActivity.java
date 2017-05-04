@@ -3,7 +3,7 @@ package com.baiiu.toucheventstudy;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.baiiu.toucheventstudy.simpleSample.SimpleBehaviorFragment;
+import com.baiiu.toucheventstudy.viewDragHelper.ViewDragHelperFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,11 +19,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public Fragment getFragment() {
-        return new SimpleBehaviorFragment();
+        return
+
+                //new SimpleBehaviorFragment()
+                //new ListScrollFragment()
+                new ViewDragHelperFragment()
 
 
-        //return new ListScrollFragment();
-
+                ;
     }
 
 }
