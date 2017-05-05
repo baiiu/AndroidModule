@@ -77,7 +77,7 @@ public class VHLinearLayout extends LinearLayout {
 
     @Override public boolean onTouchEvent(MotionEvent event) {
         mDragHelper.processTouchEvent(event);
-        return true;
+        return false;
     }
 
     private class MyDragHelper extends ViewDragHelper.Callback {

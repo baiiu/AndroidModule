@@ -15,5 +15,6 @@ public class ViewDragHelperFragment extends BaseFragment {
     }
 
     @Override protected void initOnCreateView() {
+
     }
 }

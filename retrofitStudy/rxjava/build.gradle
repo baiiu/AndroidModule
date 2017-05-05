@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 24
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
     }
 
     lintOptions {
@@ -28,6 +28,7 @@ android {
     }
 }
 dependencies {
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+compile 'io.reactivex:rxjava:1.1.6'
+    compile project(path: ':RetrofitStudy:retrofit')
 }
 

@@ -8,19 +8,19 @@
 */
 include(
 
-        //        'unitTestLearn',
-        //        ':LiteOrmLearn',
-        ':RxJavaLearn',
-        //    ':Dagger2Learn',
+        'unitTestStudy',
+        ':LiteOrmStudy',
+        ':RxJavaStudy',
+        ':Dagger2Study',
 
 )
 
 
 include(
 
-        //        ':RetrofitLearn:retrofitDemo',
-        //        ':RetrofitLearn:retrofit',
-        //        ':RetrofitLearn:rxjava',
+        ':RetrofitStudy:retrofitDemo',
+        ':RetrofitStudy:retrofit',
+        ':RetrofitStudy:rxjava',
 
 )
 

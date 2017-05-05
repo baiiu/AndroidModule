@@ -1,16 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.example.testing.myapplication"
-        minSdkVersion 15
-        targetSdkVersion 23
+        applicationId "com.baiiu.retrofitdemo"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -22,7 +23,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
 
     //okHttp
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
@@ -32,9 +33,9 @@ dependencies {
 
     //retrofit
     //    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile project(':RetrofitLearn:retrofit')
-    compile project(':RetrofitLearn:rxjava')
-    compile project(':Packaged:LogUtil')
+    compile project(':RetrofitStudy:retrofit')
+    compile project(':RetrofitStudy:rxjava')
+    compile project(':lib_component:LogUtil')
 
     //    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 //    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
