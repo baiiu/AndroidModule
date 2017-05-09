@@ -8,28 +8,28 @@
 */
 include(
 
-        'unitTestStudy',
-        ':LiteOrmStudy',
+//        'unitTestStudy',
+//        ':LiteOrmStudy',
         ':RxJavaStudy',
-        ':Dagger2Study',
+//        ':Dagger2Study',
 
 )
 
 
 include(
 
-        ':RetrofitStudy:retrofitDemo',
-        ':RetrofitStudy:retrofit',
-        ':RetrofitStudy:rxjava',
+//        ':RetrofitStudy:retrofitDemo',
+//        ':RetrofitStudy:retrofit',
+//        ':RetrofitStudy:rxjava',
 
 )
 
 // App
 include(
 
-        ':someApplications:PerformanceApp',
-        ':someApplications:MyApplication',
-        ":someApplications:ptr-lib",
+//        ':someApplications:PerformanceApp',
+//        ':someApplications:MyApplication',
+//        ":someApplications:ptr-lib",
         ":someApplications:touchEventStudy"
 
 )

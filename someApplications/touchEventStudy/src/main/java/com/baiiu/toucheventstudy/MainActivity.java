@@ -3,7 +3,9 @@ package com.baiiu.toucheventstudy;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.baiiu.toucheventstudy.viewDragHelper.ViewDragHelperFragment;
+import android.view.MotionEvent;
+import com.baiiu.library.LogUtil;
+import com.baiiu.toucheventstudy.touchEvent.TouchEventFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
                 .replace(android.R.id.content, getFragment(), "mainFragemnt")
                 .commit();
 
+        //ScrollView;
+        //NestedScrollView;
+        //ViewPager;
+        //RecyclerView;
+        //SwipeRefreshLayout;
     }
 
     public Fragment getFragment() {
@@ -23,10 +30,21 @@ public class MainActivity extends AppCompatActivity {
 
                 //new SimpleBehaviorFragment()
                 //new ListScrollFragment()
-                new ViewDragHelperFragment()
+                //new ViewDragHelperFragment()
 
+                new TouchEventFragment()
 
                 ;
+    }
+
+    @Override public boolean dispatchTouchEvent(MotionEvent ev) {
+        LogUtil.d("Activity --> dispatchTouchEvent");
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override public boolean onTouchEvent(MotionEvent event) {
+        LogUtil.d("Activity --> onTouchEvent");
+        return super.onTouchEvent(event);
     }
 
 }
