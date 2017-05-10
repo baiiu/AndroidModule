@@ -40,6 +40,7 @@ public class MyViewGroup extends FrameLayout {
     @Override public boolean dispatchTouchEvent(MotionEvent ev) {
         LogUtil.d("ViewGroup --> dispatchTouchEvent");
         return super.dispatchTouchEvent(ev);
+        //return true;
     }
 
     @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -50,7 +51,8 @@ public class MyViewGroup extends FrameLayout {
 
     @Override public boolean onTouchEvent(MotionEvent event) {
         LogUtil.d("ViewGroup --> onTouchEvent");
-        return super.onTouchEvent(event);
-        //return true;
+        //return super.onTouchEvent(event);
+        return true;
     }
+
 }

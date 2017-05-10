@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         //ViewPager;
         //RecyclerView;
         //SwipeRefreshLayout;
+
+
     }
 
     public Fragment getFragment() {

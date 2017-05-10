@@ -27,6 +27,7 @@ public class MyView extends android.support.v7.widget.AppCompatTextView {
     @Override public boolean dispatchTouchEvent(MotionEvent event) {
         LogUtil.d("View --> dispatchTouchEvent");
         return super.dispatchTouchEvent(event);
+        //return true;
     }
 
     @Override public boolean onTouchEvent(MotionEvent event) {
