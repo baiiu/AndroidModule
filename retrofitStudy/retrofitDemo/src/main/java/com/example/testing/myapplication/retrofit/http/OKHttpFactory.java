@@ -15,7 +15,7 @@ import okhttp3.OkHttpClient;
  * date: on 16/5/16 16:43
  * description:
  */
-enum OKHttpFactory {
+public enum OKHttpFactory {
 
     INSTANCE;
 

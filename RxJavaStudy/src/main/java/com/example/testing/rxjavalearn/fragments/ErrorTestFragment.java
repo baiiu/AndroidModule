@@ -7,6 +7,7 @@ import com.orhanobut.logger.Logger;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Func2;
 
 /**
  * auther: baiiu
@@ -24,16 +25,24 @@ public class ErrorTestFragment extends BaseFragment {
         //            errorTwo();
         //        }, e -> LogUtil.e(e.toString()));
 
-        Observable.just(null)
-                .map(s -> s.toString())
-                .onErrorResumeNext(throwable -> {
-                    if (throwable instanceof NullPointerException) {
-                        LogUtil.e("是空指针异常");
-                        return Observable.error(new IllegalStateException("哈哈哈哈空指针拦截"));
-                    }
+        //Observable.just(null)
+        //        .map(s -> s.toString())
+        //        .onErrorResumeNext(throwable -> {
+        //            if (throwable instanceof NullPointerException) {
+        //                LogUtil.e("是空指针异常");
+        //                return Observable.error(new IllegalStateException("哈哈哈哈空指针拦截"));
+        //            }
+        //
+        //            return Observable.just(null);
+        //        })
+        //        .subscribe(getSubscriber());
 
-                    return Observable.just(null);
-                })
+
+        Observable.zip(Observable.just(1), Observable.just(null), new Func2<Integer, Integer, String>() {
+            @Override public String call(Integer integer, Integer integer2) {
+                return String.valueOf(integer) + ", " + String.valueOf(integer2);
+            }
+        })
                 .subscribe(getSubscriber());
 
     }

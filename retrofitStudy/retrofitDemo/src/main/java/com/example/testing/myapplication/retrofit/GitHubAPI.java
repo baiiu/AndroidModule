@@ -42,7 +42,7 @@ public interface GitHubAPI {
    */
     @GET("users/{user}") Call<User> userInfo(@Path("user") String user);
 
-    @GET("users/{user}") Call<String> userInfoString(@Path("user") String user);
+    @GET("users/{user}") Call<String> userInfoString(@Path(value = "user", encoded = true) String user);
 
     @GET("users/{user}") Observable<User> userInfoRx(@Path("user") String user);
 
@@ -60,15 +60,13 @@ public interface GitHubAPI {
       使用 @Query 表示
       https://api.github.com/group/baiiu/users?sort=desc
      */
-    @GET("group/{id}/users") Call<List<User>> groupList(@Path("id") int groupId,
-            @Query("sort") String sort);
+    @GET("group/{id}/users") Call<List<User>> groupList(@Path("id") int groupId, @Query("sort") String sort);
 
     /*
       带很多查询参数,用map封装
       @QueryMap
      */
-    @GET("group/{id}/users") Call<List<User>> groupList(@Path("id") int groupId,
-            @QueryMap Map<String, String> options);
+    @GET("group/{id}/users") Call<List<User>> groupList(@Path("id") int groupId, @QueryMap Map<String, String> options);
 
     /**
      * ========================POST请求==============================

@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -25,18 +26,19 @@ public class LoadFrameLayout extends FrameLayout {
     public static final int EMPTY = 2;
     public static final int CONTENT = 3;
     public static final int NO_GONE = 4;
+    private OnClickListener mErrorClickListener;
 
 
     @IntDef({ LOADING, ERROR, EMPTY, CONTENT, NO_GONE })
-    public @interface LoadFrameState {}
+    @interface LoadFrameState {}
 
 
     @LayoutRes private int mEmptyViewLayoutResId;
     @LayoutRes private int mErrorViewLayoutResId;
     @LayoutRes private int mLoadingViewLayoutResId;
 
-    private View emptyView;
-    private View errorView;
+    private View emptyView; // viewStub --> View
+    private View errorView; // viewStub --> View
     private View loadingView;
     private View contentView;
 
@@ -55,12 +57,9 @@ public class LoadFrameLayout extends FrameLayout {
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LoadFrameLayout, defStyleAttr, 0);
         try {
-            mEmptyViewLayoutResId =
-                    a.getResourceId(R.styleable.LoadFrameLayout_emptyView, R.layout.layout_empty);
-            mErrorViewLayoutResId =
-                    a.getResourceId(R.styleable.LoadFrameLayout_errorView, R.layout.layout_error);
-            mLoadingViewLayoutResId =
-                    a.getResourceId(R.styleable.LoadFrameLayout_loadingView, R.layout.layout_loading);
+            mEmptyViewLayoutResId = a.getResourceId(R.styleable.LoadFrameLayout_emptyView, R.layout.layout_empty);
+            mErrorViewLayoutResId = a.getResourceId(R.styleable.LoadFrameLayout_errorView, R.layout.layout_error);
+            mLoadingViewLayoutResId = a.getResourceId(R.styleable.LoadFrameLayout_loadingView, R.layout.layout_loading);
         } finally {
             a.recycle();
         }
@@ -81,6 +80,30 @@ public class LoadFrameLayout extends FrameLayout {
         if (mLoadingViewLayoutResId != -1) {
             setLoadingView(mLoadingViewLayoutResId);
         }
+    }
+
+    public void setEmptyView(@LayoutRes int emptyViewResId) {
+        ViewStub viewStub = new ViewStub(getContext());
+        viewStub.setLayoutResource(emptyViewResId);
+        setEmptyView(viewStub);
+    }
+
+    public void setErrorView(@LayoutRes int errorViewResId) {
+        ViewStub viewStub = new ViewStub(getContext());
+        viewStub.setLayoutResource(errorViewResId);
+        setErrorView(viewStub);
+    }
+
+    public void setLoadingView(@LayoutRes int loadingViewResId) {
+        View view = LayoutInflater.from(getContext())
+                .inflate(loadingViewResId, this, false);
+        setLoadingView(view);
+    }
+
+    public void setContentView(@LayoutRes int contentViewResId) {
+        View view = LayoutInflater.from(getContext())
+                .inflate(contentViewResId, this, false);
+        setContentView(view);
     }
 
     public void setEmptyView(View emptyView) {
@@ -129,30 +152,6 @@ public class LoadFrameLayout extends FrameLayout {
         }
     }
 
-    public void setEmptyView(@LayoutRes int emptyViewResId) {
-        View view = LayoutInflater.from(getContext())
-                .inflate(emptyViewResId, this, false);
-        setEmptyView(view);
-    }
-
-    public void setErrorView(@LayoutRes int errorViewResId) {
-        View view = LayoutInflater.from(getContext())
-                .inflate(errorViewResId, this, false);
-        setErrorView(view);
-    }
-
-    public void setLoadingView(@LayoutRes int loadingViewResId) {
-        View view = LayoutInflater.from(getContext())
-                .inflate(loadingViewResId, this, false);
-        setLoadingView(view);
-    }
-
-    public void setContentView(@LayoutRes int contentViewResId) {
-        View view = LayoutInflater.from(getContext())
-                .inflate(contentViewResId, this, false);
-        setContentView(view);
-    }
-
     public void setEmptyText(String emptyText) {
         if (emptyView == null || TextUtils.isEmpty(emptyText)) {
             return;
@@ -174,10 +173,17 @@ public class LoadFrameLayout extends FrameLayout {
         }
     }
 
-    public void setOnErrorClickListener(View.OnClickListener listener) {
+    public void setOnErrorClickListener(OnClickListener listener) {
         if (errorView == null || listener == null) {
             return;
         }
+
+        if (errorView instanceof ViewStub) {
+            this.mErrorClickListener = listener;
+            return;
+        }
+
+        mErrorClickListener = null;
 
         TextView textView = ButterKnife.findById(errorView, R.id.tv_retry);
         if (textView != null) {
@@ -192,9 +198,31 @@ public class LoadFrameLayout extends FrameLayout {
 
         mCurrentState = data;
 
+        if (emptyView != null) {
+            if (data == EMPTY) {
+                if (emptyView instanceof ViewStub) {
+                    emptyView = ((ViewStub) emptyView).inflate();
+                }
+                emptyView.setVisibility(VISIBLE);
+            } else {
+                emptyView.setVisibility(GONE);
+            }
+        }
+
+        if (errorView != null) {
+            if (data == ERROR) {
+                if (errorView instanceof ViewStub) {
+                    errorView = ((ViewStub) errorView).inflate();
+                    setOnErrorClickListener(mErrorClickListener);
+                }
+                errorView.setVisibility(VISIBLE);
+            } else {
+                errorView.setVisibility(GONE);
+            }
+        }
+
+
         if (loadingView != null) loadingView.setVisibility(data == LOADING ? VISIBLE : GONE);
-        if (emptyView != null) emptyView.setVisibility(data == EMPTY ? VISIBLE : GONE);
-        if (errorView != null) errorView.setVisibility(data == ERROR ? VISIBLE : GONE);
         if (contentView != null) contentView.setVisibility(data == CONTENT ? VISIBLE : GONE);
 
         if (NO_GONE == data) {
@@ -203,6 +231,6 @@ public class LoadFrameLayout extends FrameLayout {
                 child.setVisibility(GONE);
             }
         }
-
     }
+
 }

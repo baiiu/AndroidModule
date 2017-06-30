@@ -3,7 +3,7 @@ package com.baiiu.myapplication;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.baiiu.myapplication.module.fastscrooll.FastScrollFragment;
+import com.baiiu.myapplication.module.ultraPtr.PtrPageFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private Fragment getFragment() {
         return
 
-                new FastScrollFragment()
+                //new FastScrollFragment()
 
-                //new PtrPageFragment()
+                new PtrPageFragment()
 
                 //new WatermarkFragment()
 

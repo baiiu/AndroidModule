@@ -26,20 +26,38 @@ public class RetrofitFragment extends Fragment {
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //normalGet();
-        stringGet();
+        //stringGet();
         //rxGet();
 
         //getWithParams();
         //post();
 
         //无缓存
-        anotherUrl();
-        anotherUrl();
-        anotherUrl();
-        anotherUrl();
+        //anotherUrl();
+        //anotherUrl();
+        //anotherUrl();
+        //anotherUrl();
+        //
+        ////默认缓存
+        //getOneDay();
 
-        //默认缓存
-        getOneDay();
+        replacePathEven();
+    }
+
+    private void replacePathEven() {
+
+        ApiFactory.gitHubAPI()
+                .userInfoString("aaaa-bb/ccc-dd/sss")
+                .enqueue(new Callback<String>() {
+                    @Override public void onResponse(Call<String> call, Response<String> response) {
+
+                    }
+
+                    @Override public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+
     }
 
     /**
@@ -147,8 +165,7 @@ public class RetrofitFragment extends Fragment {
         ApiFactory.getAnotherAPI()
                 .gankIOHistory(s)
                 .enqueue(new Callback<GankIOHistory>() {
-                    @Override
-                    public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
+                    @Override public void onResponse(Call<GankIOHistory> call, Response<GankIOHistory> response) {
                         //GankIOHistory body = response.body();
                         //LogUtil.d(body == null ? "body == null" : body.toString());
                     }

@@ -45,7 +45,6 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
         mPtr = (PtrClassicFrameLayout) view.findViewById(R.id.ptr);
 
 
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mAdapter = new SimpleTextAdapterM(getContext(), 0);
@@ -78,6 +77,18 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
 
         //下拉刷新
         mPtr.setPtrHandler(this);
+        mPtr.setLastUpdateTimeRelateObject(this);
+        // the following are default settings
+        mPtr.setResistance(1.7f);
+        mPtr.setRatioOfHeaderHeightToRefresh(1.2f);
+        mPtr.setDurationToClose(200);
+        mPtr.setDurationToCloseHeader(1000);
+        // default is false
+        mPtr.setPullToRefresh(false);
+        // default is true
+        mPtr.setKeepHeaderWhenRefresh(true);
+
+
         //上啦加载
         mLoadingMoreScrollListener = new LoadingMoreScrollListener();
         mLoadingMoreScrollListener.setOnLoadingMoreListener(this);
@@ -158,7 +169,7 @@ public class PtrPageFragment extends Fragment implements LoadingMoreScrollListen
     }
 
     @Override public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-        return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+        return PtrDefaultHandler.checkContentCanBePulledDown(frame, mRecyclerView, header);
     }
 
 }

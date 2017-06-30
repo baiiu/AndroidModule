@@ -19,7 +19,7 @@ include(
 
 include(
 
-        //        ':RetrofitStudy:retrofitDemo',
+        ':RetrofitStudy:retrofitDemo',
         //        ':RetrofitStudy:retrofit',
         //        ':RetrofitStudy:rxjava',
 
@@ -29,9 +29,9 @@ include(
 include(
 
         //        ':someApplications:PerformanceApp',
-        //        ':someApplications:MyApplication',
-        //        ":someApplications:ptr-lib",
-        ":someApplications:touchEventStudy"
+        ':someApplications:MyApplication',
+        ":someApplications:ptr-lib",
+        //        ":someApplications:touchEventStudy"
 
 )
 
