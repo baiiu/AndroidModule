@@ -2,12 +2,13 @@ package com.example.testing.rxjavalearn.operators;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.example.testing.rxjavalearn.util.LogUtil;
 import com.orhanobut.logger.Logger;
-
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
@@ -18,28 +19,27 @@ import rx.functions.Func1;
  * description:
  */
 public class FilterOperatorsFragment extends BaseFragment {
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        throttleFirst();
-//        throttleWithTimeout();
-//        debounce();
+        //        throttleFirst();
+        //        throttleWithTimeout();
+        //        debounce();
 
-//        distinct();
-//        distinctUtilChanged();
+        //distinct();
+        //distinctUtilChanged();
+        distinctList();
 
+        //        elementAt();
+        //        filter();
 
-//        elementAt();
-//        filter();
+        //        first();
+        //        firstAndBlockingObservable();
 
-//        first();
-        firstAndBlockingObservable();
-
-//        skip();
-//        take();
-//        sample();
-//        throttleFirst();
+        //        skip();
+        //        take();
+        //        sample();
+        //        throttleFirst();
     }
 
     /**
@@ -60,16 +60,14 @@ public class FilterOperatorsFragment extends BaseFragment {
      * 每隔1秒抽一次样
      */
     private void sample() {
-        Observable
-                .interval(200, TimeUnit.MILLISECONDS)
+        Observable.interval(200, TimeUnit.MILLISECONDS)
                 .sample(1000, TimeUnit.MILLISECONDS)
                 //.compose(bindToLifecycle())
                 .subscribe(getSubscriber());
     }
 
     private void take() {
-        Observable
-                .range(0, 10)
+        Observable.range(0, 10)
                 //.compose(bindToLifecycle())
                 .take(5)
                 .subscribe(getSubscriber());
@@ -79,8 +77,7 @@ public class FilterOperatorsFragment extends BaseFragment {
      * 跳过前面几个
      */
     private void skip() {
-        Observable
-                .range(0, 10)
+        Observable.range(0, 10)
                 //.compose(bindToLifecycle())
                 .skip(5)
                 .subscribe(getSubscriber());
@@ -94,24 +91,22 @@ public class FilterOperatorsFragment extends BaseFragment {
      */
     private void firstAndBlockingObservable() {
 
-        Observable
-                .create(new Observable.OnSubscribe<Integer>() {
-                    @Override
-                    public void call(Subscriber<? super Integer> subscriber) {
-                        for (int i = 0; i < 10; ++i) {
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-
-//                            LogUtil.d("onNext " + i);
-                            subscriber.onNext(i);
-                        }
-
-                        subscriber.onCompleted();
+        Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override public void call(Subscriber<? super Integer> subscriber) {
+                for (int i = 0; i < 10; ++i) {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                })
+
+                    //                            LogUtil.d("onNext " + i);
+                    subscriber.onNext(i);
+                }
+
+                subscriber.onCompleted();
+            }
+        })
                 //.compose(bindToLifecycle())
                 .first(integer -> integer > 5)
                 .toBlocking()
@@ -123,8 +118,7 @@ public class FilterOperatorsFragment extends BaseFragment {
      * 只取满足条件的第一个数据
      */
     private void first() {
-        Observable
-                .range(0, 10)
+        Observable.range(0, 10)
                 .first(integer -> integer > 5)
                 .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
     }
@@ -133,8 +127,7 @@ public class FilterOperatorsFragment extends BaseFragment {
      * 过滤操作
      */
     private void filter() {
-        Observable
-                .range(0, 10)
+        Observable.range(0, 10)
                 //.compose(bindToLifecycle())
                 .filter(integer -> integer % 2 == 0)
                 .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
@@ -144,8 +137,7 @@ public class FilterOperatorsFragment extends BaseFragment {
      * 获取指定位置的数据
      */
     private void elementAt() {
-        Observable
-                .range(0, 10)
+        Observable.range(0, 10)
                 //.compose(bindToLifecycle())
                 .elementAt(5)
                 .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
@@ -157,8 +149,7 @@ public class FilterOperatorsFragment extends BaseFragment {
      */
     private void distinctUtilChanged() {
 
-        Observable
-                .just(1, 1, 2, 2, 1, 1, 2, 2)
+        Observable.just(1, 1, 2, 2, 1, 1, 2, 2)
                 //.compose(bindToLifecycle())
                 .distinctUntilChanged()
                 .map(integer -> "distinctUntilChanged: " + integer)
@@ -169,12 +160,39 @@ public class FilterOperatorsFragment extends BaseFragment {
      * 输出的是全部不重复的数据,只输出1,2
      */
     private void distinct() {
-        Observable
-                .just(1, 1, 2, 2, 1, 1, 2, 2)
+        Observable.just(1, 1, 2, 2, 1, 1, 2, 2)
                 //.compose(bindToLifecycle())
                 .distinct()
-                .map(integer -> "distinct: " + integer)
-                .subscribe(LogUtil::d, e -> Logger.e(e.toString()), () -> LogUtil.d("onComplete"));
+                .subscribe(getSubscriber());
+    }
+
+    private void distinctList() {
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("1");
+        list.add("2");
+        list.add("1");
+        list.add("2");
+        list.add("3");
+
+        Observable.just(list)
+                .map(new Func1<List<String>, List<String>>() {
+                    HashSet<String> keyMemory = new HashSet<String>();
+
+                    @Override public List<String> call(List<String> list) {
+                        Iterator<String> iterator = list.listIterator();
+                        while (iterator.hasNext()) {
+                            String s = iterator.next();
+
+                            if (!keyMemory.add(s)) {
+                                iterator.remove();
+                            }
+                        }
+
+                        return list;
+                    }
+                })
+                .subscribe(getSubscriber());
     }
 
     /**
@@ -188,17 +206,14 @@ public class FilterOperatorsFragment extends BaseFragment {
      * 丢弃上一个数据
      */
     private void debounce() {
-        Observable
-                .range(0, 10)
+        Observable.range(0, 10)
                 .debounce(new Func1<Integer, Observable<Integer>>() {
-                    @Override
-                    public Observable<Integer> call(Integer integer) {
-//                        LogUtil.d("debounce: " + integer);
+                    @Override public Observable<Integer> call(Integer integer) {
+                        //                        LogUtil.d("debounce: " + integer);
 
 
                         return Observable.create(new Observable.OnSubscribe<Integer>() {
-                            @Override
-                            public void call(Subscriber<? super Integer> subscriber) {
+                            @Override public void call(Subscriber<? super Integer> subscriber) {
                                 if (!subscriber.isUnsubscribed() && integer % 2 == 0) {
                                     LogUtil.d("onCompleted: " + integer);
                                     subscriber.onNext(integer);
@@ -209,18 +224,15 @@ public class FilterOperatorsFragment extends BaseFragment {
                     }
                 })
                 .subscribe(new Subscriber<Integer>() {
-                    @Override
-                    public void onCompleted() {
+                    @Override public void onCompleted() {
                         LogUtil.d("onCompleted");
                     }
 
-                    @Override
-                    public void onError(Throwable e) {
+                    @Override public void onError(Throwable e) {
                         LogUtil.d(e.toString());
                     }
 
-                    @Override
-                    public void onNext(Integer integer) {
+                    @Override public void onNext(Integer integer) {
                         //最后一个9发射出来了.
                         LogUtil.d("subscriber: " + integer);
                     }
@@ -235,47 +247,41 @@ public class FilterOperatorsFragment extends BaseFragment {
      * 如果每次都是在计时结束前发射数据，那么这个限流就会走向极端：只会发射最后一个数据。
      */
     private void throttleWithTimeout() {
-        Observable
-                .create(new Observable.OnSubscribe<Integer>() {
-                    @Override
-                    public void call(Subscriber<? super Integer> subscriber) {
-                        for (int i = 0; i < 10; ++i) {
-                            if (!subscriber.isUnsubscribed()) {
-                                subscriber.onNext(i);
-                            }
-
-                            int sleep = i % 3 == 0 ? 300 : 100;
-
-                            try {
-                                Thread.sleep(sleep);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        subscriber.onCompleted();
+        Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override public void call(Subscriber<? super Integer> subscriber) {
+                for (int i = 0; i < 10; ++i) {
+                    if (!subscriber.isUnsubscribed()) {
+                        subscriber.onNext(i);
                     }
-                })
+
+                    int sleep = i % 3 == 0 ? 300 : 100;
+
+                    try {
+                        Thread.sleep(sleep);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                subscriber.onCompleted();
+            }
+        })
                 .throttleWithTimeout(200, TimeUnit.MILLISECONDS)
                 //.compose(bindToLifecycle())
                 .subscribe(new Subscriber<Integer>() {
-                    @Override
-                    public void onCompleted() {
+                    @Override public void onCompleted() {
                         LogUtil.d("onCompleted");
                     }
 
-                    @Override
-                    public void onError(Throwable e) {
+                    @Override public void onError(Throwable e) {
                         LogUtil.d(e.toString());
                     }
 
-                    @Override
-                    public void onNext(Integer integer) {
+                    @Override public void onNext(Integer integer) {
                         LogUtil.d(integer);
                     }
                 });
 
     }
-
 
 }
