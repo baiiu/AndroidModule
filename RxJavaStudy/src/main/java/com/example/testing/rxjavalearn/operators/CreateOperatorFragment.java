@@ -54,10 +54,41 @@ public class CreateOperatorFragment extends BaseFragment {
 
         //        repeat();
 
-        startWith();
+        //startWith();
 
         //        timer();
 
+        mutiClick();
+
+    }
+
+    private void mutiClick() {
+        Observable<Void> observable = RxView.clicks(bt_create)
+                .share();
+
+        observable.
+                observeOn(AndroidSchedulers.mainThread())
+                .buffer(observable.throttleFirst(300, TimeUnit.MILLISECONDS))
+                .map(List::size)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getSubscriber());
+
+        //RxView.clicks(bt_create)
+        //        .repeat(2)
+        //        .observeOn(AndroidSchedulers.mainThread())
+        //        .subscribe(new Subscriber<Void>() {
+        //            @Override public void onCompleted() {
+        //
+        //            }
+        //
+        //            @Override public void onError(Throwable e) {
+        //
+        //            }
+        //
+        //            @Override public void onNext(Void aVoid) {
+        //
+        //            }
+        //        });
 
     }
 

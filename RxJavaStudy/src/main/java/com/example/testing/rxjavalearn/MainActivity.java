@@ -3,7 +3,7 @@ package com.example.testing.rxjavalearn;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.example.testing.rxjavalearn.operators.FilterOperatorsFragment;
+import com.example.testing.rxjavalearn.operators.CreateOperatorFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment getFragment() {
 
-        //return new CreateOperatorFragment();
+        return new CreateOperatorFragment();
 
         //return new TransformOperatorsFragment();
 
-        return new FilterOperatorsFragment();
+        //return new FilterOperatorsFragment();
 
         //return new CombiningOperatorsFragment();
 
