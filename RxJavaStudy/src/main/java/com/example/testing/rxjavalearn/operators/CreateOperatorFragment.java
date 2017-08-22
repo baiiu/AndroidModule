@@ -12,6 +12,7 @@ import com.example.testing.rxjavalearn.R;
 import com.example.testing.rxjavalearn.util.LogUtil;
 import com.jakewharton.rxbinding.view.RxView;
 import com.orhanobut.logger.Logger;
+import com.trello.rxlifecycle.android.FragmentEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -50,7 +51,7 @@ public class CreateOperatorFragment extends BaseFragment {
 
         //        from();
 
-        //        interval();
+        interval();
 
         //        repeat();
 
@@ -58,7 +59,35 @@ public class CreateOperatorFragment extends BaseFragment {
 
         //        timer();
 
-        mutiClick();
+        //mutiClick();
+
+        //countDown();
+
+    }
+
+
+    private void countDown() {
+        Observable.interval(0, 1, TimeUnit.SECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(10)
+                .subscribe(new Subscriber<Long>() {
+                    @Override public void onCompleted() {
+                        LogUtil.d("unsubscribe down");
+                    }
+
+                    @Override public void onError(Throwable e) {
+                        LogUtil.e(e.toString());
+                    }
+
+                    @Override public void onNext(Long aLong) {
+                        LogUtil.d(aLong);
+
+                        if (aLong == 5) {
+                            unsubscribe();
+                        }
+                    }
+                });
 
     }
 
@@ -133,13 +162,15 @@ public class CreateOperatorFragment extends BaseFragment {
      */
     private void interval() {
         Subscription subscribe = Observable.interval(1, TimeUnit.SECONDS)
+                .compose(bindUntilEvent(FragmentEvent.DESTROY))
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> bt_create.setText("" + aLong), e -> Logger.e(e.toString()));
+                .subscribe(getSubscriber());
 
         RxView.clicks(bt_create)
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 //.compose(bindToLifecycle())
-                .subscribe(aVoid -> subscribe.unsubscribe(), e -> Logger.e(e.toString()));
+                .subscribe(aVoid -> subscribe.unsubscribe(), e -> LogUtil.e(e.toString()), () -> LogUtil.d("click ok"));
     }
 
 

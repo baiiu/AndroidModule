@@ -1,7 +1,7 @@
 package com.example.testing.rxjavalearn.operators;
 
-import android.support.v4.app.Fragment;
 import com.example.testing.rxjavalearn.util.LogUtil;
+import com.trello.rxlifecycle.components.support.RxFragment;
 import rx.Subscriber;
 
 /**
@@ -9,7 +9,7 @@ import rx.Subscriber;
  * time: 16/6/6 06 22:10
  * description:
  */
-public class BaseFragment extends Fragment {
+public class BaseFragment extends RxFragment {
 
 
     protected <T> Subscriber<T> getSubscriber() {
