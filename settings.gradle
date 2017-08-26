@@ -32,6 +32,7 @@ include(
         ':someApplications:MyApplication',
         ":someApplications:ptr-lib",
         //        ":someApplications:touchEventStudy"
+        ":someApplications:InterestingStudy",
 
 )
 
