@@ -3,7 +3,7 @@ package com.example.testing.rxjavalearn;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.example.testing.rxjavalearn.operators.CreateOperatorFragment;
+import com.example.testing.rxjavalearn.fragments.ResearchFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,12 +26,16 @@ public class MainActivity extends AppCompatActivity {
                 .add(android.R.id.content, getFragment(), "operator")
                 .commit();
 
+        //Observable.just(0);
+
     }
 
 
     private Fragment getFragment() {
 
-        return new CreateOperatorFragment();
+        return new ResearchFragment();
+
+        //return new CreateOperatorFragment();
 
         //return new TransformOperatorsFragment();
 

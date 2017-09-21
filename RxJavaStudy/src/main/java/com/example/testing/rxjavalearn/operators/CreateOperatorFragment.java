@@ -51,7 +51,7 @@ public class CreateOperatorFragment extends BaseFragment {
 
         //        from();
 
-        interval();
+        //interval();
 
         //        repeat();
 
@@ -70,7 +70,7 @@ public class CreateOperatorFragment extends BaseFragment {
         Observable.interval(0, 1, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .take(10)
+                .take(10 + 1)
                 .subscribe(new Subscriber<Long>() {
                     @Override public void onCompleted() {
                         LogUtil.d("unsubscribe down");
@@ -83,8 +83,9 @@ public class CreateOperatorFragment extends BaseFragment {
                     @Override public void onNext(Long aLong) {
                         LogUtil.d(aLong);
 
-                        if (aLong == 5) {
-                            unsubscribe();
+                        if (aLong == 10) {
+                            //unsubscribe();
+                            LogUtil.d("complete");
                         }
                     }
                 });
@@ -162,6 +163,9 @@ public class CreateOperatorFragment extends BaseFragment {
      */
     private void interval() {
         Subscription subscribe = Observable.interval(1, TimeUnit.SECONDS)
+                //.filter(aLong -> {
+                //    return aLong % 3 == 0;
+                //})
                 .compose(bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
