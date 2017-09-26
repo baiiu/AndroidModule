@@ -10,8 +10,8 @@ include(
 
         //        'unitTestStudy',
         //        ':LiteOrmStudy',
-        ':RxJavaStudy',
-        ':RxJava2Study',
+        //        ':RxJavaStudy',
+        //        ':RxJava2Study',
         //        ':Dagger2Study',
 
 )
@@ -20,8 +20,8 @@ include(
 include(
 
         ':RetrofitStudy:retrofitDemo',
-        //        ':RetrofitStudy:retrofit',
-        //        ':RetrofitStudy:rxjava',
+        ':RetrofitStudy:retrofit',
+        ':RetrofitStudy:rxjava',
 
 )
 
