@@ -37,6 +37,7 @@ public class EspressoTest extends ActivityInstrumentationTestCase2<MainActivity>
    * 这样写会多写代码,并且会出错.
    * 比如此例,输入太慢了,程序就执行了.
    */
+  @Test
   public void testSayHello() {
     onView(withId(R.id.editText)).perform(typeText(STRING_TO_BE_TYPED),
         closeSoftKeyboard()); //line 1
