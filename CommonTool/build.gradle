@@ -81,9 +81,9 @@ dependencies {
     compile rootProject.ext.support.appcompat
     compile rootProject.ext.support.recyclerView
     compile rootProject.ext.support.design
+    compile rootProject.ext.support.constraintlayout
     compile majorFrame.Gson
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
 
 
     //依赖注入

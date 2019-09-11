@@ -1,8 +1,11 @@
 package com.baiiu.toucheventstudy.simpleSample;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.baiiu.toucheventstudy.behaviors.SimpleBehavior;
 
 /**
@@ -11,7 +14,7 @@ import com.baiiu.toucheventstudy.behaviors.SimpleBehavior;
  * description:
  */
 @CoordinatorLayout.DefaultBehavior(SimpleBehavior.class)
-public class ATextView extends android.support.v7.widget.AppCompatTextView {
+public class ATextView extends AppCompatTextView {
     public ATextView(Context context) {
         super(context);
     }

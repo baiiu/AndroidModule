@@ -34,7 +34,7 @@
     android:minHeight="36dp"
     android:background="@drawable/bg_item_crash">
 
-    <android.support.v4.widget.Space
+    <Space
         android:id="@+id/space"
         android:layout_width="24dp"
         android:layout_height="wrap_content"/>
