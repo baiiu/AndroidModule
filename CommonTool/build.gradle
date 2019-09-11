@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'android-apt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion as Integer
@@ -41,10 +42,6 @@ dependencies {
     //    compile majorFrame.Gson
     //
     //    //依赖注入
-    //    complie majorFrame.ButterKnife
-    //    apt majorFrame.aptButterKnifeCompiler
-    //    compile majorFrame.Dagger2
-    //    apt majorFrame.aptDagger2Compiler
     //    compile 'org.glassfish:javax.annotation:10.0-b28'
     //
     //    //网络
@@ -91,11 +88,14 @@ dependencies {
 
     //依赖注入
     def majorFrame = rootProject.ext.majorFrame
-    compile majorFrame.ButterKnife
-    apt majorFrame.aptButterKnifeCompiler
     compile majorFrame.Dagger2
-    apt majorFrame.aptDagger2Compiler
+    annotationProcessor majorFrame.aptDagger2Compiler
+    kapt majorFrame.aptDagger2Compiler
     compile 'org.glassfish:javax.annotation:10.0-b28'
+
+    implementation majorFrame.ButterKnife
+    annotationProcessor majorFrame.aptButterKnifeProcessor
+    kapt majorFrame.kaptButterKnifeProcessor
 
     //网络
     compile majorFrame.okHttp

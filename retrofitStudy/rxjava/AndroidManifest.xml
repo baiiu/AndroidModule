@@ -4,9 +4,5 @@
     android:versionName="1.0"
     package="retrofit2.adapter.rxjava">
 
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="16"/>
-
     <application/>
 </manifest>

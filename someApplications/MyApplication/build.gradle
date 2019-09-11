@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion as Integer
@@ -29,8 +31,9 @@ dependencies {
 
     compile project(':someApplications:ptr-lib')
 
-
-    compile 'com.jakewharton:butterknife:8.0.1'
-    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    def major = rootProject.ext.majorFrame
+    implementation major.ButterKnife
+    annotationProcessor major.aptButterKnifeProcessor
+    kapt major.kaptButterKnifeProcessor
 
 }
