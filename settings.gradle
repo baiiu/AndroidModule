@@ -8,20 +8,15 @@ include ':CommonTool'
 */
 include(
 
-        'unitTestStudy',
-        ':LiteOrmStudy',
-        ':RxJavaStudy',
-        ':RxJava2Study',
-        ':Dagger2Study',
+        ':unitTestStudy',
+        ':majorFrame:LiteOrmStudy',
+        ':majorFrame:RxJavaStudy',
+        ':majorFrame:RxJava2Study',
+        ':majorFrame:Dagger2Study',
+        ':majorFrame:RetrofitStudy:retrofitDemo',
+        ':majorFrame:RetrofitStudy:retrofit',
+        ':majorFrame:RetrofitStudy:rxjava',
 
-)
-
-
-include(
-
-        ':RetrofitStudy:retrofitDemo',
-        ':RetrofitStudy:retrofit',
-        ':RetrofitStudy:rxjava',
 
 )
 
