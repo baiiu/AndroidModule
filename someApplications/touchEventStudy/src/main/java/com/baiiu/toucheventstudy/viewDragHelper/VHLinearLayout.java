@@ -3,14 +3,16 @@ package com.baiiu.toucheventstudy.viewDragHelper;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.core.view.MotionEventCompat;
+import androidx.customview.widget.ViewDragHelper;
+
 import com.baiiu.toucheventstudy.R;
 
 /**

@@ -1,8 +1,9 @@
 package com.baiiu.myapplication.module.fastscrooll;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * author: baiiu

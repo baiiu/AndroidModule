@@ -1,10 +1,14 @@
 package com.example.testing.rxjavalearn.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.example.testing.rxjavalearn.operators.BaseFragment;
 import com.example.testing.rxjavalearn.util.LogUtil;
+
 import java.util.List;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;

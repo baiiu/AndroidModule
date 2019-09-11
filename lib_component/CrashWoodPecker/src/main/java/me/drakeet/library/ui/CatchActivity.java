@@ -28,12 +28,14 @@ package me.drakeet.library.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import me.drakeet.library.R;
 
@@ -75,7 +77,7 @@ public class CatchActivity extends Activity {
     private void setUpRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.crashes);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         crashListAdapter = new CrashListAdapter(crashArray, keys.toArray(new String[keys.size()]));
         recyclerView.setAdapter(crashListAdapter);

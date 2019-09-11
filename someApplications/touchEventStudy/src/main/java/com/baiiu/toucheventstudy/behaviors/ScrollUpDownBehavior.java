@@ -1,15 +1,17 @@
 package com.baiiu.toucheventstudy.behaviors;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
-import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * author: baiiu
@@ -27,7 +29,7 @@ public class ScrollUpDownBehavior extends FloatingActionButton.Behavior {
     }
 
     @Override public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child,
-            View directTargetChild, View target, int nestedScrollAxes) {
+                                                 View directTargetChild, View target, int nestedScrollAxes) {
         return nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL || super.onStartNestedScroll(coordinatorLayout,
                                                                                                 child,
                                                                                                 directTargetChild,

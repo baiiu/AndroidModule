@@ -1,13 +1,16 @@
 package com.baiiu.commontool.base;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import butterknife.ButterKnife;
+
+import androidx.annotation.LayoutRes;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.baiiu.commontool.app.UIUtil;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by baiiu on 15/11/18.

@@ -1,12 +1,15 @@
 package com.example.testing.myapplication.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.baiiu.library.LogUtil;
 import com.example.testing.myapplication.bean.User;
 import com.example.testing.myapplication.retrofit.ApiFactory;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

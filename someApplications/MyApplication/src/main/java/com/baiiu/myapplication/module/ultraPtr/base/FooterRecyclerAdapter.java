@@ -1,8 +1,10 @@
 package com.baiiu.myapplication.module.ultraPtr.base;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.baiiu.myapplication.util.UIUtil;
 import java.util.List;
 

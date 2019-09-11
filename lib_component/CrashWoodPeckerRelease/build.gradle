@@ -24,6 +24,8 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 apply from: './gradle-mvn-push.gradle'
 
 android {
@@ -48,4 +50,9 @@ android {
 dependencies {
     // Keep the same dependencies with debug
     compile rootProject.ext.support.recyclerView
+    implementation "androidx.core:core-ktx:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

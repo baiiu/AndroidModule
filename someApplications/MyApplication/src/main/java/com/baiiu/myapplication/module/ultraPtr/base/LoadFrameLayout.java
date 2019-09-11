@@ -2,8 +2,6 @@ package com.baiiu.myapplication.module.ultraPtr.base;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.IntDef;
-import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,8 +9,13 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import butterknife.ButterKnife;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.LayoutRes;
+
 import com.baiiu.myapplication.R;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by aspsine on 16/2/4.
@@ -29,8 +32,9 @@ public class LoadFrameLayout extends FrameLayout {
     private OnClickListener mErrorClickListener;
 
 
-    @IntDef({ LOADING, ERROR, EMPTY, CONTENT, NO_GONE })
-    @interface LoadFrameState {}
+    @IntDef({LOADING, ERROR, EMPTY, CONTENT, NO_GONE})
+    @interface LoadFrameState {
+    }
 
 
     @LayoutRes private int mEmptyViewLayoutResId;
@@ -65,7 +69,8 @@ public class LoadFrameLayout extends FrameLayout {
         }
     }
 
-    @Override protected void onFinishInflate() {
+    @Override
+    protected void onFinishInflate() {
         super.onFinishInflate();
         contentView = getChildAt(0);
 
@@ -156,7 +161,7 @@ public class LoadFrameLayout extends FrameLayout {
         if (emptyView == null || TextUtils.isEmpty(emptyText)) {
             return;
         }
-        TextView textView = ButterKnife.findById(emptyView, R.id.tv_empty);
+        TextView textView = errorView.findViewById(R.id.tv_empty);
         if (textView != null) {
             textView.setText(emptyText);
         }
@@ -167,7 +172,7 @@ public class LoadFrameLayout extends FrameLayout {
             return;
         }
 
-        TextView textView = ButterKnife.findById(errorView, R.id.tv_error);
+        TextView textView = errorView.findViewById(R.id.tv_error);
         if (textView != null) {
             textView.setText(errorText);
         }
@@ -185,7 +190,7 @@ public class LoadFrameLayout extends FrameLayout {
 
         mErrorClickListener = null;
 
-        TextView textView = ButterKnife.findById(errorView, R.id.tv_retry);
+        TextView textView = errorView.findViewById(R.id.tv_retry);
         if (textView != null) {
             textView.setOnClickListener(listener);
         }

@@ -2,9 +2,13 @@ package com.example.testing.rxjavalearn.operators;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.example.testing.rxjavalearn.util.LogUtil;
+
 import java.util.concurrent.TimeUnit;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;

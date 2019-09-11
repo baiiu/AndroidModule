@@ -4,11 +4,13 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+
 import com.baiiu.library.LogUtil;
 import com.baiiu.performance.BaseFragment;
 import com.baiiu.performance.R;
@@ -22,8 +24,9 @@ import com.baiiu.performance.R;
 public class LeakCanaryFragment extends BaseFragment {
     private static MOnClickListener mOnClickListener;
 
-    @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+    @Nullable
+    @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                                       @Nullable Bundle savedInstanceState) {
         LogUtil.d("哈哈哈哈哈哈");
 
         View view = inflater.inflate(R.layout.fragment_leak_canary, container, false);

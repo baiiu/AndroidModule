@@ -1,12 +1,16 @@
 package com.example.testing.rxjavalearn.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.testing.rxjavalearn.bean.Repo;
 import com.example.testing.rxjavalearn.bean.User;
 import com.example.testing.rxjavalearn.util.LogUtil;
+
 import java.util.List;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;

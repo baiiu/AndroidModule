@@ -1,19 +1,23 @@
 package com.example.testing.myapplication.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.ListFragment;
+
 import com.baiiu.library.LogUtil;
 import com.example.testing.myapplication.R;
 import com.example.testing.myapplication.bean.Daily;
 import com.example.testing.myapplication.bean.Story;
 import com.example.testing.myapplication.retrofit.ApiFactory;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

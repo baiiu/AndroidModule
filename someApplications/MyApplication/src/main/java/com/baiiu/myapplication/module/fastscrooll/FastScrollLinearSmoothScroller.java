@@ -2,12 +2,13 @@ package com.baiiu.myapplication.module.fastscrooll;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * author: baiiu

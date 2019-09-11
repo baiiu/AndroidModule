@@ -1,8 +1,9 @@
 package com.baiiu.library;
 
 
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
+import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
+
 import com.baiiu.library.klog.BaseLog;
 import com.baiiu.library.klog.FileLog;
 import com.baiiu.library.klog.JsonLog;

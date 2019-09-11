@@ -3,7 +3,9 @@ package com.baiiu.myapplication.module.watermark;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.baiiu.myapplication.util.LogUtil;
 import com.baiiu.myapplication.util.UIUtil;
 

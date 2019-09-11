@@ -2,11 +2,13 @@ package com.baiiu.commontool.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.LayoutRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.annotation.LayoutRes;
+
 import com.baiiu.commontool.R;
 
 /**

@@ -1,14 +1,18 @@
 package com.example.testing.rxjavalearn.operators;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.example.testing.rxjavalearn.util.LogUtil;
 import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;

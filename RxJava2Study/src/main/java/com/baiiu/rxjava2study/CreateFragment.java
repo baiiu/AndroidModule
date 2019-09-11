@@ -1,9 +1,12 @@
 package com.baiiu.rxjava2study;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.baiiu.library.LogUtil;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.Single;

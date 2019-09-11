@@ -1,11 +1,13 @@
 package com.baiiu.myapplication.module.ultraPtr.base;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
+import androidx.annotation.LayoutRes;
+import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.ButterKnife;
 import com.baiiu.myapplication.util.UIUtil;
 

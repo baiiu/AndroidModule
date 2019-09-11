@@ -1,11 +1,13 @@
 package com.baiiu.toucheventstudy.behaviors;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * author: baiiu
@@ -22,7 +24,7 @@ public class ScrollAwareBehavior extends FloatingActionButton.Behavior {
 
     @Override
     public boolean onStartNestedScroll(final CoordinatorLayout coordinatorLayout, final FloatingActionButton child,
-            final View directTargetChild, final View target, final int nestedScrollAxes) {
+                                       final View directTargetChild, final View target, final int nestedScrollAxes) {
         // Ensure we react to vertical scrolling
         return nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL || super.onStartNestedScroll(coordinatorLayout,
                                                                                                 child,

@@ -1,14 +1,5 @@
 package com.example.testing.testingexample;
 
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.SmallTest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 /**
  * author: baiiu
  * date: on 16/4/28 11:39
@@ -22,24 +13,24 @@ import static org.junit.Assert.assertTrue;
  * see more:
  * http://stackoverflow.com/questions/4671923/what-is-the-purpose-of-smalltest-mediumtest-and-largetest-annotations-in-an
  */
-@RunWith(AndroidJUnit4.class) @SmallTest public class LocalInstrumentedUnitTest {
-
-  @Before public void setUp() throws Exception {
-  }
-
-  @Test public void testIsStringEmpty() throws Exception {
-    assertTrue(CommonUtil.isEmpty(""));
-    assertTrue(CommonUtil.isEmpty("     "));
-  }
-
-  @Test public void testIsAllStringEmpty() throws Exception {
-    assertTrue(CommonUtil.isAllEmpty("", "   ", ""));
-    assertFalse(CommonUtil.isAllEmpty("哈哈哈", "  "));
-  }
-
-  @Test public void testIsOneStringEmpty() throws Exception {
-    assertTrue(CommonUtil.isOneEmpty("", "   ", ""));
-    assertTrue(CommonUtil.isOneEmpty("", "哈哈", "   "));
-    assertFalse(CommonUtil.isOneEmpty("哈哈", "哈哈"));
-  }
-}
+//@RunWith(AndroidJUnit4.class) @SmallTest public class LocalInstrumentedUnitTest {
+//
+//  @Before public void setUp() throws Exception {
+//  }
+//
+//  @Test public void testIsStringEmpty() throws Exception {
+//    assertTrue(CommonUtil.isEmpty(""));
+//    assertTrue(CommonUtil.isEmpty("     "));
+//  }
+//
+//  @Test public void testIsAllStringEmpty() throws Exception {
+//    assertTrue(CommonUtil.isAllEmpty("", "   ", ""));
+//    assertFalse(CommonUtil.isAllEmpty("哈哈哈", "  "));
+//  }
+//
+//  @Test public void testIsOneStringEmpty() throws Exception {
+//    assertTrue(CommonUtil.isOneEmpty("", "   ", ""));
+//    assertTrue(CommonUtil.isOneEmpty("", "哈哈", "   "));
+//    assertFalse(CommonUtil.isOneEmpty("哈哈", "哈哈"));
+//  }
+//}

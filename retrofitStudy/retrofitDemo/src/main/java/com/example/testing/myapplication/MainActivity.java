@@ -3,9 +3,11 @@ package com.example.testing.myapplication;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.example.testing.myapplication.fragments.OkHttpFragment;
 import com.example.testing.myapplication.util.NetWorkReceiver;
 

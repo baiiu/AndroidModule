@@ -1,8 +1,9 @@
 package com.example.testing.liteormlearn.learn;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.testing.liteormlearn.R;
 import com.example.testing.liteormlearn.model.me.ModelA;

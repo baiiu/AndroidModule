@@ -2,8 +2,6 @@ package com.baiiu.myapplication.module.JavaJsCommunication;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +14,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.baiiu.myapplication.R;
 import com.baiiu.myapplication.util.LogUtil;
 import java.io.InputStream;
@@ -32,8 +34,9 @@ public class JavaJsFragment extends Fragment implements View.OnClickListener {
     FrameLayout frameLayout;
     private WebView webView;
 
-    @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+    @Nullable
+    @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                                       @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_java_js, container, false);
         frameLayout = (FrameLayout) view.findViewById(R.id.frameLayoutContainer);

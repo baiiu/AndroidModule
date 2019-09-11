@@ -1,9 +1,12 @@
 package com.baiiu.commontool.base;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.baiiu.commontool.util.CommonUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 

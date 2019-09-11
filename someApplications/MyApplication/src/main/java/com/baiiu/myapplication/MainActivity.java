@@ -1,8 +1,10 @@
 package com.baiiu.myapplication;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.baiiu.myapplication.module.ultraPtr.PtrPageFragment;
 
 public class MainActivity extends AppCompatActivity {

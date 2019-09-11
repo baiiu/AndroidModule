@@ -1,10 +1,12 @@
 package com.baiiu.toucheventstudy.list;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import butterknife.BindView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.baiiu.toucheventstudy.R;
 import com.baiiu.toucheventstudy.base.BaseFragment;
+
+import butterknife.BindView;
 
 /**
  * author: baiiu

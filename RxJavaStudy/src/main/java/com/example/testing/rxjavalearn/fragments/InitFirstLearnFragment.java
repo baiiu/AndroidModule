@@ -1,11 +1,14 @@
 package com.example.testing.rxjavalearn.fragments;
 
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+
 import com.example.testing.rxjavalearn.R;
 import com.example.testing.rxjavalearn.util.LogUtil;
+
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;

@@ -1,22 +1,26 @@
 package com.example.testing.rxjavalearn.operators;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import androidx.annotation.Nullable;
+
 import com.example.testing.rxjavalearn.R;
 import com.example.testing.rxjavalearn.util.LogUtil;
 import com.jakewharton.rxbinding.view.RxView;
 import com.orhanobut.logger.Logger;
 import com.trello.rxlifecycle.android.FragmentEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;

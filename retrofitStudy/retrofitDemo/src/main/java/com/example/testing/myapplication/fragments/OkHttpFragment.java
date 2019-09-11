@@ -1,11 +1,15 @@
 package com.example.testing.myapplication.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.baiiu.library.LogUtil;
 import com.example.testing.myapplication.retrofit.http.OKHttpFactory;
+
 import java.io.IOException;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;

@@ -1,7 +1,9 @@
 package com.baiiu.dagger2learn;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.baiiu.dagger2learn.bean.OnePerson;
 import com.baiiu.dagger2learn.di.module.ApplicationModule;
 import com.baiiu.dagger2learn.doubleDependenciesSample.DoubleDependenciesFragment;

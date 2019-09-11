@@ -1,8 +1,11 @@
 package com.baiiu.performance.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import com.baiiu.performance.BaseFragment;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,7 +17,8 @@ import java.io.IOException;
  */
 
 public class StrictModeFragment extends BaseFragment {
-    @Override public void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //LogUtil.d("哈哈执行了么StrictModeFragment");
 

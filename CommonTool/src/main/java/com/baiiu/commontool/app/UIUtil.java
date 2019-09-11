@@ -3,11 +3,13 @@ package com.baiiu.commontool.app;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.LayoutRes;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.LayoutRes;
+
 import com.squareup.leakcanary.RefWatcher;
 
 /**

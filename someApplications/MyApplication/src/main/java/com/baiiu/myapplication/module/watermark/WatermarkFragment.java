@@ -1,13 +1,15 @@
 package com.baiiu.myapplication.module.watermark;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.baiiu.myapplication.R;
 import com.baiiu.myapplication.module.fastscrooll.FastScrollLinearLayoutManager;
 import com.baiiu.myapplication.module.fastscrooll.SimpleTextAdapter;
