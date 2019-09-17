@@ -6,8 +6,8 @@
 // 自定义插件
 include(
 
-        ':plugin:pluginApplication'
-
+        ':plugin:pluginApplication',
+        ':plugin:testplugin',
 )
 
 // 三方框架

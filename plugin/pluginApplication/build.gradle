@@ -1,6 +1,19 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.test.hello'
+
+buildscript {
+    repositories {
+        maven {
+            url uri('../repo')
+        }
+    }
+    dependencies {
+        classpath 'com.spi.demo:testplugin:1.0-SNAPSHOT'
+    }
+}
+
 android {
     compileSdkVersion 28
 
