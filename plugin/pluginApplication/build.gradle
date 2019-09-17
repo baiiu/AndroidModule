@@ -37,3 +37,9 @@ dependencies {
 
     implementation project(":lib_component:LogUtil")
 }
+
+apply from: 'test1.gradle.kts'
+apply from: 'test2.gradle.kts'
+apply from: 'test3.gradle.kts'
+apply from: 'test4.gradle.kts'
+
