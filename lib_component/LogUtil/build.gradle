@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion as Integer
-    buildToolsVersion rootProject.ext.buildToolsVersion as String
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion as int
@@ -22,9 +21,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile rootProject.ext.majorFrame.okHttp
-    compile rootProject.ext.support.appcompat
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.majorFrame.okHttp
+    implementation rootProject.ext.support.appcompat
     implementation "androidx.core:core-ktx:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

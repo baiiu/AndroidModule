@@ -18,6 +18,7 @@ tasks.register<GreetingToFileTask>("greet") {
     destination = { project.extra["greetingFile"]!! }
 }
 
+// ./gradlew -q sayGreeting
 tasks.register("sayGreeting") {
     dependsOn("greet")
     doLast {

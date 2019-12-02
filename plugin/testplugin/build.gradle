@@ -7,14 +7,16 @@ dependencies {
 
 apply plugin: 'maven'
 
-group = 'com.spi.demo'
-version = '1.0-SNAPSHOT'
-
 //设置maven deployer
 uploadArchives {
     repositories {
         mavenDeployer {
             repository(url: uri('../repo'))
+
+            pom.groupId = 'com.baiiu.demo'
+            pom.artifactId = 'hello'
+            pom.version = '1.0-SNAPSHOT'
+
         }
     }
 }

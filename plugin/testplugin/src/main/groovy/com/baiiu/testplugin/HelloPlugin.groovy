@@ -1,4 +1,4 @@
-package com.live.testplugin
+package com.baiiu.testplugin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
