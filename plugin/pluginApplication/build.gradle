@@ -2,15 +2,20 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.test.hello'
+apply plugin: 'com.test.kothello'
 
 buildscript {
     repositories {
         maven {
             url uri('../repo')
         }
+        maven {
+            url uri('../kotrepo')
+        }
     }
     dependencies {
         classpath 'com.baiiu.demo:hello:1.0-SNAPSHOT'
+        classpath 'com.baiiu.kotdemo:hello:1.0-SNAPSHOT'
     }
 }
 

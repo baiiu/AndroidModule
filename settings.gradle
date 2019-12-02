@@ -8,31 +8,32 @@ include(
 
         ':plugin:pluginApplication',
         ':plugin:testplugin',
+        ':plugin:testKotlinPlugin',
+
 )
 
 // 三方框架
 include(
 
-//        ':unitTestStudy',
-//        ':majorFrame:LiteOrmStudy',
-//        ':majorFrame:RxJavaStudy',
-//        ':majorFrame:RxJava2Study',
-//        ':majorFrame:Dagger2Study',
-//        ':majorFrame:RetrofitStudy:retrofitDemo',
-//        ':majorFrame:RetrofitStudy:retrofit',
-//        ':majorFrame:RetrofitStudy:rxjava',
-
+        //        ':unitTestStudy',
+        //        ':majorFrame:LiteOrmStudy',
+        //        ':majorFrame:RxJavaStudy',
+        //        ':majorFrame:RxJava2Study',
+        //        ':majorFrame:Dagger2Study',
+        //        ':majorFrame:RetrofitStudy:retrofitDemo',
+        //        ':majorFrame:RetrofitStudy:retrofit',
+        //        ':majorFrame:RetrofitStudy:rxjava',
 
 )
 
 // App
 include(
 
-//        ':someApplications:PerformanceApp',
-//        ':someApplications:MyApplication',
-//        ":someApplications:ptr-lib",
-//        ":someApplications:touchEventStudy",
-//        ":someApplications:InterestingStudy",
+        //        ':someApplications:PerformanceApp',
+        //        ':someApplications:MyApplication',
+        //        ":someApplications:ptr-lib",
+        //        ":someApplications:touchEventStudy",
+        //        ":someApplications:InterestingStudy",
 
 )
 
@@ -41,9 +42,9 @@ include(
 include(
 
         ':lib_component:LogUtil',
-//        ':lib_component:LogUtilRelease',
-//        ':lib_component:CrashWoodpecker',
-//        ':lib_component:CrashWoodpeckerRelease'
+        //        ':lib_component:LogUtilRelease',
+        //        ':lib_component:CrashWoodpecker',
+        //        ':lib_component:CrashWoodpeckerRelease'
 
 )
 
