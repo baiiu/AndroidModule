@@ -1,3 +1,5 @@
+import java.util.function.Consumer
+
 /*
     通用工具类,汇总整理
 */
@@ -48,6 +50,101 @@ include(
 
 )
 
+gradle.addBuildListener(new BuildListener() {
+    @Override
+    void buildStarted(Gradle gradle) {
+        println("=== gradle.buildStarted")
+    }
 
+    @Override
+    void settingsEvaluated(Settings settings) {
+        println("=== gradle.settingsEvaluated")
+    }
 
+    @Override
+    void projectsLoaded(Gradle gradle) {
+        println("=== gradle.projectsLoaded")
+    }
+
+    @Override
+    void projectsEvaluated(Gradle gradle) {
+        println("=== gradle.projectsEvaluated")
+    }
+
+    @Override
+    void buildFinished(BuildResult result) {
+        println("=== gradle.buildFinished")
+    }
+})
+gradle.afterProject { project, projectState ->
+    if (projectState.failure) {
+        println "=== setting.project.After " + project + " FAILED"
+    } else {
+        println "=== setting.project.After " + project + " succeeded"
+    }
+}
+gradle.beforeProject { p -> println("=== setting.project.Before " + p)
+}
+gradle.allprojects(new Action<Project>() {
+    @Override
+    void execute(Project project) {
+        project.beforeEvaluate {
+            project
+            println "=== allprojects.setting.project.before.Evaluate " + project
+        }
+        project.afterEvaluate { pro -> println("=== allprojects.setting.project.after.Evaluate " + pro)
+        }
+    }
+})
+gradle.taskGraph.addTaskExecutionListener(new TaskExecutionListener() {
+    @Override
+    void beforeExecute(Task task) {
+        println("@@@ gradle.taskGraph.beforeTask " + task)
+    }
+
+    @Override
+    void afterExecute(Task task, TaskState state) {
+        println("@@@ gradle.taskGraph.afterTask " + task)
+    }
+})
+gradle.taskGraph.addTaskExecutionGraphListener(new TaskExecutionGraphListener() {
+    @Override
+    void graphPopulated(TaskExecutionGraph graph) {
+        println("@@@ gradle.taskGraph.graphPopulated " + graph)
+    }
+})
+gradle.taskGraph.whenReady { taskGrahp ->
+
+    println("===========================================gradle.taskGraph.whenReady ")
+    List<Task> list = taskGrahp.getAllTasks()
+    list.forEach(new Consumer<Task>() {
+        @Override
+        void accept(Task t) {
+            println(t)
+
+            //            t.getDependsOn().forEach(new Consumer<Object>() {
+            //                @Override
+            //                void accept(Object o) {
+            //                    println("DependsOn--> " + o.toString())
+            //                }
+            //            })
+            //
+            //            t.getInputs().getFiles().getFiles().forEach(new Consumer<File>() {
+            //                @Override
+            //                void accept(File input) {
+            //                    println("input--> " + input.getAbsolutePath())
+            //                }
+            //            })
+            //
+            //            t.getOutputs().getFiles().getFiles().forEach(new Consumer<File>() {
+            //                @Override
+            //                void accept(File output) {
+            //                    println("output--> " + output.getAbsolutePath())
+            //                }
+            //            })
+        }
+    })
+
+    println("===========================================gradle.taskGraph.whenReady ")
+}
 
