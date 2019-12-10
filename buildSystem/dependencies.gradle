@@ -20,7 +20,6 @@ ext {
     javaSourceCompatibility = JavaVersion.VERSION_1_8
     javaTargetCompatibility = JavaVersion.VERSION_1_8
 
-
     retrofitVersion = '2.2.0'
     okHttpVersion = '3.6.0'
     okHttpUtilsVersion = '2.6.2'
@@ -44,8 +43,10 @@ ext {
 
     //dependencies
     support = [
-            appcompat         : 'androidx.appcompat:appcompat:1.0.2',
-            annotation        : "androidx.annotation:annotation:1.0.2",
+
+            appcompat         : 'androidx.appcompat:appcompat:1.1.0',
+            annotation        : "androidx.annotation:annotation:1.1.0",
+            corektx           : "androidx.core:core-ktx:1.1.0",
 
             design            : "com.google.android.material:material:1.0.0-rc01",
             recyclerView      : 'androidx.recyclerview:recyclerview:1.0.0',
@@ -55,8 +56,7 @@ ext {
             lifecycleProcessor: "androidx.lifecycle:lifecycle-compiler:2.0.0",
             legacy            : "androidx.legacy:legacy-support-v4:1.0.0",
             room              : "androidx.room:room-runtime:2.1.0",
-            roomProcessor     : "androidx.room:room-compiler:2.1.0"
-    ]
+            roomProcessor     : "androidx.room:room-compiler:2.1.0"]
 
     rx = [
 
@@ -81,33 +81,33 @@ ext {
             //Realm, LiteOrm etc ...
 
             //json
-            Gson                  : "com.google.code.gson:gson:${GsonVersion}",
+            Gson                    : "com.google.code.gson:gson:${GsonVersion}",
 
             //okHttp
-            okHttp                : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
-            loggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
-            okHttpUtils           : "com.zhy:okhttputils:${okHttpUtilsVersion}",
+            okHttp                  : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            loggingInterceptor      : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            okHttpUtils             : "com.zhy:okhttputils:${okHttpUtilsVersion}",
 
             //retrofit
-            retrofit              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            converterGson         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            adapterRxJava         : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            retrofit                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            converterGson           : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            adapterRxJava           : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
 
             //Glide
-            Glide                 : "com.github.bumptech.glide:glide:${GlideVersion}",
+            Glide                   : "com.github.bumptech.glide:glide:${GlideVersion}",
 
             //ButterKnife
-//ButterKnife
+            //ButterKnife
             ButterKnife             : "com.jakewharton:butterknife:${ButterKnifeVersion}",
             aptButterKnifeProcessor : "com.jakewharton:butterknife-compiler:${ButterKnifeVersion}",
             kaptButterKnifeProcessor: "com.jakewharton:butterknife-compiler:${ButterKnifeVersion}",
 
             //Dagger2
-            Dagger2               : "com.google.dagger:dagger:${Dagger2Version}",
-            aptDagger2Compiler    : "com.google.dagger:dagger-compiler:${Dagger2Version}",
+            Dagger2                 : "com.google.dagger:dagger:${Dagger2Version}",
+            aptDagger2Compiler      : "com.google.dagger:dagger-compiler:${Dagger2Version}",
 
             //EventBus
-            EventBus              : "org.greenrobot:eventbus:${EventBusVersion}"
+            EventBus                : "org.greenrobot:eventbus:${EventBusVersion}"
 
     ]
 
