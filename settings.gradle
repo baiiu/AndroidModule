@@ -9,8 +9,9 @@ import java.util.function.Consumer
 include(
 
         ':plugin:pluginApplication',
-//        ':plugin:testplugin',
-//        ':plugin:testKotlinPlugin',
+        ':JavaLib',
+        //        ':plugin:testplugin',
+        //        ':plugin:testKotlinPlugin',
 
 )
 

@@ -32,6 +32,7 @@ http://kvh.io/cn/embrace-android-studio-gradle-plugin.html
 
 ## 3. AOP、ASM、Javassist、AspectJ等字节码注入技术
 [Java字节码增强探秘](https://mp.weixin.qq.com/s/CH9D-E7fxuu462Q2S3t0AA)
+[AOP 的利器：ASM 3.0 介绍](https://www.ibm.com/developerworks/cn/java/j-lo-asm30/)
 
 ## 4. 使用ASM
 - 页面(Activity、Fragment)的打开事件
