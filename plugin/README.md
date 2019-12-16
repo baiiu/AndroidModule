@@ -39,3 +39,4 @@ http://kvh.io/cn/embrace-android-studio-gradle-plugin.html
 - 各种点击事件的统计,包括但不限于Click LongClick TouchEvent
 - Debug期需要统计各个方法的耗时。注意这里的方法包括接入的第三方SDK的方法。
 
+[Transform API](https://juejin.im/post/5ccd41066fb9a03204595a91)
