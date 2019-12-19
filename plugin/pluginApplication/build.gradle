@@ -54,7 +54,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation project(":lib_component:LogUtil")
+//    implementation project(":lib_component:LogUtil")
 }
 
 apply from: 'test1.gradle.kts'
@@ -62,36 +62,36 @@ apply from: 'test2.gradle.kts'
 apply from: 'test3.gradle.kts'
 apply from: 'test4.gradle.kts'
 
-project.afterEvaluate(new Action<Project>() {
-    @Override
-    public void execute(Project project) {
-        println("###############################################################" + project.name)
-
-        Map<Project, Set<Task>> allTasks = project.getAllTasks(true);
-        for (Map.Entry<Project, Set<Task>> projectSetEntry : allTasks.entrySet()) {
-            Set<Task> value = projectSetEntry.getValue();
-            for (Task task : value) {
-                try {
-                    System.out.println("----------------------------------");
-                    System.out.println(task.getName());
-                    for (Object o : task.getDependsOn()) {
-                        System.out.println("dependOn--> " + o.toString());
-                    }
-
-                    for (File file : task.getInputs().getFiles().getFiles()) {
-                        System.out.println("input--> " + file.getAbsolutePath());
-                    }
-
-                    for (File file : task.getOutputs().getFiles().getFiles()) {
-                        System.out.println("output--> " + file.getAbsolutePath());
-                    }
-                    System.out.println("----------------------------------");
-                } catch (Exception e) {
-                    e.printStackTrace()
-                }
-            }
-        }
-
-        println("###############################################################" + project.name)
-    }
-})
+//project.afterEvaluate(new Action<Project>() {
+//    @Override
+//    public void execute(Project project) {
+//        println("###############################################################" + project.name)
+//
+//        Map<Project, Set<Task>> allTasks = project.getAllTasks(true);
+//        for (Map.Entry<Project, Set<Task>> projectSetEntry : allTasks.entrySet()) {
+//            Set<Task> value = projectSetEntry.getValue();
+//            for (Task task : value) {
+//                try {
+//                    System.out.println("----------------------------------");
+//                    System.out.println(task.getName());
+//                    for (Object o : task.getDependsOn()) {
+//                        System.out.println("dependOn--> " + o.toString());
+//                    }
+//
+//                    for (File file : task.getInputs().getFiles().getFiles()) {
+//                        System.out.println("input--> " + file.getAbsolutePath());
+//                    }
+//
+//                    for (File file : task.getOutputs().getFiles().getFiles()) {
+//                        System.out.println("output--> " + file.getAbsolutePath());
+//                    }
+//                    System.out.println("----------------------------------");
+//                } catch (Exception e) {
+//                    e.printStackTrace()
+//                }
+//            }
+//        }
+//
+//        println("###############################################################" + project.name)
+//    }
+//})
