@@ -3,19 +3,24 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.test.hello'
 apply plugin: 'com.test.kothello'
+apply plugin: 'com.baiiu.log'
 
 buildscript {
     repositories {
         maven {
-            url uri('../repo')
+            url uri('../repo/test')
         }
         maven {
-            url uri('../kotrepo')
+            url uri('../repo/kottest')
+        }
+        maven {
+            url uri('../repo/logrepo')
         }
     }
     dependencies {
         classpath 'com.baiiu.demo:hello:1.0-SNAPSHOT'
         classpath 'com.baiiu.kotdemo:hello:1.0-SNAPSHOT'
+        classpath 'com.baiiu.log:log:1.0-SNAPSHOT'
     }
 }
 

@@ -11,7 +11,7 @@ apply plugin: 'maven'
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: uri('../repo'))
+            repository(url: uri('../repo/test'))
 
             pom.groupId = 'com.baiiu.demo'
             pom.artifactId = 'hello'

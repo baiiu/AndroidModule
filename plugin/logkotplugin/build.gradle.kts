@@ -8,21 +8,22 @@ plugins {
     `maven-publish`
 }
 
-group = "com.baiiu.kotdemo"
-version = "1.0-SNAPSHOT"
-
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            artifactId = "hello"
+            group = "com.baiiu.log"
+            version = "1.0-SNAPSHOT"
+            artifactId = "log"
 
             from(components["java"])
         }
     }
     repositories {
         maven {
-            url = uri("../repo/kottest")
+            url = uri("../repo/logrepo")
         }
     }
 }
+
+
 
