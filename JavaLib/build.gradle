@@ -3,8 +3,8 @@ apply plugin: 'java-library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // https://mvnrepository.com/artifact/org.ow2.asm/asm
-    compile group: 'org.ow2.asm', name: 'asm', version: '7.2'
-
+    //    compile group: 'org.ow2.asm', name: 'asm', version: '7.2'
+    compile "org.ow2.asm:asm:7.2"
 }
 
 sourceCompatibility = "7"

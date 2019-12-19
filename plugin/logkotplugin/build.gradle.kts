@@ -8,6 +8,12 @@ plugins {
     `maven-publish`
 }
 
+
+dependencies {
+    implementation("org.ow2.asm:asm:7.2")
+    implementation("com.android.tools.build:gradle:3.4.2")
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {

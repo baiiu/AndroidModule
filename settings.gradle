@@ -9,7 +9,7 @@ import java.util.function.Consumer
 include(
 
         ':plugin:pluginApplication',
-        ':JavaLib',
+//        ':JavaLib',
         ':plugin:testplugin',
         ':plugin:testKotlinPlugin',
         ':plugin:logkotplugin',
