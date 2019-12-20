@@ -1,28 +1,40 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.test.hello'
-apply plugin: 'com.test.kothello'
-apply plugin: 'com.baiiu.log'
+//apply plugin: 'com.test.hello'
+//apply plugin: 'com.test.kothello'
 
-buildscript {
-    repositories {
-        maven {
-            url uri('../repo/test')
-        }
-        maven {
-            url uri('../repo/kottest')
-        }
-        maven {
-            url uri('../repo/logrepo')
-        }
-    }
-    dependencies {
-        classpath 'com.baiiu.demo:hello:1.0-SNAPSHOT'
-        classpath 'com.baiiu.kotdemo:hello:1.0-SNAPSHOT'
-        classpath 'com.baiiu.log:log:1.0-SNAPSHOT'
-    }
-}
+//buildscript {
+//    repositories {
+//        maven {
+//            url uri('../repo/test')
+//        }
+//        maven {
+//            url uri('../repo/kottest')
+//        }
+//        maven {
+//            url uri('../repo/logrepo')
+//        }
+//    }
+//    dependencies {
+//        classpath 'com.baiiu.demo:hello:1.0-SNAPSHOT'
+//        classpath 'com.baiiu.kotdemo:hello:1.0-SNAPSHOT'
+//        classpath 'com.baiiu.log:log:1.0-SNAPSHOT'
+//    }
+//}
+
+//apply plugin: 'com.baiiu.log'
+//
+//buildscript {
+//    repositories {
+//        maven {
+//            url uri('../repo/logrepo')
+//        }
+//    }
+//    dependencies {
+//        classpath 'com.baiiu.log:log:1.0-SNAPSHOT'
+//    }
+//}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion as Integer
@@ -39,8 +51,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -54,7 +72,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-//    implementation project(":lib_component:LogUtil")
+    //    implementation project(":lib_component:LogUtil")
 }
 
 apply from: 'test1.gradle.kts'

@@ -9,10 +9,10 @@ import java.util.function.Consumer
 include(
 
         ':plugin:pluginApplication',
-//        ':JavaLib',
-        ':plugin:testplugin',
-        ':plugin:testKotlinPlugin',
         ':plugin:logkotplugin',
+        //        ':JavaLib',
+        //        ':plugin:testplugin',
+        //        ':plugin:testKotlinPlugin',
 
 )
 
@@ -45,7 +45,7 @@ include(
 // 辅助分析包
 include(
 
-        ':lib_component:LogUtil',
+        //        ':lib_component:LogUtil',
         //        ':lib_component:LogUtilRelease',
         //        ':lib_component:CrashWoodpecker',
         //        ':lib_component:CrashWoodpeckerRelease'
@@ -94,7 +94,8 @@ gradle.allprojects(new Action<Project>() {
             project
             println "=== allprojects.setting.project.before.Evaluate " + project
         }
-        project.afterEvaluate { pro -> println("=== allprojects.setting.project.after.Evaluate " + pro)
+        project.afterEvaluate {
+            pro -> println("=== allprojects.setting.project.after.Evaluate " + pro)
         }
     }
 })
