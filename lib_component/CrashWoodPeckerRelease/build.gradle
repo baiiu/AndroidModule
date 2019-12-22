@@ -50,7 +50,7 @@ android {
 dependencies {
     // Keep the same dependencies with debug
     compile rootProject.ext.support.recyclerView
-    implementation "androidx.core:core-ktx:$kotlin_version"
+    implementation rootProject.ext.support.corektx
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 repositories {

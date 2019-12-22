@@ -1,8 +1,9 @@
 package com.baiiu.logkotplugin
 
 import com.android.build.api.transform.*
-import org.gradle.internal.impldep.org.apache.commons.io.*
-import org.gradle.internal.impldep.org.objectweb.asm.*
+import org.apache.commons.io.FileUtils
+import org.objectweb.asm.ClassReader
+import org.objectweb.asm.ClassWriter
 import java.io.File
 import java.io.FileOutputStream
 
@@ -29,7 +30,11 @@ class LogTransform : Transform() {
     }
 
     override fun getScopes(): MutableSet<in QualifiedContent.Scope> {
-        return mutableSetOf(QualifiedContent.Scope.PROJECT)
+        return mutableSetOf(
+                QualifiedContent.Scope.PROJECT,
+                QualifiedContent.Scope.EXTERNAL_LIBRARIES,
+                QualifiedContent.Scope.SUB_PROJECTS
+        )
     }
 
 
@@ -191,6 +196,9 @@ class LogTransform : Transform() {
                     val classReader = ClassReader(file.readBytes())
                     val classWriter = ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
                     val className = name.split(".class")[0]
+
+                    println("className: $className")
+
                     val classVisitor = LogVisitor(className, classWriter)
                     classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
                     val code = classWriter.toByteArray()

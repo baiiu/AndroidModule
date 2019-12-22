@@ -1,8 +1,10 @@
 package com.baiiu.logkotplugin;
 
-
-import org.gradle.internal.impldep.org.objectweb.asm.*;
-import org.gradle.internal.impldep.org.objectweb.asm.commons.*;
+import org.objectweb.asm.AnnotationVisitor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.commons.AdviceAdapter;
 
 /**
  * author: zhuzhe
@@ -36,7 +38,8 @@ public class LogVisitor extends ClassVisitor {
      * @param name 方法名
      */
     @Override
-    public MethodVisitor visitMethod(final int access, final String name, final String desc, final String signature,
+    public MethodVisitor visitMethod(final int access, final String name, final String desc,
+            final String signature,
             String[] exceptions) {
         MethodVisitor methodVisitor = cv.visitMethod(access, name, desc, signature, exceptions);
 
@@ -108,7 +111,8 @@ public class LogVisitor extends ClassVisitor {
      * @param interfaces 实现的接口名
      */
     @Override
-    public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+    public void visit(int version, int access, String name, String signature, String superName,
+            String[] interfaces) {
         super.visit(version, access, name, signature, superName, interfaces);
         this.className = name;
         this.superName = superName;

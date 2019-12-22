@@ -38,7 +38,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile rootProject.ext.support.appcompat
-    implementation "androidx.core:core-ktx:$kotlin_version"
+    implementation rootProject.ext.support.corektx
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 repositories {

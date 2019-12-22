@@ -35,7 +35,7 @@ dependencies {
 
     compile rootProject.ext.support.appcompat
     compile project(':lib_component:LogUtil')
-    implementation "androidx.core:core-ktx:$kotlin_version"
+    implementation rootProject.ext.support.corektx
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 repositories {

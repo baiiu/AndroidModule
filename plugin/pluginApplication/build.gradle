@@ -23,18 +23,27 @@ apply plugin: 'kotlin-android-extensions'
 //    }
 //}
 
-//apply plugin: 'com.baiiu.log'
-//
-//buildscript {
-//    repositories {
-//        maven {
-//            url uri('../repo/logrepo')
-//        }
-//    }
-//    dependencies {
-//        classpath 'com.baiiu.log:log:1.0-SNAPSHOT'
-//    }
-//}
+apply plugin: 'com.baiiu.log'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url uri('../repo/logrepo')
+        }
+    }
+    dependencies {
+        classpath 'com.baiiu.log:log:1.0-SNAPSHOT'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+    allprojects {
+        repositories {
+            google()
+            jcenter()
+        }
+    }
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion as Integer
@@ -56,10 +65,10 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+    //    compileOptions {
+    //        sourceCompatibility JavaVersion.VERSION_1_8
+    //        targetCompatibility JavaVersion.VERSION_1_8
+    //    }
 }
 
 dependencies {
