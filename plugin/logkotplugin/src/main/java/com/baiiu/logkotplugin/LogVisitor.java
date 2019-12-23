@@ -29,7 +29,7 @@ public class LogVisitor extends ClassVisitor {
     private String[] interfaces;
 
     public LogVisitor(String className, ClassVisitor classVisitor) {
-        super(Opcodes.ASM7, classVisitor);
+        super(Opcodes.ASM6, classVisitor);
     }
 
     /**
@@ -43,7 +43,7 @@ public class LogVisitor extends ClassVisitor {
             String[] exceptions) {
         MethodVisitor methodVisitor = cv.visitMethod(access, name, desc, signature, exceptions);
 
-        methodVisitor = new AdviceAdapter(Opcodes.ASM5, methodVisitor, access, name, desc) {
+        methodVisitor = new AdviceAdapter(Opcodes.ASM6, methodVisitor, access, name, desc) {
 
             private boolean isInject() {
                 //如果父类名是AppCompatActivity则拦截这个方法,实际应用中可以换成自己的父类例如BaseActivity
@@ -59,8 +59,7 @@ public class LogVisitor extends ClassVisitor {
 
             }
 
-            @Override
-            public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+            @Override public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
                 return super.visitAnnotation(desc, visible);
             }
 
@@ -87,6 +86,18 @@ public class LogVisitor extends ClassVisitor {
                         mv.visitMethodInsn(INVOKESTATIC, "com/baiiu/pluginapplication/TraceUtil"
                                 , "onActivityDestroy", "(Landroid/app/Activity;)V", false);
                     }
+
+                    //if ("onResume".equals(name)) {
+                    //    mv.visitVarInsn(ALOAD, 0);
+                    //    mv.visitMethodInsn(INVOKESTATIC,
+                    //                       "com/baiiu/pluginapplication/TraceUtil",
+                    //                       "onActivityResume", "(Landroid/app/Activity;)V",
+                    //                       false);
+                    //} else if ("onPause".equals(name)) {
+                    //    mv.visitVarInsn(ALOAD, 0);
+                    //    mv.visitMethodInsn(INVOKESTATIC, "com/baiiu/pluginapplication/TraceUtil"
+                    //            , "onActivityPause", "(Landroid/app/Activity;)V", false);
+                    //}
                 }
             }
 
