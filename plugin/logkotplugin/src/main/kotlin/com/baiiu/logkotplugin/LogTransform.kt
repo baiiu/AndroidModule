@@ -118,6 +118,10 @@ class LogTransform : Transform() {
 
     //真正执行jar修改的函数
     private fun transformJarInput(jarInput: JarInput, dest: File?) {
+
+//        println("JarInputName: ${jarInput.file.name}, ${jarInput.file.absolutePath};"
+//                + " dest: ${dest?.name}, ${dest?.absolutePath}")
+
         FileUtils.copyFile(jarInput.file, dest)
     }
 
@@ -188,7 +192,10 @@ class LogTransform : Transform() {
         if (directoryInput.file?.isDirectory == true) {
             val fileTreeWalk = directoryInput.file.walk()
             fileTreeWalk.forEach { file ->
-                var name = file.name
+                val name = file.name
+
+                println("DirectoryInputName: ${file.name}, file is: ${file.absolutePath}")
+
                 //在这里进行代码处理
                 if (name.endsWith(".class") && !name.startsWith("R\$")
                         && "R.class" != name && "BuildConfig.class" != name) {
