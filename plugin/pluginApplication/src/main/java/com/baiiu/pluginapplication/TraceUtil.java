@@ -8,37 +8,35 @@ import android.widget.Toast;
  * time: 2019-12-20
  * description:
  */
+// @formatter:off
 public class TraceUtil {
 
 
     public static void onActivityCreate(Activity activity) {
         Toast.makeText(activity
-                , activity.getClass()
-                               .getName() + "call onCreate"
+                , activity.getClass().getName() + "call onCreate"
                 , Toast.LENGTH_SHORT)
                 .show();
 
-        android.util.Log.e("mLogU", "onActivityCreate");
+        android.util.Log.e("mLogU", activity.getClass().getName() + "onCreate");
     }
 
     public static void onActivityResume(Activity activity) {
         Toast.makeText(activity
-                , activity.getClass()
-                               .getName() + "call onResume"
+                , activity.getClass().getName() + "call onResume"
                 , Toast.LENGTH_SHORT)
                 .show();
 
-        android.util.Log.e("mLogU", "onActivityResume");
+        android.util.Log.e("mLogU", activity.getClass().getName() +"onResume");
     }
 
     public static void onActivityPause(Activity activity) {
         Toast.makeText(activity
-                , activity.getClass()
-                               .getName() + "call onPause"
+                , activity.getClass().getName() + "call onPause"
                 , Toast.LENGTH_SHORT)
                 .show();
 
-        android.util.Log.e("mLogU", "onActivityPause");
+        android.util.Log.e("mLogU", activity.getClass().getName() +"onPause");
     }
 
     public static void onActivityDestroy(Activity activity) {
@@ -48,6 +46,6 @@ public class TraceUtil {
                 , Toast.LENGTH_SHORT)
                 .show();
 
-        android.util.Log.e("mLogU", "onActivityDestroy");
+        android.util.Log.e("mLogU", activity.getClass().getName() +"onDestroy");
     }
 }

@@ -47,7 +47,7 @@ public class LogVisitor extends ClassVisitor {
 
             private boolean isInject() {
                 //如果父类名是AppCompatActivity则拦截这个方法,实际应用中可以换成自己的父类例如BaseActivity
-                if (superName.contains("AppCompatActivity")) {
+                if (superName.contains("Activity")) {
                     return true;
                 }
                 return false;
@@ -74,7 +74,7 @@ public class LogVisitor extends ClassVisitor {
              */
             @Override
             protected void onMethodEnter() {
-                System.out.println("onMethodEnter: " + name);
+                System.out.println("onMethodEnter: " + className + ", " + superName + ", " + name);
 
                 if (isInject()) {
                     if ("onCreate".equals(name)) {

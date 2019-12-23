@@ -1,3 +1,4 @@
+include ':pluginJavaapplication'
 import java.util.function.Consumer
 
 /*
