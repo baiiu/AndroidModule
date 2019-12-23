@@ -74,6 +74,8 @@ public class LogVisitor extends ClassVisitor {
              */
             @Override
             protected void onMethodEnter() {
+                System.out.println("onMethodEnter: " + name);
+
                 if (isInject()) {
                     if ("onCreate".equals(name)) {
                         mv.visitVarInsn(ALOAD, 0);
@@ -85,19 +87,17 @@ public class LogVisitor extends ClassVisitor {
                         mv.visitVarInsn(ALOAD, 0);
                         mv.visitMethodInsn(INVOKESTATIC, "com/baiiu/pluginapplication/TraceUtil"
                                 , "onActivityDestroy", "(Landroid/app/Activity;)V", false);
+                    } else if ("onResume".equals(name)) {
+                        mv.visitVarInsn(ALOAD, 0);
+                        mv.visitMethodInsn(INVOKESTATIC,
+                                           "com/baiiu/pluginapplication/TraceUtil",
+                                           "onActivityResume", "(Landroid/app/Activity;)V",
+                                           false);
+                    } else if ("onPause".equals(name)) {
+                        mv.visitVarInsn(ALOAD, 0);
+                        mv.visitMethodInsn(INVOKESTATIC, "com/baiiu/pluginapplication/TraceUtil"
+                                , "onActivityPause", "(Landroid/app/Activity;)V", false);
                     }
-
-                    //if ("onResume".equals(name)) {
-                    //    mv.visitVarInsn(ALOAD, 0);
-                    //    mv.visitMethodInsn(INVOKESTATIC,
-                    //                       "com/baiiu/pluginapplication/TraceUtil",
-                    //                       "onActivityResume", "(Landroid/app/Activity;)V",
-                    //                       false);
-                    //} else if ("onPause".equals(name)) {
-                    //    mv.visitVarInsn(ALOAD, 0);
-                    //    mv.visitMethodInsn(INVOKESTATIC, "com/baiiu/pluginapplication/TraceUtil"
-                    //            , "onActivityPause", "(Landroid/app/Activity;)V", false);
-                    //}
                 }
             }
 

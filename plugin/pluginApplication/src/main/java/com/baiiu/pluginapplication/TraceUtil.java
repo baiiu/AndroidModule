@@ -14,7 +14,7 @@ public class TraceUtil {
     public static void onActivityCreate(Activity activity) {
         Toast.makeText(activity
                 , activity.getClass()
-                               .getName() + "call onResume"
+                               .getName() + "call onCreate"
                 , Toast.LENGTH_SHORT)
                 .show();
 
@@ -44,7 +44,7 @@ public class TraceUtil {
     public static void onActivityDestroy(Activity activity) {
         Toast.makeText(activity
                 , activity.getClass()
-                               .getName() + "call onResume"
+                               .getName() + "call onDestroy"
                 , Toast.LENGTH_SHORT)
                 .show();
 
