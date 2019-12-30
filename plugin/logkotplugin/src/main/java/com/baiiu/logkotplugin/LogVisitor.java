@@ -86,7 +86,7 @@ public class LogVisitor extends ClassVisitor {
                 if (!className.contains("TraceUtil")) {
                     mv.visitLdcInsn(className);
                     mv.visitLdcInsn(name);
-                    mv.visitLdcInsn(superName);
+                    mv.visitLdcInsn(desc);
                     mv.visitMethodInsn(Opcodes.INVOKESTATIC,
                                        "com/baiiu/pluginapplication/TraceUtil",
                                        "onMethodEnter",
@@ -131,7 +131,7 @@ public class LogVisitor extends ClassVisitor {
                 if (!className.contains("TraceUtil")) {
                     mv.visitLdcInsn(className);
                     mv.visitLdcInsn(name);
-                    mv.visitLdcInsn(superName);
+                    mv.visitLdcInsn(desc);
                     mv.visitMethodInsn(Opcodes.INVOKESTATIC,
                                        "com/baiiu/pluginapplication/TraceUtil",
                                        "onMethodExit",
