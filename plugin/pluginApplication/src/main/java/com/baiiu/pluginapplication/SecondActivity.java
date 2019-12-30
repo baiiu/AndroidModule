@@ -15,5 +15,4 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-
 }

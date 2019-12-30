@@ -11,6 +11,14 @@ import android.widget.Toast;
 // @formatter:off
 public class TraceUtil {
 
+    public static void onMethodEnter(String className,String methodName,String superName) {
+        android.util.Log.e("mLogUUUU","onMethodEnter: " + className +", " + methodName +", " + superName);
+    }
+
+    public static void onMethodExit(String className,String methodName,String superName) {
+        android.util.Log.e("mLogUUUU","onMethodExit: " + className +", " + methodName +", " + superName);
+    }
+
 
     public static void onActivityCreate(Activity activity) {
         Toast.makeText(activity

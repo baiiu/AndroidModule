@@ -74,7 +74,25 @@ public class LogVisitor extends ClassVisitor {
              */
             @Override
             protected void onMethodEnter() {
-                System.out.println("onMethodEnter: " + className + ", " + superName + ", " + name);
+                System.out.println("onMethodEnter: "
+                                           + className
+                                           + ", "
+                                           + superName
+                                           + ", "
+                                           + name
+                                           + ", "
+                                           + desc);
+
+                if (!className.contains("TraceUtil")) {
+                    mv.visitLdcInsn(className);
+                    mv.visitLdcInsn(name);
+                    mv.visitLdcInsn(superName);
+                    mv.visitMethodInsn(Opcodes.INVOKESTATIC,
+                                       "com/baiiu/pluginapplication/TraceUtil",
+                                       "onMethodEnter",
+                                       "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+                                       false);
+                }
 
                 if (isInject()) {
                     if ("onCreate".equals(name)) {
@@ -108,6 +126,19 @@ public class LogVisitor extends ClassVisitor {
             @Override
             protected void onMethodExit(int i) {
                 super.onMethodExit(i);
+                System.out.println("onMethodExit: " + className + ", " + superName + ", " + name);
+
+                if (!className.contains("TraceUtil")) {
+                    mv.visitLdcInsn(className);
+                    mv.visitLdcInsn(name);
+                    mv.visitLdcInsn(superName);
+                    mv.visitMethodInsn(Opcodes.INVOKESTATIC,
+                                       "com/baiiu/pluginapplication/TraceUtil",
+                                       "onMethodExit",
+                                       "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+                                       false);
+                }
+
             }
         };
         return methodVisitor;
