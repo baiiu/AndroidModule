@@ -1,0 +1,42 @@
+{
+  "stringTable": {
+    "0": "/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/.cxx/cmake/debug/x86",
+    "1": "--target=i686-none-linux-android16 --gcc-toolchain=/Users/zhuzhe/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/zhuzhe/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dnative_lib_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/zhuzhe/Library/Android/sdk/ndk/20.1.5948944/build/cmake/android.toolchain.cmake",
+    "/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/src/main/cpp/CMakeLists.txt",
+    "/Users/zhuzhe/Library/Android/sdk/ndk/20.1.5948944/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/zhuzhe/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/.cxx/cmake/debug/x86\" clean"
+  ],
+  "buildTargetsCommand": "/Users/zhuzhe/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/.cxx/cmake/debug/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "native-lib-Debug-x86": {
+      "buildCommand": "/Users/zhuzhe/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/.cxx/cmake/debug/x86\" native-lib",
+      "buildType": "debug",
+      "toolchain": "1806229339",
+      "abi": "x86",
+      "artifactName": "native-lib",
+      "files": [
+        {
+          "src": "/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/src/main/cpp/native-lib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/build/intermediates/cmake/debug/obj/x86/libnative-lib.so"
+    }
+  },
+  "toolchains": {
+    "1806229339": {
+      "cppCompilerExecutable": "/Users/zhuzhe/Library/Android/sdk/ndk/20.1.5948944/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

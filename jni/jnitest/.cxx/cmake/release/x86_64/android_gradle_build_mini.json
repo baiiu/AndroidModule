@@ -1,0 +1,19 @@
+{
+  "buildFiles": [
+    "/Users/zhuzhe/Library/Android/sdk/ndk/20.1.5948944/build/cmake/android.toolchain.cmake",
+    "/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/src/main/cpp/CMakeLists.txt",
+    "/Users/zhuzhe/Library/Android/sdk/ndk/20.1.5948944/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/zhuzhe/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/.cxx/cmake/release/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/Users/zhuzhe/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/.cxx/cmake/release/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "native-lib-Release-x86_64": {
+      "artifactName": "native-lib",
+      "buildCommand": "/Users/zhuzhe/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/.cxx/cmake/release/x86_64\" native-lib",
+      "abi": "x86_64",
+      "output": "/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so"
+    }
+  }
+}
