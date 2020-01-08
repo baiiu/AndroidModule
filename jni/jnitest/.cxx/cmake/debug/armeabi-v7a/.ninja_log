@@ -1,4 +1,7 @@
 # ninja log v5
-0	8	0	clean	700fc2b9a1d2e9b4
-0	391	1578390419	CMakeFiles/native-lib.dir/native-lib.cpp.o	2c552630008f7ce
-392	479	1578390419	/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	84410d03fd6757fe
+0	377	1578390911	CMakeFiles/native-lib.dir/native-lib.cpp.o	2c552630008f7ce
+378	433	1578390911	/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	84410d03fd6757fe
+3	410	1578458010	CMakeFiles/native-lib.dir/native-lib.cpp.o	2c552630008f7ce
+410	478	1578458010	/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	84410d03fd6757fe
+1	388	1578458054	CMakeFiles/native-lib.dir/native-lib.cpp.o	2c552630008f7ce
+389	438	1578458054	/Users/zhuzhe/workmy/AndroidModule/jni/jnitest/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	84410d03fd6757fe

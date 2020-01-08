@@ -9,10 +9,6 @@
   },
   {
     "level": "INFO",
-    "message": "- force flag, will remove stale json folder"
-  },
-  {
-    "level": "INFO",
     "message": "- expected json /Users/zhuzhe/workmy/AndroidModule/jni/jnitest/.cxx/cmake/debug/x86_64/android_gradle_build.json file is not present, will remove stale json folder"
   },
   {
