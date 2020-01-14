@@ -38,23 +38,23 @@ class LogTransform : Transform() {
     }
 
 
-    override fun transform(transformInvocation: TransformInvocation?) {
+    override fun transform(transformInvocation: TransformInvocation) {
         super.transform(transformInvocation)
 
         println("==============================TracePlugin visit start========================================")
 
-        val isIncremental = transformInvocation?.isIncremental
+        val isIncremental = transformInvocation.isIncremental
 
         //OutputProvider管理输出路径，如果消费型输入为空，你会发现OutputProvider == null
-        var outputProvider = transformInvocation?.outputProvider
+        val outputProvider = transformInvocation.outputProvider
 
-        if (isIncremental == false) {
+        if (!isIncremental) {
             //不需要增量编译，先清除全部
             outputProvider?.deleteAll()
         }
 
-        transformInvocation?.inputs?.forEach { input ->
-            input?.jarInputs?.forEach { jarInput ->
+        transformInvocation.inputs.forEach { input ->
+            input.jarInputs.forEach { jarInput ->
                 //处理Jar
                 processJarInput(jarInput, outputProvider, isIncremental)
             }
@@ -68,37 +68,37 @@ class LogTransform : Transform() {
     }
 
     //jar输入文件 修改
-    private fun processJarInput(jarInput: JarInput, outputProvider: TransformOutputProvider?, isIncremental: Boolean?) {
+    private fun processJarInput(jarInput: JarInput, outputProvider: TransformOutputProvider, isIncremental: Boolean) {
 
-        var dest = outputProvider?.getContentLocation(
+        val output = outputProvider.getContentLocation(
                 jarInput.file.absolutePath,
                 jarInput.contentTypes,
                 jarInput.scopes,
                 Format.JAR)
-        if (isIncremental == true) {
+        if (isIncremental) {
             //处理增量编译
-            processJarInputIncremental(jarInput, dest)
+            processJarInputIncremental(jarInput, output)
         } else {
             //不处理增量编译
-            processJarInputNoIncremental(jarInput, dest)
+            processJarInputNoIncremental(jarInput, output)
         }
     }
 
     //jar 没有增量的修改
-    private fun processJarInputNoIncremental(jarInput: JarInput, dest: File?) {
-        transformJarInput(jarInput, dest)
+    private fun processJarInputNoIncremental(jarInput: JarInput, dest: File) {
+        transformJarInput(jarInput.file, dest)
     }
 
 
     //jar 增量的修改
-    private fun processJarInputIncremental(jarInput: JarInput, dest: File?) {
+    private fun processJarInputIncremental(jarInput: JarInput, dest: File) {
         when (jarInput.status) {
             Status.NOTCHANGED -> {
             }
 
             Status.ADDED -> {
                 //真正transform的地方
-                transformJarInput(jarInput, dest)
+                transformJarInput(jarInput.file, dest)
             }
             Status.CHANGED -> {
                 //Changed的状态需要先删除之前的
@@ -106,7 +106,7 @@ class LogTransform : Transform() {
                     FileUtils.forceDelete(dest)
                 }
                 //真正transform的地方
-                transformJarInput(jarInput, dest)
+                transformJarInput(jarInput.file, dest)
             }
             Status.REMOVED ->
                 //移除Removed
@@ -117,12 +117,12 @@ class LogTransform : Transform() {
     }
 
     //真正执行jar修改的函数
-    private fun transformJarInput(jarInput: JarInput, dest: File?) {
+    private fun transformJarInput(input: File, output: File) {
 
 //        println("JarInputName: ${jarInput.file.name}, ${jarInput.file.absolutePath};"
 //                + " dest: ${dest?.name}, ${dest?.absolutePath}")
 
-        FileUtils.copyFile(jarInput.file, dest)
+        FileUtils.copyFile(input, output)
     }
 
 
