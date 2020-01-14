@@ -14,8 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MotionEventCompat;
 
 import com.baiiu.library.LogUtil;
+import java.util.ArrayList;
+import java.util.List;
+import org.greenrobot.eventbus.EventBus;
 
 public class MainActivity extends AppCompatActivity {
+
+    private List<Test> list;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +44,32 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView = new TextView(MainActivity.this);
                 textView.setText(String.valueOf(position));
                 textView.setPadding(0, 50, 0, 50);
-                textView.setBackgroundColor(position % 2 == 0 ? Color.WHITE : Color.parseColor("#22000000"));
+                textView.setBackgroundColor(
+                        position % 2 == 0 ? Color.WHITE : Color.parseColor("#22000000"));
                 return textView;
             }
         });
+
+        list = new ArrayList<>();
+        list.add(new Test1());
+        list.add(new Test1());
+        list.add(new Test2());
+        list.add(new Test3());
+        for (Test test : list) {
+            test.init();
+        }
+
+
+        EventBus.getDefault()
+                .post("1");
+
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        for (Test test : list) {
+            test.destory();
+        }
     }
 
     public void onClick(View view) {

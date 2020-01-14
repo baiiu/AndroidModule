@@ -51,7 +51,7 @@ include(
 // 辅助分析包
 include(
 
-        //        ':lib_component:LogUtil',
+        ':lib_component:LogUtil',
         //        ':lib_component:LogUtilRelease',
         //        ':lib_component:CrashWoodpecker',
         //        ':lib_component:CrashWoodpeckerRelease'
