@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.baiiu.library.LogUtil;
+import com.baiiu.hookapp.startActivity.StartActivityHook;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,15 +13,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            Hook.hook(this);
-        } catch (Exception e) {
-            LogUtil.e("MainActivity#onCreate: " + e.toString());
-        }
 
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                StartActivityHook.hook(MainActivity.this);
+                startActivity(
+                        new Intent(MainActivity.this, SecondActivity.class)
+                );
             }
         });
 

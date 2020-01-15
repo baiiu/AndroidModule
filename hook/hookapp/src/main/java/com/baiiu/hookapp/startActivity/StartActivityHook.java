@@ -1,4 +1,4 @@
-package com.baiiu.hookapp;
+package com.baiiu.hookapp.startActivity;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -15,32 +15,40 @@ import java.lang.reflect.Method;
  * time: 2020-01-15
  * description:
  */
-public class Hook {
+public class StartActivityHook {
 
 
-    static void hook(Activity activity) throws Exception {
-        Class<?> aClass = Class.forName("android.app.ActivityThread");
-
-        Method currentActivityThreadMethod = aClass.getDeclaredMethod("currentActivityThread");
-        currentActivityThreadMethod.setAccessible(true);
-        Object currentActivityThread = currentActivityThreadMethod.invoke(null);
-
-
-        Field mInstrumentationField = aClass.getDeclaredField("mInstrumentation");
-        mInstrumentationField.setAccessible(true);
-        Object mInstrumentation = mInstrumentationField.get(currentActivityThread);
-
-
-        EvilInstrumentation evilInstrumentation = new EvilInstrumentation(mInstrumentation);
-        mInstrumentationField.set(currentActivityThread, evilInstrumentation);
-
+    public static void hook(Activity activity) {
         try {
-            Field field = Activity.class.getDeclaredField("mInstrumentation");
-            field.setAccessible(true);
-            field.set(activity, evilInstrumentation);
+
+            Class<?> aClass = Class.forName("android.app.ActivityThread");
+
+            Method currentActivityThreadMethod = aClass.getDeclaredMethod("currentActivityThread");
+            currentActivityThreadMethod.setAccessible(true);
+            Object currentActivityThread = currentActivityThreadMethod.invoke(null);
+
+
+            Field mInstrumentationField = aClass.getDeclaredField("mInstrumentation");
+            mInstrumentationField.setAccessible(true);
+            Object mInstrumentation = mInstrumentationField.get(currentActivityThread);
+
+
+            EvilInstrumentation evilInstrumentation = new EvilInstrumentation(mInstrumentation);
+            mInstrumentationField.set(currentActivityThread, evilInstrumentation);
+
+
+            try {
+                Field field = Activity.class.getDeclaredField("mInstrumentation");
+                field.setAccessible(true);
+                field.set(activity, evilInstrumentation);
+            } catch (Exception e) {
+                LogUtil.e("HookStartActivity#hook: " + e.toString());
+            }
+
         } catch (Exception e) {
-            LogUtil.e("Hook#hook: " + e.toString());
+            LogUtil.e("HookStartActivity#hook: " + e.toString());
         }
+
     }
 
     private static class EvilInstrumentation extends Instrumentation {
