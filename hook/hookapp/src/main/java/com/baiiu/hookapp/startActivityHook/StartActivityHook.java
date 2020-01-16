@@ -1,4 +1,4 @@
-package com.baiiu.hookapp.startActivity;
+package com.baiiu.hookapp.startActivityHook;
 
 import android.app.Activity;
 import android.app.Instrumentation;
