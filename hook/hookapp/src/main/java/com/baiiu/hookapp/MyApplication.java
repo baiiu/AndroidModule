@@ -9,12 +9,20 @@ import android.content.Context;
  * description:
  */
 public class MyApplication extends Application {
+    private static Context sContext;
 
-    @Override protected void attachBaseContext(Context base) {
+    @Override
+    protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
     }
 
-    @Override public void onCreate() {
+    @Override
+    public void onCreate() {
         super.onCreate();
+        sContext = this;
+    }
+
+    public static Context getContext() {
+        return sContext;
     }
 }

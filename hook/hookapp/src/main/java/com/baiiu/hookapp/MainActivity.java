@@ -1,21 +1,21 @@
 package com.baiiu.hookapp;
 
-import android.app.NotificationManager;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
-import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.baiiu.hookapp.binderHook.BinderHook;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.baiiu.hookapp.binderHook.BinderHook2;
 import com.baiiu.hookapp.startActivityHook.StartActivityHook;
 import com.baiiu.library.LogUtil;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private int a;
+    private final int b = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_startAct:
                 StartActivityHook.hook(MainActivity.this);
@@ -36,16 +37,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 );
                 break;
             case R.id.btn_clipboard:
-                BinderHook.hook();
+                BinderHook2.hook();
 
                 ClipboardManager clipboardManager =
                         (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 LogUtil.e("btn_clipboard: " +
-                          clipboardManager +
-                          ", " +
-                          clipboardManager.getPrimaryClip()
-                          + "， "
-                          + clipboardManager.hasPrimaryClip());
+                        clipboardManager +
+                        ", " +
+                        clipboardManager.getPrimaryClip()
+                        + "， "
+                        + clipboardManager.hasPrimaryClip());
 
 
                 break;
