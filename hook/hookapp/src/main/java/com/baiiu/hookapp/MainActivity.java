@@ -3,12 +3,15 @@ package com.baiiu.hookapp;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.baiiu.hookapp.msHook.AMSHook;
 import com.baiiu.hookapp.binderHook.BinderHook2;
+import com.baiiu.hookapp.msHook.PMSHook;
 import com.baiiu.hookapp.startActivityHook.StartActivityHook;
 import com.baiiu.library.LogUtil;
 
@@ -24,7 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.btn_startAct).setOnClickListener(this);
         findViewById(R.id.btn_clipboard).setOnClickListener(this);
+        findViewById(R.id.btn_pmshook).setOnClickListener(this);
 
+        AMSHook.hook();
     }
 
     @Override
@@ -47,8 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         clipboardManager.getPrimaryClip()
                         + "， "
                         + clipboardManager.hasPrimaryClip());
-
-
+                break;
+            case R.id.btn_pmshook:
+                PMSHook.hook(this);
+                LogUtil.e(MyApplication.getContext() + ", " + this);
+                LogUtil.e(MyApplication.getContext().getPackageManager() + ", " + this.getPackageManager());
+                getPackageManager().getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
                 break;
         }
     }
