@@ -1,5 +1,6 @@
 package com.baiiu.hookapp.startStubActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.baiiu.hookapp.R;
  * time: 2020-01-17
  * description:
  */
+@SuppressLint("Registered")
 public class TargetActivity extends AppCompatActivity {
 
     @Override
