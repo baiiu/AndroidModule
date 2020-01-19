@@ -38,10 +38,18 @@
         android:text="btn_pmshook" />
 
     <Button
-        android:id="@+id/btn_startSubAct"
+        android:id="@+id/btn_startStubActInDex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="btn_startSubAct" />
+        android:text="btn_startStubActInDex" />
+
+    <Button
+        android:id="@+id/btn_startStubActOtherDex_hook_pathClassLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="btn_startStubActOtherDex_hook_pathClassLoader" />
+
 
 </LinearLayout>

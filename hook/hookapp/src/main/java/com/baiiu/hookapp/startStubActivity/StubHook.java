@@ -21,6 +21,9 @@ import java.util.List;
  */
 public class StubHook {
 
+    /**
+     * 打开未在manifest文件中注册的本dex下的activity
+     */
     public static void hook() {
 
         // 1. hook 发送端

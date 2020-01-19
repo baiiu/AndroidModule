@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.baiiu.hookapp.classLoaderHook.PathClassLoaderHook;
 import com.baiiu.hookapp.msHook.AMSHook;
 import com.baiiu.hookapp.binderHook.BinderHook2;
 import com.baiiu.hookapp.msHook.PMSHook;
@@ -16,6 +17,9 @@ import com.baiiu.hookapp.startActivityHook.StartActivityHook;
 import com.baiiu.hookapp.startStubActivity.StubHook;
 import com.baiiu.hookapp.startStubActivity.TargetActivity;
 import com.baiiu.library.LogUtil;
+
+import static com.baiiu.hookapp.classLoaderHook.PathClassLoaderHook.NAME_CLASS;
+import static com.baiiu.hookapp.classLoaderHook.PathClassLoaderHook.NAME_PACKAGE;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_startAct).setOnClickListener(this);
         findViewById(R.id.btn_clipboard).setOnClickListener(this);
         findViewById(R.id.btn_pmshook).setOnClickListener(this);
-        findViewById(R.id.btn_startSubAct).setOnClickListener(this);
+        findViewById(R.id.btn_startStubActInDex).setOnClickListener(this);
+        findViewById(R.id.btn_startStubActOtherDex_hook_pathClassLoader).setOnClickListener(this);
 
 
     }
@@ -65,9 +70,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 LogUtil.e(MyApplication.getContext().getPackageManager() + ", " + this.getPackageManager());
                 getPackageManager().getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
                 break;
-            case R.id.btn_startSubAct:
+            case R.id.btn_startStubActInDex:
+                // 打开未在manifest文件中注册的本dex下的activity
                 StubHook.hook();
                 startActivity(new Intent(this, TargetActivity.class));
+                break;
+            case R.id.btn_startStubActOtherDex_hook_pathClassLoader:
+                // hookPathClassLoader打开别的dex下的activity
+                PathClassLoaderHook.hook();
+                startActivity(new Intent().setClassName(NAME_PACKAGE, NAME_CLASS));
                 break;
         }
     }
