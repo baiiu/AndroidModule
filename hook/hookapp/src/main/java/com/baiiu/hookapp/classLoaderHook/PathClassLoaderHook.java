@@ -25,16 +25,15 @@ import java.util.List;
 import dalvik.system.DexClassLoader;
 import dalvik.system.DexFile;
 
+import static com.baiiu.hookapp.classLoaderHook.Util.NAME_CLASS;
+import static com.baiiu.hookapp.classLoaderHook.Util.NAME_PACKAGE;
+
 /**
  * author: zhuzhe
  * time: 2020-01-19
  * description:
  */
 public class PathClassLoaderHook {
-    public static final String NAME_PACKAGE = "com.baiiu.zhihudaily";
-    public static final String NAME_CLASS = "com.baiiu.zhihudaily.NewsListActivity";
-
-
     private static boolean isAMSHooked = false;
 
     /**
