@@ -4,10 +4,13 @@ import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 
+import com.baiiu.hookapp.MyApplication;
 import com.baiiu.library.LogUtil;
 
 import java.io.File;
@@ -37,6 +40,7 @@ public class CreateClassLoaderHook {
             1. hook classLoader，让mInstrumentation.newActivity()的classLoader里找到目标act
          */
         hookLoadedApk();
+        hookPM();
 
         /*
             2. hook amn，让ams走过权限校验
@@ -78,7 +82,6 @@ public class CreateClassLoaderHook {
             Field mClassLoaderField = loadedApk.getClass().getDeclaredField("mClassLoader");
             mClassLoaderField.setAccessible(true);
             mClassLoaderField.set(loadedApk, classLoader);
-
             sLoadedApk.put(sApplicationInfo.packageName, loadedApk);
             mPackages.put(sApplicationInfo.packageName, new WeakReference(loadedApk));
 
@@ -110,7 +113,50 @@ public class CreateClassLoaderHook {
         String apkPath = apkFile.getPath();
         applicationInfo.sourceDir = apkPath;
         applicationInfo.publicSourceDir = apkPath;
+        Field credentialProtectedDataDir = ApplicationInfo.class.getDeclaredField("credentialProtectedDataDir");
+        credentialProtectedDataDir.setAccessible(true);
+        credentialProtectedDataDir.set(applicationInfo, "/data/user/0/" + applicationInfo.packageName);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            applicationInfo.deviceProtectedDataDir = "/data/user_de/0/" + applicationInfo.packageName;
+        }
+        applicationInfo.dataDir = "/data/user/0/" + applicationInfo.packageName;
+
         return applicationInfo;
+    }
+
+    private static void hookPM() {
+        try {
+            Class<?> activityThread = Class.forName("android.app.ActivityThread");
+            Method currentActivityThreadM = activityThread.getDeclaredMethod("currentActivityThread");
+            Object currentActivityThread = currentActivityThreadM.invoke(null);
+
+            Field sPackageManager = activityThread.getDeclaredField("sPackageManager");
+            sPackageManager.setAccessible(true);
+            final Object rawPackageManager = sPackageManager.get(currentActivityThread);
+
+            Object proxyPackgeManager = Proxy.newProxyInstance(IBinder.class.getClassLoader(), new Class[]{Class.forName("android.content.pm.IPackageManager")}, new InvocationHandler() {
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+                    if ("getPackageInfo".equals(method.getName()) && args[0].equals(NAME_PACKAGE)) {
+                        LogUtil.e("CreateClassLoaderHook#hookPM: " + method + args);
+                        PackageInfo packageInfo = new PackageInfo();
+                        packageInfo.applicationInfo = sApplicationInfo;
+                        packageInfo.packageName = NAME_PACKAGE;
+
+                        return packageInfo;
+                    }
+
+                    return method.invoke(rawPackageManager, args);
+                }
+            });
+
+            sPackageManager.set(currentActivityThread, proxyPackgeManager);
+        } catch (Exception e) {
+            LogUtil.e("CreateClassLoaderHook#hookPM: " + e);
+        }
+
     }
 
     private static boolean isAMSHooked = false;
