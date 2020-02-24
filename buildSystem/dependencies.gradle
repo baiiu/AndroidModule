@@ -56,7 +56,9 @@ ext {
             lifecycleProcessor: "androidx.lifecycle:lifecycle-compiler:2.0.0",
             legacy            : "androidx.legacy:legacy-support-v4:1.0.0",
             room              : "androidx.room:room-runtime:2.1.0",
-            roomProcessor     : "androidx.room:room-compiler:2.1.0"]
+            roomProcessor     : "androidx.room:room-compiler:2.1.0"
+
+    ]
 
     rx = [
 
