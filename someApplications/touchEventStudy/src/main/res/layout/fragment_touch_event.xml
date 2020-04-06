@@ -3,19 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <com.baiiu.toucheventstudy.touchEvent.MyView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:background="#66123456"
         android:gravity="center"
+        android:hardwareAccelerated="false"
         android:text="Test"
         android:textSize="26sp"
-        tools:ignore="HardcodedText"
-        />
+        tools:ignore="HardcodedText" />
+
+
+    <com.baiiu.toucheventstudy.touchEvent.MyView3
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="50dp"
+        android:background="#55123456"
+        android:gravity="center"
+        android:hardwareAccelerated="false"
+        android:text="Test"
+        android:textSize="26sp"
+        tools:ignore="HardcodedText" />
+
+
+    <com.baiiu.toucheventstudy.touchEvent.MyView2
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="#22123456"
+        android:gravity="center"
+        android:hardwareAccelerated="false"
+        android:text="Test"
+        android:textSize="26sp"
+        tools:ignore="HardcodedText" />
 
 </com.baiiu.toucheventstudy.touchEvent.MyViewGroup>

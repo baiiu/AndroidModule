@@ -1,5 +1,10 @@
 package com.baiiu.toucheventstudy.touchEvent;
 
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.Nullable;
+
 import com.baiiu.toucheventstudy.R;
 import com.baiiu.toucheventstudy.base.BaseFragment;
 
@@ -9,11 +14,13 @@ import com.baiiu.toucheventstudy.base.BaseFragment;
  * description:
  */
 public class TouchEventFragment extends BaseFragment {
-    @Override protected int provideLayoutId() {
+
+    @Override
+    protected int provideLayoutId() {
         return R.layout.fragment_touch_event;
     }
 
-    @Override protected void initOnCreateView() {
-
+    @Override
+    protected void initOnCreateView() {
     }
 }
