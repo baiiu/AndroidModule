@@ -1,4 +1,4 @@
-package com.baiiu.workhard;
+package com.baiiu.workhard.eventbus;
 
 /**
  * author: zhuzhe

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.baiiu.library.LogUtil;
-import com.baiiu.toucheventstudy.touchEvent.TouchEventFragment;
+import com.baiiu.toucheventstudy.viewDragHelper.ViewDragHelperFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
                 //new SimpleBehaviorFragment()
                 //new ListScrollFragment()
-                //new ViewDragHelperFragment()
+                new ViewDragHelperFragment()
 
-                new TouchEventFragment()
 
                 ;
     }

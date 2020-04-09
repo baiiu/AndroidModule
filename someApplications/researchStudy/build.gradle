@@ -7,7 +7,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion as String
 
     defaultConfig {
-        applicationId "com.baiiu.myapplication"
+        applicationId "com.baiiu.workhard"
         minSdkVersion rootProject.ext.minSdkVersion as int
         targetSdkVersion rootProject.ext.targetSdkVersion as int
         versionCode 1

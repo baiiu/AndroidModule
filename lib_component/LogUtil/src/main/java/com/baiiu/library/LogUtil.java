@@ -8,6 +8,7 @@ import com.baiiu.library.klog.BaseLog;
 import com.baiiu.library.klog.FileLog;
 import com.baiiu.library.klog.JsonLog;
 import com.baiiu.library.klog.XmlLog;
+
 import java.io.File;
 
 /**
@@ -21,12 +22,12 @@ import java.io.File;
  * </ol>
  *
  * @author zhaokaiqiang
- *         github https://github.com/ZhaoKaiQiang/KLog
- *         15/11/17 扩展功能，添加对文件的支持
- *         15/11/18 扩展功能，增加对XML的支持，修复BUG
- *         15/12/8  扩展功能，添加对任意参数的支持
- *         15/12/11 扩展功能，增加对无限长字符串支持
- *         16/6/13  扩展功能，添加对自定义全局Tag的支持
+ * github https://github.com/ZhaoKaiQiang/KLog
+ * 15/11/17 扩展功能，添加对文件的支持
+ * 15/11/18 扩展功能，增加对XML的支持，修复BUG
+ * 15/12/8  扩展功能，添加对任意参数的支持
+ * 15/12/11 扩展功能，增加对无限长字符串支持
+ * 16/6/13  扩展功能，添加对自定义全局Tag的支持
  */
 public class LogUtil {
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
@@ -49,8 +50,9 @@ public class LogUtil {
     public static final int JSON = 0x7;
     public static final int XML = 0x8;
 
-    @IntDef({ V, D, I, W, E, WTF, JSON, XML })
-    public @interface LogType {}
+    @IntDef({V, D, I, W, E, WTF, JSON, XML})
+    public @interface LogType {
+    }
 
     private static final int STACK_TRACE_INDEX = 6;
 
@@ -218,7 +220,7 @@ public class LogUtil {
     }
 
     /**
-     * @param tagStr TAG标签
+     * @param tagStr  TAG标签
      * @param objects 要打印的值
      */
     private static String[] wrapperContent(String tagStr, Object... objects) {
@@ -251,7 +253,7 @@ public class LogUtil {
         String msg = (objects == null) ? NULL_TIPS : getObjectsString(objects);
         String headString = "[ (" + className + ":" + lineNumber + ")#" + methodNameShort + " ] ";
 
-        return new String[] { tag, msg, headString };
+        return new String[]{tag, msg, headString};
     }
 
     private static String getObjectsString(Object... objects) {

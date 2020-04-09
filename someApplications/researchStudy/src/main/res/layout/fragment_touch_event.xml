@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.baiiu.toucheventstudy.touchEvent.MyViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+<com.baiiu.workhard.touchEvent.MyViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
-    <com.baiiu.toucheventstudy.touchEvent.MyView
+    <com.baiiu.workhard.touchEvent.MyView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
@@ -18,7 +18,7 @@
         tools:ignore="HardcodedText" />
 
 
-    <com.baiiu.toucheventstudy.touchEvent.MyView3
+    <com.baiiu.workhard.touchEvent.MyView3
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
@@ -31,7 +31,7 @@
         tools:ignore="HardcodedText" />
 
 
-    <com.baiiu.toucheventstudy.touchEvent.MyView2
+    <com.baiiu.workhard.touchEvent.MyView2
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="bottom|center_horizontal"
@@ -42,4 +42,4 @@
         android:textSize="26sp"
         tools:ignore="HardcodedText" />
 
-</com.baiiu.toucheventstudy.touchEvent.MyViewGroup>
+</com.baiiu.workhard.touchEvent.MyViewGroup>

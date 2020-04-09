@@ -1,12 +1,7 @@
-package com.baiiu.toucheventstudy.touchEvent;
+package com.baiiu.workhard.touchEvent;
 
-import android.os.Bundle;
-import android.view.View;
-
-import androidx.annotation.Nullable;
-
-import com.baiiu.toucheventstudy.R;
-import com.baiiu.toucheventstudy.base.BaseFragment;
+import com.baiiu.workhard.R;
+import com.baiiu.workhard.base.BaseFragment;
 
 /**
  * author: baiiu

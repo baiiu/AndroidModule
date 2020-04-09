@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId "com.baiiu.toucheventstudy"
-        minSdkVersion 19
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSdkVersion as int
+        targetSdkVersion rootProject.ext.targetSdkVersion as int
         versionCode 1
         versionName "1.0"
     }

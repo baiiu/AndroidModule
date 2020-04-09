@@ -1,18 +1,14 @@
-package com.baiiu.toucheventstudy.touchEvent;
+package com.baiiu.workhard.touchEvent;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.baiiu.library.LogUtil;
-
-import java.lang.reflect.Method;
 
 /**
  * author: baiiu

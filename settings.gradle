@@ -43,8 +43,8 @@ include(
         //        ':someApplications:PerformanceApp',
         //        ':someApplications:MyApplication',
         //        ":someApplications:ptr-lib",
-        ":someApplications:touchEventStudy",
-        //        ":someApplications:InterestingStudy",
+        //        ":someApplications:touchEventStudy",
+        ':someApplications:researchStudy',
 
 )
 
