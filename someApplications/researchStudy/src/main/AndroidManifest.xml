@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".BActivity" />
+
+        <service android:name=".anr.ANRService" />
     </application>
 
 </manifest>

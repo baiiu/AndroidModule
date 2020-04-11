@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.baiiu.library.LogUtil
+import com.baiiu.workhard.anr.ANRFragment
+import com.baiiu.workhard.referenceQueue.TestReferenceQueue
 import com.baiiu.workhard.touchEvent.TouchEventFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  * time: 2020-04-09
  * description:
  */
-class MainActivity : AppCompatActivity(R.layout.activity_main), View.OnClickListener {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,23 +29,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), View.OnClickList
                     .commit()
         }
 
+        TestReferenceQueue().test()
 
-        button.setOnClickListener(this)
     }
 
     private fun getFragment(): Fragment? {
 //        return TouchEventFragment()
-        return null
+        return ANRFragment()
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.button -> {
-                startActivity(Intent(this, BActivity::class.java))
-                LogUtil.d(BActivity.TAG, "aaaaaaaaaaa")
-            }
-        }
-    }
 
     override fun onPause() {
         super.onPause()
