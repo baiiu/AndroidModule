@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun getFragment(): Fragment? {
-//        return TouchEventFragment()
-        return ANRFragment()
+        return TouchEventFragment()
+//        return ANRFragment()
     }
 
 

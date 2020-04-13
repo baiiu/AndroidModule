@@ -12,9 +12,14 @@ public class GarbageObject {
 
     @Override
     protected void finalize() throws Throwable {
-        super.finalize();
-        LogUtil.d(TestReferenceQueue.TAG, "GarbageObject: finalize:" + this.toString());
 
-//        TestReferenceQueue.sGarbageObject = this;
+        LogUtil.d(TestReferenceQueue.TAG, "GarbageObject: finalize111:" + this.toString());
+
+        super.finalize();
+
+        LogUtil.d(TestReferenceQueue.TAG, "GarbageObject: finalize222:" + this.toString());
+
+        TestReferenceQueue.sGarbageObject = this;
+//        TestReferenceQueue.sGarbageObject = null;
     }
 }
