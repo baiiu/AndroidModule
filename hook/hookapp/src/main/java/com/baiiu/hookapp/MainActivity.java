@@ -10,29 +10,28 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.baiiu.hookapp.binderHook.BinderHook2;
-import com.baiiu.hookapp.classLoaderHook.CreateClassLoaderHook;
-import com.baiiu.hookapp.classLoaderHook.PathClassLoaderHook;
+import com.baiiu.hookapp.loadedApkHook.CreateClassLoaderHook;
 import com.baiiu.hookapp.msHook.AMSHook;
 import com.baiiu.hookapp.msHook.PMSHook;
+import com.baiiu.hookapp.pathClassLoaderHook.PathClassLoaderHook;
+import com.baiiu.hookapp.pathClassLoaderHook2.PathClassLoaderHook2;
 import com.baiiu.hookapp.startActivityHook.StartActivityHook;
 import com.baiiu.hookapp.startStubActivity.StubHook;
 import com.baiiu.hookapp.startStubActivity.TargetActivity;
 import com.baiiu.library.LogUtil;
 
-import static com.baiiu.hookapp.classLoaderHook.Util.NAME_CLASS;
-import static com.baiiu.hookapp.classLoaderHook.Util.NAME_PACKAGE;
+import static com.baiiu.hookapp.loadedApkHook.Util.NAME_CLASS;
+import static com.baiiu.hookapp.loadedApkHook.Util.NAME_PACKAGE;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private int a;
-    private final int b = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        String string = getResources().getString(R.string.app_name);
+        LogUtil.d("MainActivity#onCreate");
+
+        setContentView(R.layout.activity_main);
 
         findViewById(R.id.btn_startAct).setOnClickListener(this);
         findViewById(R.id.btn_clipboard).setOnClickListener(this);
@@ -80,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_startStubActOtherDex_hook_pathClassLoader:
                 // hookPathClassLoader打开别的dex下的activity
                 PathClassLoaderHook.hook();
+
                 startActivity(new Intent().setClassName(NAME_PACKAGE, NAME_CLASS));
                 break;
             case R.id.btn_startStubActOtherDex_hook_loadedApk:

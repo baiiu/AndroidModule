@@ -34,6 +34,7 @@ class CountBitmap {
         LogUtil.e("count: ${scaledWidth * scaledHeight * 4}")
     }
 
+    // 565加载，没卵用
     fun use565(context: Context) {
         val opts: BitmapFactory.Options = BitmapFactory.Options()
         val inTargetDensity: Int = context.resources.displayMetrics.densityDpi
@@ -59,6 +60,7 @@ class CountBitmap {
         LogUtil.e("hasAlpha: ${bitmap.hasAlpha()}")
     }
 
+    // 一张 480*300 的png图片放在assets下，用RGB_8888加载，占用的内存大小计算
     fun fromAssets(context: Context) {
         val bitmap = BitmapFactory.decodeStream(context.assets.open("test.png"))
         LogUtil.e("allocationByteCount: ${bitmap.allocationByteCount}")
