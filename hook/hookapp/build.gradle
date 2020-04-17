@@ -26,4 +26,5 @@ dependencies {
     implementation rootProject.ext.support.appcompat
 
     implementation project(":lib_component:LogUtil")
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }

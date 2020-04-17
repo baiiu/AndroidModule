@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_startStubActOtherDex_hook_pathClassLoader:
                 // hookPathClassLoader打开别的dex下的activity
-                PathClassLoaderHook.hook();
+                PathClassLoaderHook2.hook();
 
                 startActivity(new Intent().setClassName(NAME_PACKAGE, NAME_CLASS));
                 break;

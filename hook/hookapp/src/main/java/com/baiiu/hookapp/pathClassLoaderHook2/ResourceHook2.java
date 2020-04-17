@@ -3,6 +3,7 @@ package com.baiiu.hookapp.pathClassLoaderHook2;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.os.Build;
 
 import com.baiiu.library.LogUtil;
@@ -132,6 +133,24 @@ class ResourceHook2 {
         newPaths[newPaths.length - 1] = newPath;
 
         return newPaths;
+    }
+
+    static Resources hook2(Context context, File apk) {
+        Resources hostResources = context.getResources();
+
+        try {
+            Method addAssetPath = AssetManager.class.getDeclaredMethod("addAssetPath", String.class);
+            addAssetPath.setAccessible(true);
+            AssetManager newAssetManager = AssetManager.class.getDeclaredConstructor().newInstance();
+            addAssetPath.invoke(newAssetManager, apk.getAbsolutePath());
+
+            return new Resources(newAssetManager, hostResources.getDisplayMetrics(), hostResources.getConfiguration());
+
+        } catch (Exception e) {
+            LogUtil.e("ResourceHook#hook2: " + e.toString());
+        }
+
+        return hostResources;
     }
 
 

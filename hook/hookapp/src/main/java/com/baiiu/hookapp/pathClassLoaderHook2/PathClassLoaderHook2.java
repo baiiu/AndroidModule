@@ -1,16 +1,27 @@
 package com.baiiu.hookapp.pathClassLoaderHook2;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Instrumentation;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.PersistableBundle;
+import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.baiiu.hookapp.MainActivity;
 import com.baiiu.hookapp.MyApplication;
+import com.baiiu.hookapp.R;
 import com.baiiu.library.LogUtil;
 
 import java.io.File;
@@ -38,6 +49,7 @@ import static com.baiiu.hookapp.loadedApkHook.Util.NAME_PACKAGE;
  */
 public class PathClassLoaderHook2 {
     private static boolean isAMSHooked = false;
+    private static File sApkFile;
 
     /**
      * hook PathClassLoader打开别的dex下的activity
@@ -76,8 +88,8 @@ public class PathClassLoaderHook2 {
             LogUtil.d("dexElements: " + dexElements);
 
             // 构造elements
-            File apkFile = copyFromAssets("app-debug.apk");
-            List<File> list = extractAPK(apkFile);
+            sApkFile = copyFromAssets("app-debug.apk");
+            List<File> list = extractAPK(sApkFile);
 //            ResourceHook2.hook(MyApplication.getContext(), apkFile); // 资源hook
 
             Method makeDexElements = Class.forName("dalvik.system.DexPathList").getDeclaredMethod("makeDexElements", List.class, File.class, List.class, ClassLoader.class);
@@ -232,8 +244,88 @@ public class PathClassLoaderHook2 {
 
             intent.setClassName(NAME_PACKAGE, NAME_CLASS);
             return mBase.newActivity(cl, NAME_CLASS, intent);
+
         }
 
+        @Override
+        public void callActivityOnCreate(Activity activity, Bundle icicle) {
+            injectActivity(activity);
+            mBase.callActivityOnCreate(activity, icicle);
+        }
+
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public void callActivityOnCreate(Activity activity, Bundle icicle, PersistableBundle persistentState) {
+            injectActivity(activity);
+            mBase.callActivityOnCreate(activity, icicle, persistentState);
+        }
+
+        private void injectActivity(Activity activity) {
+            try {
+                android.util.Log.d("mLogU", "before hook===============");
+                android.util.Log.d("mLogU", "decor_content_parent:" + Integer.toHexString(androidx.appcompat.R.id.decor_content_parent) + "，" + activity.getResources().getResourceEntryName(androidx.appcompat.R.id.decor_content_parent));
+                android.util.Log.d("mLogU", "app_name:" + +R.string.app_name + "， " + activity.getString(R.string.app_name));
+                android.util.Log.d("mLogU", "getText:" + activity.getResources().getText(0x7f0c0026));
+                android.util.Log.d("mLogU", "===============before hook");
+            } catch (Exception e) {
+                android.util.Log.d("mLogU", "before hook error:: " + e.toString());
+            }
+
+
+            try {
+                Resources resources = ResourceHook2.hook2(activity, sApkFile);
+
+                Field mResources = AppCompatActivity.class.getDeclaredField("mResources");
+                mResources.setAccessible(true);
+                mResources.set(activity, resources);
+
+                try {
+                    android.util.Log.d("mLogU", "after hook===============");
+                    android.util.Log.d("mLogU", "decor_content_parent:" + Integer.toHexString(androidx.appcompat.R.id.decor_content_parent) + "，" + resources.getResourceEntryName(androidx.appcompat.R.id.decor_content_parent));
+                    android.util.Log.d("mLogU", "app_name:" + R.string.app_name + "， " + resources.getString(R.string.app_name));
+                    android.util.Log.d("mLogU", "getText:" + resources.getText(0x7f0c0026));
+                    android.util.Log.d("mLogU", "===============after hook");
+                } catch (Exception e) {
+                    android.util.Log.d("mLogU", "after hook error: " + e.toString());
+                }
+
+                Field mBase = ContextWrapper.class.getDeclaredField("mBase");
+                mBase.setAccessible(true);
+
+                Context origin = (Context) mBase.get(activity);
+                VContext vContext = new VContext(origin, resources);
+                mBase.set(activity, vContext);
+
+            } catch (Exception e) {
+                LogUtil.e("PathClassLoaderHook2#VInstrumentation: " + e.toString());
+            }
+        }
+    }
+
+    private static class VContext extends ContextWrapper {
+        private final Resources resources;
+
+        public VContext(Context base, Resources resources) {
+            super(base);
+            this.resources = resources;
+        }
+
+        @Override
+        public Resources getResources() {
+            return resources;
+        }
+
+        @Override
+        public AssetManager getAssets() {
+            return resources.getAssets();
+        }
+
+//        @Override
+//        public Resources.Theme getTheme() {
+//            Resources.Theme theme = this.resources.newTheme();
+//            theme.setTo(super.getTheme());
+//            return theme;
+//        }
     }
 
 
