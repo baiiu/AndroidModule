@@ -135,7 +135,12 @@ class ResourceHook2 {
         return newPaths;
     }
 
+    private static Resources sResources;
+
     static Resources hook2(Context context, File apk) {
+        if (sResources != null) {
+            return sResources;
+        }
         Resources hostResources = context.getResources();
 
         try {
@@ -144,7 +149,9 @@ class ResourceHook2 {
             AssetManager newAssetManager = AssetManager.class.getDeclaredConstructor().newInstance();
             addAssetPath.invoke(newAssetManager, apk.getAbsolutePath());
 
-            return new Resources(newAssetManager, hostResources.getDisplayMetrics(), hostResources.getConfiguration());
+            sResources = new Resources(newAssetManager, hostResources.getDisplayMetrics(), hostResources.getConfiguration());
+
+            return sResources;
 
         } catch (Exception e) {
             LogUtil.e("ResourceHook#hook2: " + e.toString());

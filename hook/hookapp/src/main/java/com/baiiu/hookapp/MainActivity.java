@@ -1,5 +1,6 @@
 package com.baiiu.hookapp;
 
+import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +24,7 @@ import com.baiiu.library.LogUtil;
 import static com.baiiu.hookapp.loadedApkHook.Util.NAME_CLASS;
 import static com.baiiu.hookapp.loadedApkHook.Util.NAME_PACKAGE;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_startStubActOtherDex_hook_pathClassLoader:
                 // hookPathClassLoader打开别的dex下的activity
+
+                /*
+                    合并资源方案，资源冲突覆盖
+                 */
+//                PathClassLoaderHook.hook();
+
+                /*
+                 *  单个资源方案，目前只能加载 插件非AppCompat Theme的apk
+                 */
                 PathClassLoaderHook2.hook();
 
                 startActivity(new Intent().setClassName(NAME_PACKAGE, NAME_CLASS));

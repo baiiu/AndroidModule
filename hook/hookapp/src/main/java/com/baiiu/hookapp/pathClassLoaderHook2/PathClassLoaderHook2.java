@@ -7,6 +7,7 @@ import android.app.Instrumentation;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Build;
@@ -18,6 +19,7 @@ import android.os.PersistableBundle;
 import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.baiiu.hookapp.MainActivity;
 import com.baiiu.hookapp.MyApplication;
@@ -34,6 +36,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -235,16 +238,22 @@ public class PathClassLoaderHook2 {
         }
 
         @Override
+        public boolean onException(Object obj, Throwable e) {
+            LogUtil.d("VInstrumentation#onException: " + obj + ", " + e.toString());
+            return false;
+        }
+
+        @Override
         public Activity newActivity(ClassLoader cl, String className, Intent intent) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
             if (!intent.getComponent().getClassName().equals("com.baiiu.hookapp.StubActivity")) {
                 return mBase.newActivity(cl, className, intent);
             }
 
-            LogUtil.d("PathClassLoaderHook2#VInstrumentation: " + className + ", " + intent);
+            LogUtil.d("VInstrumentation#newActivity: " + className + ", " + intent);
 
             intent.setClassName(NAME_PACKAGE, NAME_CLASS);
-            return mBase.newActivity(cl, NAME_CLASS, intent);
 
+            return mBase.newActivity(cl, NAME_CLASS, intent);
         }
 
         @Override
@@ -275,39 +284,78 @@ public class PathClassLoaderHook2 {
             try {
                 Resources resources = ResourceHook2.hook2(activity, sApkFile);
 
-                Field mResources = AppCompatActivity.class.getDeclaredField("mResources");
-                mResources.setAccessible(true);
-                mResources.set(activity, resources);
+
+                Class<?> aClass = activity.getClass();
+                while (aClass != null) {
+                    try {
+                        android.util.Log.d("mLogU", aClass.getName());
+                        Field mResources = aClass.getDeclaredField("mResources");
+                        mResources.setAccessible(true);
+                        mResources.set(activity, resources);
+
+                    } catch (Exception e) {
+                        android.util.Log.d("mLogU", "22222222222: " + e.toString());
+                    }
+
+                    aClass = aClass.getSuperclass();
+                }
+
+
+                Field mBase = ContextWrapper.class.getDeclaredField("mBase");
+                mBase.setAccessible(true);
+
+                Context origin = activity.getBaseContext();
+                Field contextImplResource = origin.getClass().getDeclaredField("mResources");
+                contextImplResource.setAccessible(true);
+                contextImplResource.set(origin, resources);
+
+
+                Object mPackage = PathClassLoaderHook2.getPackageInfo(sApkFile);
+                Field applicationInfoF = mPackage.getClass().getDeclaredField("applicationInfo");
+                applicationInfoF.setAccessible(true);
+                ApplicationInfo mApplicationInfo = (ApplicationInfo) applicationInfoF.get(mPackage);
+
+
+                VContext vContext = new VContext(activity.getBaseContext(), resources, mApplicationInfo);
+                mBase.set(activity, vContext);
+
+                activity.setTheme(mApplicationInfo.theme);
 
                 try {
                     android.util.Log.d("mLogU", "after hook===============");
                     android.util.Log.d("mLogU", "decor_content_parent:" + Integer.toHexString(androidx.appcompat.R.id.decor_content_parent) + "，" + resources.getResourceEntryName(androidx.appcompat.R.id.decor_content_parent));
                     android.util.Log.d("mLogU", "app_name:" + R.string.app_name + "， " + resources.getString(R.string.app_name));
                     android.util.Log.d("mLogU", "getText:" + resources.getText(0x7f0c0026));
+                    android.util.Log.d("mLogU", "getText:" + activity.getText(0x7f0c0026));
                     android.util.Log.d("mLogU", "===============after hook");
                 } catch (Exception e) {
                     android.util.Log.d("mLogU", "after hook error: " + e.toString());
                 }
 
-                Field mBase = ContextWrapper.class.getDeclaredField("mBase");
-                mBase.setAccessible(true);
-
-                Context origin = (Context) mBase.get(activity);
-                VContext vContext = new VContext(origin, resources);
-                mBase.set(activity, vContext);
-
             } catch (Exception e) {
-                LogUtil.e("PathClassLoaderHook2#VInstrumentation: " + e.toString());
+                LogUtil.e("VInstrumentation#injectActivity: " + e.toString());
             }
         }
     }
 
     private static class VContext extends ContextWrapper {
         private final Resources resources;
+        private final ApplicationInfo mApplicationInfo;
 
-        public VContext(Context base, Resources resources) {
+        public VContext(Context base, Resources resources, ApplicationInfo applicationInfo) {
             super(base);
             this.resources = resources;
+            this.mApplicationInfo = applicationInfo;
+        }
+
+        @Override
+        public Context getBaseContext() {
+            return super.getBaseContext();
+        }
+
+        @Override
+        public ApplicationInfo getApplicationInfo() {
+            return mApplicationInfo;
         }
 
         @Override
@@ -320,12 +368,24 @@ public class PathClassLoaderHook2 {
             return resources.getAssets();
         }
 
-//        @Override
-//        public Resources.Theme getTheme() {
-//            Resources.Theme theme = this.resources.newTheme();
-//            theme.setTo(super.getTheme());
-//            return theme;
-//        }
+        @Override
+        public Resources.Theme getTheme() {
+            Resources.Theme theme = this.resources.newTheme();
+            theme.applyStyle(mApplicationInfo.theme, false);
+            return theme;
+        }
+    }
+
+    private static Object getPackageInfo(File apkFile) throws Exception {
+        Class<?> packageParserClass = Class.forName("android.content.pm.PackageParser");
+        Class<?> mPackageClass = Class.forName("android.content.pm.PackageParser$Package");
+        Class<?> packageUserStateClass = Class.forName("android.content.pm.PackageUserState");
+
+        // 构造Package对象
+        Object packageParser = packageParserClass.newInstance();
+        Method parsePackageMethod = packageParserClass.getDeclaredMethod("parsePackage", File.class, int.class);
+
+        return parsePackageMethod.invoke(packageParser, apkFile, 1);
     }
 
 
