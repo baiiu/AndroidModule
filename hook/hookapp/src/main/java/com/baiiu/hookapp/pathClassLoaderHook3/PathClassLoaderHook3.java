@@ -1,4 +1,4 @@
-package com.baiiu.hookapp.pathClassLoaderHook2;
+package com.baiiu.hookapp.pathClassLoaderHook3;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -12,14 +12,8 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.os.PersistableBundle;
-import android.view.ViewGroup;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.baiiu.hookapp.MainActivity;
 import com.baiiu.hookapp.MyApplication;
@@ -28,13 +22,18 @@ import com.baiiu.library.LogUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -44,24 +43,23 @@ import dalvik.system.DexClassLoader;
 
 import static com.baiiu.hookapp.loadedApkHook.Util.NAME_CLASS;
 import static com.baiiu.hookapp.loadedApkHook.Util.NAME_PACKAGE;
+import static java.lang.ClassLoader.getSystemClassLoader;
 
 /**
  * author: zhuzhe
  * time: 2020-01-19
  * description:
  */
-public class PathClassLoaderHook2 {
+public class PathClassLoaderHook3 {
     private static boolean isAMSHooked = false;
     private static File sApkFile;
+    private static String sOptimizedPath;
 
-    /**
-     * hook 插件用独立资源
-     */
     public static void hook() {
         /*
-            1. hook classLoader，让mInstrumentation.newActivity()的classLoader里找到目标act
+            1. hook classLoader，双亲委派代理
          */
-        hookPathClassLoader();
+        hookPathClassLoader2();
 
         /*
             2. hook amn，让ams走过权限校验
@@ -77,43 +75,123 @@ public class PathClassLoaderHook2 {
 
     private static void hookPathClassLoader() {
         try {
-            Class<?> dexPathList = Class.forName("dalvik.system.DexPathList");
-            Field dexElementsF = dexPathList.getDeclaredField("dexElements");
-            dexElementsF.setAccessible(true);
-
-
-            Field pathListF = DexClassLoader.class.getSuperclass().getDeclaredField("pathList");
-            pathListF.setAccessible(true);
-            Object pathList = pathListF.get(MainActivity.class.getClassLoader());
-
-            Object[] dexElements = (Object[]) dexElementsF.get(pathList);
-            LogUtil.d("dexElements: " + dexElements);
-
-            // 构造elements
             sApkFile = copyFromAssets("app-debug.apk");
-            List<File> list = extractAPK(sApkFile);
-//            ResourceHook2.hook(MyApplication.getContext(), apkFile); // 资源hook
+            File optimize = new File(sApkFile.getParentFile(), "optimize");
+            if (!optimize.exists()) {
+                optimize.mkdirs();
+            }
+            sOptimizedPath = optimize.getAbsolutePath();
 
-            Method makeDexElements = Class.forName("dalvik.system.DexPathList").getDeclaredMethod("makeDexElements", List.class, File.class, List.class, ClassLoader.class);
-            makeDexElements.setAccessible(true);
-            Object[] toAddElementArray = (Object[]) makeDexElements.invoke(null, list, list.get(0).getParentFile(), new ArrayList<>(), dexPathList.getClassLoader());
+            Field mLoadedApkF = MyApplication.getContext().getClass().getSuperclass().getDeclaredField("mLoadedApk");
+            mLoadedApkF.setAccessible(true);
+            Object loadedApk = mLoadedApkF.get(MyApplication.getContext());
 
-//            Class<?> elementClass = dexElements.getClass().getComponentType();
-//            Constructor<?> constructor = elementClass.getConstructor(DexFile.class, File.class);
-//            Object element = constructor.newInstance(DexFile.loadDex(apkFile.getCanonicalPath(), dexFile.getAbsolutePath(), 0), apkFile);
-//            LogUtil.e("element: " + element);
+            Field mClassLoaderF = loadedApk.getClass().getDeclaredField("mClassLoader");
+            mClassLoaderF.setAccessible(true);
+            ClassLoader origin = (ClassLoader) mClassLoaderF.get(loadedApk);
 
-//            // 添加
-            Class<?> elementClass = dexElements.getClass().getComponentType();
-            Object[] newElements = (Object[]) Array.newInstance(elementClass, dexElements.length + toAddElementArray.length);
-            System.arraycopy(dexElements, 0, newElements, 0, dexElements.length);
-            System.arraycopy(toAddElementArray, 0, newElements, dexElements.length, toAddElementArray.length);
+            /*
 
-            // 替换
-            dexElementsF.set(pathList, newElements);
+                bootClassLoader
 
+                PathClassLoader
+
+                pluginClassLoader
+             */
+            PluginClassLoader pluginClassLoader = new PluginClassLoader(sApkFile.getAbsolutePath(), sOptimizedPath, null, origin);
+            mClassLoaderF.set(loadedApk, pluginClassLoader);
         } catch (Exception e) {
             LogUtil.e("PathClassLoaderHook2#hookPathClassLoader: " + e.toString());
+        }
+    }
+
+    // 只hook classLoader
+    private static void hookPathClassLoader2() {
+        try {
+            sApkFile = copyFromAssets("app-debug.apk");
+            File optimize = new File(sApkFile.getParentFile(), "optimize");
+            if (!optimize.exists()) {
+                optimize.mkdirs();
+            }
+            sOptimizedPath = optimize.getAbsolutePath();
+
+            /*
+                bootClassLoader
+
+                pluginClassLoader
+
+                PathClassLoader
+             */
+
+            ClassLoader pathClassLoader = MyApplication.class.getClassLoader(); // pathClassLoader
+
+            ClassLoader bootClassLoader = pathClassLoader.getParent(); // bootClassLoader
+
+            PluginClassLoader pluginClassLoader = new PluginClassLoader(sApkFile.getAbsolutePath(), sOptimizedPath, null, bootClassLoader);
+
+            // 设置父类
+            Field parentF = ClassLoader.class.getDeclaredField("parent");
+            parentF.setAccessible(true);
+            Field modifersField = Field.class.getDeclaredField("accessFlags");
+            modifersField.setAccessible(true);
+            modifersField.setInt(parentF, parentF.getModifiers() & ~Modifier.FINAL);
+
+            parentF.set(pathClassLoader, pluginClassLoader);
+
+        } catch (Exception e) {
+            LogUtil.e("PathClassLoaderHook#hookPathClassLoader: " + e.toString());
+        }
+    }
+
+    private static class PluginClassLoader extends DexClassLoader {
+        private Map<String, String> map = new HashMap<>();
+
+        PluginClassLoader(String dexPath, String optimizedDirectory, String librarySearchPath, ClassLoader parent) {
+            super(dexPath, optimizedDirectory, librarySearchPath, parent);
+            map.put("com.baiiu.hookapp.StubActivity", NAME_CLASS);
+        }
+
+        @Override
+        public Class<?> loadClass(String name) throws ClassNotFoundException {
+            LogUtil.e("PluginClassLoader#loadClass: " + name);
+
+            if (map.containsKey(name)) {
+                name = map.get(name);
+            }
+
+            Class<?> c = findLoadedClass(name);
+
+            if (c == null) {
+                try {
+                    if (getParent() != null) {
+                        c = getParent().loadClass(name);
+                    }
+                } catch (ClassNotFoundException e) {
+                    // ClassNotFoundException thrown if class not found
+                    // from the non-null parent class loader
+                }
+
+                if (c == null) {
+                    // If still not found, then invoke findClass in order
+                    // to find the class.
+                    c = findClass(name);
+                }
+            }
+            return c;
+
+//            Class clazz;
+//            try {
+//                clazz = origin.loadClass(name);
+//            } catch (ClassNotFoundException e) {
+//                clazz = super.loadClass(name);
+//            }
+//            return clazz;
+        }
+
+        @Override
+        protected Class<?> findClass(String name) throws ClassNotFoundException {
+            LogUtil.e("PluginClassLoader#findClass: " + name);
+            return super.findClass(name);
         }
     }
 
@@ -244,14 +322,14 @@ public class PathClassLoaderHook2 {
 
         @Override
         public Activity newActivity(ClassLoader cl, String className, Intent intent) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-            if (!intent.getComponent().getClassName().equals("com.baiiu.hookapp.StubActivity")) {
-                return mBase.newActivity(cl, className, intent);
-            }
-
-            LogUtil.d("VInstrumentation#newActivity: " + className + ", " + intent);
-
-            intent.setClassName(NAME_PACKAGE, NAME_CLASS);
-
+//            if (!intent.getComponent().getClassName().equals("com.baiiu.hookapp.StubActivity")) {
+//                return mBase.newActivity(cl, className, intent);
+//            }
+//
+//            LogUtil.d("VInstrumentation#newActivity: " + className + ", " + intent);
+//
+//            intent.setClassName(NAME_PACKAGE, NAME_CLASS);
+//
             return mBase.newActivity(cl, NAME_CLASS, intent);
         }
 
@@ -281,7 +359,7 @@ public class PathClassLoaderHook2 {
 
 
             try {
-                Resources resources = ResourceHook2.hook2(activity, sApkFile);
+                Resources resources = ResourceHook3.hook2(activity, sApkFile);
 
 
                 Class<?> aClass = activity.getClass();
@@ -309,7 +387,7 @@ public class PathClassLoaderHook2 {
                 contextImplResource.set(origin, resources);
 
 
-                Object mPackage = PathClassLoaderHook2.getPackageInfo(sApkFile);
+                Object mPackage = PathClassLoaderHook3.getPackageInfo(sApkFile);
                 Field applicationInfoF = mPackage.getClass().getDeclaredField("applicationInfo");
                 applicationInfoF.setAccessible(true);
                 ApplicationInfo mApplicationInfo = (ApplicationInfo) applicationInfoF.get(mPackage);

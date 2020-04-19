@@ -16,6 +16,7 @@ import com.baiiu.hookapp.msHook.AMSHook;
 import com.baiiu.hookapp.msHook.PMSHook;
 import com.baiiu.hookapp.pathClassLoaderHook.PathClassLoaderHook;
 import com.baiiu.hookapp.pathClassLoaderHook2.PathClassLoaderHook2;
+import com.baiiu.hookapp.pathClassLoaderHook3.PathClassLoaderHook3;
 import com.baiiu.hookapp.startActivityHook.StartActivityHook;
 import com.baiiu.hookapp.startStubActivity.StubHook;
 import com.baiiu.hookapp.startStubActivity.TargetActivity;
@@ -88,7 +89,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 /*
                  *  单个资源方案，目前只能加载 插件非AppCompat Theme的apk
                  */
-                PathClassLoaderHook2.hook();
+//                PathClassLoaderHook2.hook();
+
+                /*
+                    只 hook classLoader做跳转
+                 */
+                PathClassLoaderHook3.hook();
 
                 startActivity(new Intent().setClassName(NAME_PACKAGE, NAME_CLASS));
                 break;
