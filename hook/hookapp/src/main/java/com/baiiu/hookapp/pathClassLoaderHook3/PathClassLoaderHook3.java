@@ -159,33 +159,7 @@ public class PathClassLoaderHook3 {
                 name = map.get(name);
             }
 
-            Class<?> c = findLoadedClass(name);
-
-            if (c == null) {
-                try {
-                    if (getParent() != null) {
-                        c = getParent().loadClass(name);
-                    }
-                } catch (ClassNotFoundException e) {
-                    // ClassNotFoundException thrown if class not found
-                    // from the non-null parent class loader
-                }
-
-                if (c == null) {
-                    // If still not found, then invoke findClass in order
-                    // to find the class.
-                    c = findClass(name);
-                }
-            }
-            return c;
-
-//            Class clazz;
-//            try {
-//                clazz = origin.loadClass(name);
-//            } catch (ClassNotFoundException e) {
-//                clazz = super.loadClass(name);
-//            }
-//            return clazz;
+            return super.loadClass(name);
         }
 
         @Override
