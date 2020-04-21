@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TestApk</string>
+
+    <string name="hello_from_apk">hello From testApk</string>
+    <string name="hello_from_apk2">hello From testApk2</string>
+    <string name="hello_from_apk3">hello From testApk3</string>
+    <string name="hello_from_apk4">hello From testApk4</string>
+    <string name="hello_from_apk5">hello From testApk5</string>
+    <string name="hello_from_apk6">hello From testApk6</string>
+    <string name="hello_from_apk7">hello From testApk7</string>
+    <string name="hello_from_apk8">hello From testApk8</string>
+    <string name="hello_from_apk9">hello From testApk9</string>
+    <string name="hello_from_apk10">hello From testApk10</string>
+    <string name="hello_from_apk11">hello From testApk11</string>
+    <string name="hello_from_apk12">hello From testApk12</string>
+    <string name="hello_from_apk13">hello From testApk13</string>
+    <string name="hello_from_apk14">hello From testApk14</string>
+    <string name="hello_from_apk15">hello From testApk15</string>
+    <string name="hello_from_apk16">hello From testApk16</string>
+    <string name="hello_from_apk17">hello From testApk17</string>
+    <string name="hello_from_apk18">hello From testApk18</string>
+    <string name="hello_from_apk19">hello From testApk19</string>
+    <string name="hello_from_apk20">hello From testApk20</string>
+
+</resources>

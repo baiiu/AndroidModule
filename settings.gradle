@@ -19,6 +19,7 @@ include(
 include(
 
         ":hook:hookapp",
+        ':hook:testapk',
 //        ":jni:jnitest"
 
 )
