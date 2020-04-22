@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.baiiu.library.LogUtil
+import com.baiiu.workhard.foregroundService.TestForegroundService
 import com.baiiu.workhard.referenceQueue.TestReferenceQueue
 import com.baiiu.workhard.spi.SPITest
 import com.baiiu.workhard.touchEvent.TouchEventFragment
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         TestReferenceQueue().test()
         SPITest.test()
+        TestForegroundService.start(this)
 
     }
 

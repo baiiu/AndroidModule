@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.baiiu.workhard">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -20,6 +22,7 @@
         <activity android:name=".BActivity" />
 
         <service android:name=".anr.ANRService" />
+        <service android:name=".foregroundService.MyService" />
     </application>
 
 </manifest>
