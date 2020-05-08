@@ -29,7 +29,7 @@ class ANRFragment : BaseFragment() {
         button_toB.setOnClickListener {
             startActivity(Intent(mContext, BActivity::class.java))
             LogUtil.d(BActivity.TAG, "aaaaaaaaaaa")
-            Thread.sleep(20_000)
+//            Thread.sleep(20_000)
             LogUtil.d(BActivity.TAG, "bbbbbbbbbbb")
         }
 
@@ -46,10 +46,10 @@ class ANRFragment : BaseFragment() {
         rotateAnimator.repeatCount = ValueAnimator.INFINITE
         rotateAnimator.start()
 
-        MainThreadExecutor.postDelay(
-                Runnable { mContext.startService(Intent(mContext, ANRService::class.java)) },
-                3000
-        )
+//        MainThreadExecutor.postDelay(
+//                Runnable { mContext.startService(Intent(mContext, ANRService::class.java)) },
+//                3000
+//        )
 
     }
 

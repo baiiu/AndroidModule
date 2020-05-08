@@ -1,16 +1,19 @@
 package com.baiiu.workhard
 
 import android.os.Bundle
+import android.telecom.Call
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.baiiu.library.LogUtil
+import com.baiiu.workhard.anr.ANRFragment
 import com.baiiu.workhard.foregroundService.TestForegroundService
 import com.baiiu.workhard.referenceQueue.TestReferenceQueue
 import com.baiiu.workhard.spi.SPITest
-import com.baiiu.workhard.touchEvent.TouchEventFragment
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 /**
  * author: zhuzhe
@@ -31,13 +34,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         TestReferenceQueue().test()
         SPITest.test()
         TestForegroundService.start(this)
-
     }
 
     private fun getFragment(): Fragment? {
-        return null
+//        return null
 //        return TouchEventFragment()
-//        return ANRFragment()
+        return ANRFragment()
     }
 
 
@@ -46,6 +48,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         LogUtil.d(BActivity.TAG, "MainActivity#onPause")
     }
 
+    override fun onStop() {
+        super.onStop()
+        LogUtil.d(BActivity.TAG, "MainActivity#onStop")
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+    }
 
     var currentX = 0
     var currentY = 0

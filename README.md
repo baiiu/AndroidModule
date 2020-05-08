@@ -4,8 +4,9 @@ This project is mean to learn something in Android, now there are:
 - hook
 尝试各种hook方案，打开testapk
 
-- gradleNote
+- plugin
 学习gradle语言，gradle基础
+gradle插件
 
 - majjorFrame：
 学习主流三方框架

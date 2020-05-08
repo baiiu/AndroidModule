@@ -26,6 +26,21 @@ class BActivity : AppCompatActivity(R.layout.activity_b) {
         LogUtil.d(TAG, "BActivity: onResume")
     }
 
+    override fun onPause() {
+        super.onPause()
+        LogUtil.d(TAG, "BActivity: onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        LogUtil.d(TAG, "BActivity: onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LogUtil.d(TAG, "BActivity: onDestroy")
+    }
+
     companion object {
         const val TAG = "BActivity";
     }
