@@ -5,6 +5,8 @@
 #include <jni.h>
 #include <string>
 #include <android/log.h>
+#include <people.h>
+//#include "people/People.h"
 
 #define LOGI(...) __android_log_print(ANDROID_LOG_DEBUG,"mLogU" ,__VA_ARGS__)
 
@@ -13,7 +15,10 @@ Java_com_baiiu_jnitest_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
+    People people;
+
+//    return env->NewStringUTF(hello.c_str());
+    return env->NewStringUTF(people.getString().c_str());
 }
 
 extern "C" JNIEXPORT void JNICALL
