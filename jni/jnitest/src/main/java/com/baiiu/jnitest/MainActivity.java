@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.baiiu.jnitest.basic.BasicFragment;
 import com.baiiu.jnitest.dynamicLoad.DynamicFragment;
 import com.baiiu.jnitest.dynamicLoad.DynamicLoad;
+import com.baiiu.jnitest.typeConvert.TypeConvertFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new BasicFragment();
 
-        return new DynamicFragment();
+//        return new DynamicFragment();
 
+        return new TypeConvertFragment();
     }
 
 

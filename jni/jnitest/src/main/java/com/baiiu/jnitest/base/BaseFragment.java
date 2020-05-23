@@ -31,19 +31,23 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        if (mView == null) {
-            mView = inflater.inflate(provideLayoutId(), container, false);
+        int layoutId = provideLayoutId();
+        if (mView == null && layoutId != 0) {
+            mView = inflater.inflate(layoutId, container, false);
         }
 
         return mView;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         initOnCreateView();
     }
 
-    protected abstract int provideLayoutId();
+    protected int provideLayoutId() {
+        return 0;
+    }
 
     protected abstract void initOnCreateView();
 }

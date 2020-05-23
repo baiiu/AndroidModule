@@ -42,6 +42,11 @@ add_library(
         SHARED
         dynamic/dynamic-lib.cpp
 )
+add_library(
+        typeConvert-lib
+        SHARED
+        typeConvert/typeConvert.cpp
+)
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -76,5 +81,9 @@ target_link_libraries( # Specifies the target library.
 
 target_link_libraries(
         dynamic-lib
+        ${log-lib}
+)
+target_link_libraries(
+        typeConvert-lib
         ${log-lib}
 )
