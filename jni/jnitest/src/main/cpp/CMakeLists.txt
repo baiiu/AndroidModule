@@ -45,7 +45,12 @@ add_library(
 add_library(
         typeConvert-lib
         SHARED
-        typeConvert/typeConvert.cpp
+        typeConvert/TypeConvert.cpp
+)
+add_library(
+        string-lib
+        SHARED
+        string/StringTest.cpp
 )
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -85,5 +90,9 @@ target_link_libraries(
 )
 target_link_libraries(
         typeConvert-lib
+        ${log-lib}
+)
+target_link_libraries(
+        string-lib
         ${log-lib}
 )
