@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.baiiu.jnitest.basic.BasicFragment;
 import com.baiiu.jnitest.dynamicLoad.DynamicFragment;
 import com.baiiu.jnitest.dynamicLoad.DynamicLoad;
+import com.baiiu.jnitest.referencePass.ReferencePassFragment;
 import com.baiiu.jnitest.string.StringTestFragment;
 import com.baiiu.jnitest.typeConvert.TypeConvertFragment;
 
@@ -36,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new TypeConvertFragment();
 
-        return new StringTestFragment();
+//        return new StringTestFragment();
 
+        return new ReferencePassFragment();
     }
 
 
