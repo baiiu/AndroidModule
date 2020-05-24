@@ -13,6 +13,7 @@ import com.baiiu.jnitest.dynamicLoad.DynamicFragment;
 import com.baiiu.jnitest.dynamicLoad.DynamicLoad;
 import com.baiiu.jnitest.referencePass.ReferencePassFragment;
 import com.baiiu.jnitest.string.StringTestFragment;
+import com.baiiu.jnitest.thread.ThreadFragment;
 import com.baiiu.jnitest.typeConvert.TypeConvertFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new StringTestFragment();
 
-        return new ReferencePassFragment();
+//        return new ReferencePassFragment();
+
+        return new ThreadFragment();
     }
 
 

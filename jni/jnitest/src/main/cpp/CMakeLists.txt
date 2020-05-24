@@ -57,6 +57,11 @@ add_library(
         SHARED
         referencePass/ReferenceTest.cpp
 )
+add_library(
+        thread-lib
+        SHARED
+        thread/threadTest.cpp
+)
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -103,5 +108,9 @@ target_link_libraries(
 )
 target_link_libraries(
         reference-lib
+        ${log-lib}
+)
+target_link_libraries(
+        thread-lib
         ${log-lib}
 )
