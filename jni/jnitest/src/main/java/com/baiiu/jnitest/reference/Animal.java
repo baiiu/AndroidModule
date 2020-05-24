@@ -1,4 +1,4 @@
-package com.baiiu.jnitest.referencePass;
+package com.baiiu.jnitest.reference;
 
 import java.util.Arrays;
 
@@ -29,6 +29,7 @@ public class Animal {
         return "Animal{" +
                 "name='" + name + '\'' +
                 "num='" + num + '\'' +
+                super.toString() +
                 '}';
     }
 

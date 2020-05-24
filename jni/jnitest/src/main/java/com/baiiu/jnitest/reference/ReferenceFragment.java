@@ -1,4 +1,4 @@
-package com.baiiu.jnitest.referencePass;
+package com.baiiu.jnitest.reference;
 
 import com.baiiu.jnitest.base.BaseFragment;
 
@@ -8,8 +8,10 @@ import java.util.Arrays;
  * 引用传递: 字符串，数组 和 对象
  * <p>
  * native访问对象字段、对象方法
+ * <p>
+ * native创建对象
  */
-public class ReferencePassFragment extends BaseFragment {
+public class ReferenceFragment extends BaseFragment {
 
     static {
         System.loadLibrary("reference-lib");
@@ -38,6 +40,9 @@ public class ReferencePassFragment extends BaseFragment {
         android.util.Log.e("mLogU", "after: " + sCount);
 
         nativeCallMethod(animal);
+
+        android.util.Log.e("mLogU", "createAnimal: " + createAnimal().toString());
+        android.util.Log.e("mLogU", "createAnimal2: " + createAnimal2().toString());
     }
 
     public native String callNativeStringArray(String[] strArray);
@@ -52,5 +57,9 @@ public class ReferencePassFragment extends BaseFragment {
 
     // native调用animal相关方法
     public native void nativeCallMethod(Animal animal);
+
+    public native Animal createAnimal();
+
+    public native Animal createAnimal2();
 
 }

@@ -1,20 +1,12 @@
 package com.baiiu.jnitest;
 
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
-import com.baiiu.jnitest.basic.BasicFragment;
-import com.baiiu.jnitest.dynamicLoad.DynamicFragment;
-import com.baiiu.jnitest.dynamicLoad.DynamicLoad;
-import com.baiiu.jnitest.referencePass.ReferencePassFragment;
-import com.baiiu.jnitest.string.StringTestFragment;
+import com.baiiu.jnitest.reference.ReferenceFragment;
 import com.baiiu.jnitest.thread.ThreadFragment;
-import com.baiiu.jnitest.typeConvert.TypeConvertFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new StringTestFragment();
 
-//        return new ReferencePassFragment();
+        return new ReferenceFragment();
 
-        return new ThreadFragment();
+//        return new ThreadFragment();
     }
 
 
