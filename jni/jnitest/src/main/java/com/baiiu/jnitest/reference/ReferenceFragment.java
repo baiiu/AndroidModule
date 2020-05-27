@@ -26,6 +26,7 @@ public class ReferenceFragment extends BaseFragment {
     protected void initOnCreateView() {
         String s = callNativeStringArray(new String[]{"1", "2", "3", "4", "5"});
         android.util.Log.e("mLogU", "first is " + s);
+        android.util.Log.e("mLogU", "toStringArray:" + Arrays.toString(toStringArray(new int[]{1, 2, 3, 4, 5})));
 
         android.util.Log.e("mLogU", Arrays.toString(getIntArray(10)));
 
@@ -46,6 +47,8 @@ public class ReferenceFragment extends BaseFragment {
     }
 
     public native String callNativeStringArray(String[] strArray);
+
+    public native String[] toStringArray(int[] arr);
 
     public native int[] getIntArray(int num);
 

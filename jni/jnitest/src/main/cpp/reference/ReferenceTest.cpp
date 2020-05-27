@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <log.h>
+#include <string>
 
 //
 // Created by baiiu on 2020/5/23.
@@ -48,6 +49,29 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_callNativeStringArray(JNIEnv 
     env->ReleaseStringUTFChars(jstr, s);
 
     return env->NewStringUTF(s);
+}
+
+extern "C"
+JNIEXPORT jobjectArray JNICALL
+Java_com_baiiu_jnitest_reference_ReferenceFragment_toStringArray(JNIEnv *env, jobject thiz,
+                                                                 jintArray jarr) {
+    int length = env->GetArrayLength(jarr);
+    int *arr;
+    arr = env->GetIntArrayElements(jarr, JNI_FALSE);
+
+
+    jobjectArray jobjectArray = env->NewObjectArray(length,
+                                                    env->FindClass("java/lang/String"),
+                                                    nullptr);
+    for (int i = 0; i < length; ++i) {
+
+        jstring str = env->NewStringUTF(("this is: " + std::to_string(arr[i])).c_str());
+        env->SetObjectArrayElement(jobjectArray, i, str);
+    }
+
+    env->ReleaseIntArrayElements(jarr, arr, 0);
+
+    return jobjectArray;
 }
 
 extern "C"
