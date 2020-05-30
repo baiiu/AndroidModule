@@ -8,8 +8,8 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_baiiu_jnitest_thread_ThreadFragment_nativeCallBack(JNIEnv *env, jobject thiz,
-                                                            jobject call_back) {
+Java_com_baiiu_jnitest_thread_ThreadCallbackFragment_nativeCallBack(JNIEnv *env, jobject thiz,
+                                                                    jobject call_back) {
 
     jclass clazz = env->GetObjectClass(call_back);
     jmethodID methodId = env->GetMethodID(clazz, "onCallBack", "()V");
@@ -50,8 +50,8 @@ void *threadCallBack(void *) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_baiiu_jnitest_thread_ThreadFragment_nativeThreadCallBack(JNIEnv *env, jobject thiz,
-                                                                  jobject call_back) {
+Java_com_baiiu_jnitest_thread_ThreadCallbackFragment_nativeThreadCallBack(JNIEnv *env, jobject thiz,
+                                                                          jobject call_back) {
 
     threadObject = env->NewGlobalRef(call_back);
     threadClazz = env->GetObjectClass(call_back);

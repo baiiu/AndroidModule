@@ -62,7 +62,8 @@ add_library(
 add_library(
         thread-lib
         SHARED
-        thread/threadTest.cpp
+        thread/threadCallback.cpp
+        thread/threadCreate.cpp
 )
 add_library(
         exception-lib

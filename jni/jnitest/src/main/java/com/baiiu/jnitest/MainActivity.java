@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.baiiu.jnitest.exception.ExceptionFragment;
 import com.baiiu.jnitest.reference.PassReferenceFragment;
 import com.baiiu.jnitest.reference.ReferenceFragment;
+import com.baiiu.jnitest.thread.ThreadCreateFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new ThreadFragment();
 
-        return new ExceptionFragment();
+//        return new ExceptionFragment();
+
+        return new ThreadCreateFragment();
     }
 
 

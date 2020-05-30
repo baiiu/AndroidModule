@@ -7,9 +7,9 @@ import com.baiiu.jnitest.base.BaseFragment;
 /**
  * author: baiiu
  * time: 2020/5/24
- * description:
+ * description: JNI处理回调
  */
-public class ThreadFragment extends BaseFragment {
+public class ThreadCallbackFragment extends BaseFragment {
     static {
         System.loadLibrary("thread-lib");
     }
@@ -52,8 +52,6 @@ public class ThreadFragment extends BaseFragment {
                 });
             }
         }).start();
-
-
     }
 
     private void log() {
