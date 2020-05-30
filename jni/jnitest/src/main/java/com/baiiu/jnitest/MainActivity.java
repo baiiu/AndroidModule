@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
+import com.baiiu.jnitest.bitmap.BitmapFragment;
 import com.baiiu.jnitest.exception.ExceptionFragment;
 import com.baiiu.jnitest.reference.PassReferenceFragment;
 import com.baiiu.jnitest.reference.ReferenceFragment;
@@ -45,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new ThreadCreateFragment();
 
-        return new ThreadMutexFragment();
+//        return new ThreadMutexFragment();
+
+        return new BitmapFragment();
     }
 
 
