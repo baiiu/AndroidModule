@@ -9,6 +9,7 @@ import com.baiiu.jnitest.exception.ExceptionFragment;
 import com.baiiu.jnitest.reference.PassReferenceFragment;
 import com.baiiu.jnitest.reference.ReferenceFragment;
 import com.baiiu.jnitest.thread.ThreadCreateFragment;
+import com.baiiu.jnitest.thread.ThreadMutexFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new ExceptionFragment();
 
-        return new ThreadCreateFragment();
+//        return new ThreadCreateFragment();
+
+        return new ThreadMutexFragment();
     }
 
 
