@@ -55,7 +55,8 @@ add_library(
 add_library(
         reference-lib
         SHARED
-        reference/ReferenceTest.cpp
+        reference/PassReference.cpp
+        reference/reference.cpp
 )
 add_library(
         thread-lib

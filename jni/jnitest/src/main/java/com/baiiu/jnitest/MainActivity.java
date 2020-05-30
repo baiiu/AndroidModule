@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
+import com.baiiu.jnitest.reference.PassReferenceFragment;
 import com.baiiu.jnitest.reference.ReferenceFragment;
-import com.baiiu.jnitest.thread.ThreadFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 //        return new TypeConvertFragment();
 
 //        return new StringTestFragment();
+
+//        return new PassReferenceFragment();
 
         return new ReferenceFragment();
 

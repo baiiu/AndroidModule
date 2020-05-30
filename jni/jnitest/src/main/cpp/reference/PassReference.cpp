@@ -34,9 +34,9 @@
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_callNativeStringArray(JNIEnv *env,
-                                                                         jobject thiz,
-                                                                         jobjectArray str_array) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_callNativeStringArray(JNIEnv *env,
+                                                                             jobject thiz,
+                                                                             jobjectArray str_array) {
     int length = env->GetArrayLength(str_array);
     LOGD("string[] length is %d", length);
 
@@ -53,8 +53,8 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_callNativeStringArray(JNIEnv 
 
 extern "C"
 JNIEXPORT jobjectArray JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_toStringArray(JNIEnv *env, jobject thiz,
-                                                                 jintArray jarr) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_toStringArray(JNIEnv *env, jobject thiz,
+                                                                     jintArray jarr) {
     int length = env->GetArrayLength(jarr);
     int *arr;
     arr = env->GetIntArrayElements(jarr, JNI_FALSE);
@@ -76,8 +76,8 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_toStringArray(JNIEnv *env, jo
 
 extern "C"
 JNIEXPORT jintArray JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_getIntArray(JNIEnv *env, jobject thiz,
-                                                               jint num) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_getIntArray(JNIEnv *env, jobject thiz,
+                                                                   jint num) {
     jintArray jarr = env->NewIntArray(num);
 
     int buf[num];
@@ -93,7 +93,7 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_getIntArray(JNIEnv *env, jobj
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_nativeSetNum(JNIEnv *env, jclass clazz) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_nativeSetNum(JNIEnv *env, jclass clazz) {
     jfieldID fieldId = env->GetStaticFieldID(clazz, "sCount", "I");
     jint origin = env->GetStaticIntField(clazz, fieldId);
     env->SetStaticIntField(clazz, fieldId, ++origin);
@@ -102,9 +102,9 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_nativeSetNum(JNIEnv *env, jcl
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_accessInstanceField(JNIEnv *env,
-                                                                       jobject thiz,
-                                                                       jobject animal) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_accessInstanceField(JNIEnv *env,
+                                                                           jobject thiz,
+                                                                           jobject animal) {
     jclass clazz = env->GetObjectClass(animal);
     jfieldID fieldId = env->GetFieldID(clazz, "name", "Ljava/lang/String;");
 
@@ -114,9 +114,9 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_accessInstanceField(JNIEnv *e
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_accessStaticField(JNIEnv *env,
-                                                                     jobject thiz,
-                                                                     jobject animal) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_accessStaticField(JNIEnv *env,
+                                                                         jobject thiz,
+                                                                         jobject animal) {
     jclass clazz = env->GetObjectClass(animal);
     jfieldID fieldId = env->GetStaticFieldID(clazz, "num", "I");
     jint origin = env->GetStaticIntField(clazz, fieldId);
@@ -127,9 +127,9 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_accessStaticField(JNIEnv *env
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_nativeCallMethod(JNIEnv *env,
-                                                                    jobject thiz,
-                                                                    jobject animal) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_nativeCallMethod(JNIEnv *env,
+                                                                        jobject thiz,
+                                                                        jobject animal) {
     jclass clazz = env->GetObjectClass(animal);
 
     /*
@@ -178,7 +178,7 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_nativeCallMethod(JNIEnv *env,
 }
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_createAnimal(JNIEnv *env, jobject thiz) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_createAnimal(JNIEnv *env, jobject thiz) {
     jclass animalClass = env->FindClass("com/baiiu/jnitest/reference/Animal");
     jmethodID initMethod = env->GetMethodID(animalClass, "<init>", "(Ljava/lang/String;)V");
     jstring str = env->NewStringUTF("dog");
@@ -189,7 +189,7 @@ Java_com_baiiu_jnitest_reference_ReferenceFragment_createAnimal(JNIEnv *env, job
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_baiiu_jnitest_reference_ReferenceFragment_createAnimal2(JNIEnv *env, jobject thiz) {
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_createAnimal2(JNIEnv *env, jobject thiz) {
     jclass animalClass = env->FindClass("com/baiiu/jnitest/reference/Animal");
     jmethodID initMethod = env->GetMethodID(animalClass, "<init>", "(Ljava/lang/String;)V");
 
