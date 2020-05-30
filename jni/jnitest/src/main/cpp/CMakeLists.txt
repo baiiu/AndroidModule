@@ -31,7 +31,8 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        native-lib.cpp)
+        native-lib.cpp
+        )
 add_library(
         people-lib
         SHARED
@@ -62,6 +63,11 @@ add_library(
         thread-lib
         SHARED
         thread/threadTest.cpp
+)
+add_library(
+        exception-lib
+        SHARED
+        exception/exception.cpp
 )
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -113,5 +119,9 @@ target_link_libraries(
 )
 target_link_libraries(
         thread-lib
+        ${log-lib}
+)
+target_link_libraries(
+        exception-lib
         ${log-lib}
 )

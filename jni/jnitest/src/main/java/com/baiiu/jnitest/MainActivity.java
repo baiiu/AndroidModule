@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 
+import com.baiiu.jnitest.exception.ExceptionFragment;
 import com.baiiu.jnitest.reference.PassReferenceFragment;
 import com.baiiu.jnitest.reference.ReferenceFragment;
 
@@ -34,9 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new PassReferenceFragment();
 
-        return new ReferenceFragment();
+//        return new ReferenceFragment();
 
 //        return new ThreadFragment();
+
+        return new ExceptionFragment();
     }
 
 
