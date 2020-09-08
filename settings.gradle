@@ -20,8 +20,8 @@ include(
 
         ":hook:hookapp",
         ':hook:testapk',
-        ":jni:jnitest"
-
+        ":jni:jnitest",
+        ':jni:mktest'
 )
 
 // 三方框架
@@ -158,4 +158,3 @@ gradle.taskGraph.whenReady { taskGrahp ->
 
     println("===========================================gradle.taskGraph.whenReady ")
 }
-
