@@ -17,9 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((TextView) findViewById(R.id.textView)).setText(stringFromJNI());
+        ((TextView) findViewById(R.id.textView)).setText(String.format("%s %s", stringFromJNI(), stringFromJNI2()));
     }
 
     public native String stringFromJNI();
+
+    public native String stringFromJNI2();
 
 }
