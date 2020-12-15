@@ -55,10 +55,14 @@ public class ThreadCallbackFragment extends BaseFragment {
     }
 
     private void log() {
-        android.util.Log.e("mLogU", (Looper.getMainLooper() == Looper.myLooper()) + "， " + Thread.currentThread().getName() + ", " + +Thread.currentThread().getId());
+        android.util.Log.e("mLogU", "onCallBack: " + (Looper.getMainLooper() == Looper.myLooper()) + "， " + Thread.currentThread().getName() + ", " + +Thread.currentThread().getId());
     }
 
-    // 当前线程
+    /*
+        在当前调用线程调用callback
+
+        Java线程不一样，env传下去是不一样的；
+     */
     public native void nativeCallBack(ICallBack callBack);
 
     // native中newThread传回

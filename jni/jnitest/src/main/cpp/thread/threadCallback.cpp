@@ -11,6 +11,9 @@ JNIEXPORT void JNICALL
 Java_com_baiiu_jnitest_thread_ThreadCallbackFragment_nativeCallBack(JNIEnv *env, jobject thiz,
                                                                     jobject call_back) {
 
+    LOGE("nativeCallBack--> env: %p, &env: %p ", env, &env);
+    LOGE("nativeCallBack--> thiz: %p, &thiz: %p ", thiz, &thiz);
+
     jclass clazz = env->GetObjectClass(call_back);
     jmethodID methodId = env->GetMethodID(clazz, "onCallBack", "()V");
     env->CallVoidMethod(call_back, methodId);
