@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.baiiu.library.LogUtil
 import com.baiiu.workhard.anr.ANRFragment
 import com.baiiu.workhard.foregroundService.TestForegroundService
+import com.baiiu.workhard.lock.LockTest
 import com.baiiu.workhard.referenceQueue.TestReferenceQueue
 import com.baiiu.workhard.spi.SPITest
 import okhttp3.OkHttpClient
@@ -31,15 +32,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     .commit()
         }
 
-        TestReferenceQueue().test()
-        SPITest.test()
-        TestForegroundService.start(this)
+//        TestReferenceQueue().test()
+//        SPITest.test()
+//        TestForegroundService.start(this)
+        LockTest.test()
     }
 
     private fun getFragment(): Fragment? {
-//        return null
+        return null
 //        return TouchEventFragment()
-        return ANRFragment()
+//        return ANRFragment()
     }
 
 
