@@ -5,12 +5,11 @@
 #include <log.h>
 #include <unistd.h>
 
-
-int function(int n) {
+int fibonacci(int n) {
     if (n == 1) return 1;
     if (n == 2) return 1;
 
-    return function(n - 1) + function(n - 2);
+    return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
 
@@ -20,7 +19,7 @@ Java_com_baiiu_jnitest_testSocket_TestSocketFragment_native_1connect(JNIEnv *env
     __android_log_print(ANDROID_LOG_ERROR, "mLogU", "start connect: %p， %p", &env, env);
 
 //    int result = function(1000000000);
-    int result = function(5);
+    int result = fibonacci(5);
 
     __android_log_print(ANDROID_LOG_ERROR, "mLogU", "end connect: %p， %p, %d", &env, env, result);
     return true;

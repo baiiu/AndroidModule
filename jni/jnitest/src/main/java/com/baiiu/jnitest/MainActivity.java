@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import com.baiiu.jnitest.bitmap.BitmapFragment;
+import com.baiiu.jnitest.dlopen.DLOpenFragment;
 import com.baiiu.jnitest.exception.ExceptionFragment;
 import com.baiiu.jnitest.reference.PassReferenceFragment;
 import com.baiiu.jnitest.reference.ReferenceFragment;
@@ -21,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, getFragment())
                 .commitAllowingStateLoss();
@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new BitmapFragment();
 
-        return new TestSocketFragment();
+//        return new TestSocketFragment();
+
+        return new DLOpenFragment();
 
     }
 
