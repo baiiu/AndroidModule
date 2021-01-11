@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new StringTestFragment();
 
-//        return new PassReferenceFragment();
+        return new PassReferenceFragment();
 
 //        return new ReferenceFragment();
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new TestSocketFragment();
 
-        return new DLOpenFragment();
+//        return new DLOpenFragment();
 
     }
 

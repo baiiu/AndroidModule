@@ -32,21 +32,29 @@
 | double[] | jdoubleArray |
  */
 
+jintArray localObject;
+jobject globalObject;
+
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_baiiu_jnitest_reference_PassReferenceFragment_callNativeStringArray(JNIEnv *env,
                                                                              jobject thiz,
                                                                              jobjectArray str_array) {
+    LOGE("localObject: %p", localObject);
+    LOGE("globalObject: %p", globalObject);
+
     int length = env->GetArrayLength(str_array);
     LOGD("string[] length is %d", length);
 
     jobject obj = env->GetObjectArrayElement(str_array, 0);
     LOGD("obj: %%", obj);
 
+
     jstring jstr = static_cast<jstring>(obj);
     const char *s = env->GetStringUTFChars(jstr, JNI_FALSE);
     LOGD("str: %s", s);
     env->ReleaseStringUTFChars(jstr, s);
+
 
     return env->NewStringUTF(s);
 }
@@ -55,6 +63,11 @@ extern "C"
 JNIEXPORT jobjectArray JNICALL
 Java_com_baiiu_jnitest_reference_PassReferenceFragment_toStringArray(JNIEnv *env, jobject thiz,
                                                                      jintArray jarr) {
+    localObject = jarr;
+    globalObject = env->NewGlobalRef(jarr);
+    LOGE("localObject: %p", localObject);
+    LOGE("globalObject: %p", globalObject);
+
     int length = env->GetArrayLength(jarr);
     int *arr;
     arr = env->GetIntArrayElements(jarr, JNI_FALSE);
@@ -78,6 +91,20 @@ extern "C"
 JNIEXPORT jintArray JNICALL
 Java_com_baiiu_jnitest_reference_PassReferenceFragment_getIntArray(JNIEnv *env, jobject thiz,
                                                                    jint num) {
+
+    LOGE("localObject: %p", localObject);
+
+    /*
+     * Abort message: 'java_vm_ext.cc:545] JNI DETECTED ERROR IN APPLICATION: use of invalid jobject 0xffd2d890'
+     * 崩溃：JNI层中创建的jobject对象默认是局部引用（Local Reference）。
+     * 当函数从JNI层返回后，Local reference的对象很可能被回收。所以，不能在JNI层中永久保存一个Local Reference的对象。
+     * 需要使用NewGlobalRef 和 NewWeakGlobalRef。
+     */
+//    LOGE("localObject: %p, %d", localObject, env->GetArrayLength(localObject));
+    auto arrGlobal = static_cast<jarray>(globalObject);
+    LOGE("localObject: %p, %d", localObject, env->GetArrayLength(arrGlobal));
+
+
     jintArray jarr = env->NewIntArray(num);
 
     int buf[num];
@@ -94,6 +121,8 @@ Java_com_baiiu_jnitest_reference_PassReferenceFragment_getIntArray(JNIEnv *env, 
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_baiiu_jnitest_reference_PassReferenceFragment_nativeSetNum(JNIEnv *env, jclass clazz) {
+    LOGE("localObject: %p", localObject);
+
     jfieldID fieldId = env->GetStaticFieldID(clazz, "sCount", "I");
     jint origin = env->GetStaticIntField(clazz, fieldId);
     env->SetStaticIntField(clazz, fieldId, ++origin);
@@ -105,6 +134,8 @@ JNIEXPORT void JNICALL
 Java_com_baiiu_jnitest_reference_PassReferenceFragment_accessInstanceField(JNIEnv *env,
                                                                            jobject thiz,
                                                                            jobject animal) {
+    LOGE("localObject: %p", localObject);
+
     jclass clazz = env->GetObjectClass(animal);
     jfieldID fieldId = env->GetFieldID(clazz, "name", "Ljava/lang/String;");
 
@@ -114,9 +145,10 @@ Java_com_baiiu_jnitest_reference_PassReferenceFragment_accessInstanceField(JNIEn
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_baiiu_jnitest_reference_PassReferenceFragment_accessStaticField(JNIEnv *env,
-                                                                         jobject thiz,
+Java_com_baiiu_jnitest_reference_PassReferenceFragment_accessStaticField(JNIEnv *env, jobject thiz,
                                                                          jobject animal) {
+    LOGE("localObject: %p", localObject);
+
     jclass clazz = env->GetObjectClass(animal);
     jfieldID fieldId = env->GetStaticFieldID(clazz, "num", "I");
     jint origin = env->GetStaticIntField(clazz, fieldId);
@@ -130,6 +162,8 @@ JNIEXPORT void JNICALL
 Java_com_baiiu_jnitest_reference_PassReferenceFragment_nativeCallMethod(JNIEnv *env,
                                                                         jobject thiz,
                                                                         jobject animal) {
+    LOGE("localObject: %p", localObject);
+
     jclass clazz = env->GetObjectClass(animal);
 
     /*
@@ -179,6 +213,8 @@ Java_com_baiiu_jnitest_reference_PassReferenceFragment_nativeCallMethod(JNIEnv *
 extern "C"
 JNIEXPORT jobject JNICALL
 Java_com_baiiu_jnitest_reference_PassReferenceFragment_createAnimal(JNIEnv *env, jobject thiz) {
+    LOGE("localObject: %p", localObject);
+
     jclass animalClass = env->FindClass("com/baiiu/jnitest/reference/Animal");
     jmethodID initMethod = env->GetMethodID(animalClass, "<init>", "(Ljava/lang/String;)V");
     jstring str = env->NewStringUTF("dog");
@@ -190,6 +226,8 @@ Java_com_baiiu_jnitest_reference_PassReferenceFragment_createAnimal(JNIEnv *env,
 extern "C"
 JNIEXPORT jobject JNICALL
 Java_com_baiiu_jnitest_reference_PassReferenceFragment_createAnimal2(JNIEnv *env, jobject thiz) {
+    LOGE("localObject: %p", localObject);
+
     jclass animalClass = env->FindClass("com/baiiu/jnitest/reference/Animal");
     jmethodID initMethod = env->GetMethodID(animalClass, "<init>", "(Ljava/lang/String;)V");
 
