@@ -1,0 +1,67 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion as Integer
+
+    defaultConfig {
+        applicationId "com.baiiu.cmaketest"
+        minSdkVersion rootProject.ext.minSdkVersion as int
+        targetSdkVersion rootProject.ext.targetSdkVersion as int
+        versionCode rootProject.ext.versionCode as int
+        versionName rootProject.ext.versionName as String
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        def ENABLE_LOG = false
+
+        int a = 0x01;
+        int b = 0x02;
+
+//        int result = 0
+        int result = a
+//        int result = b
+//        int result = a | b
+
+        printf("result: %d\n", result)
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+                arguments "-DANDROID_STL=c++_shared",
+                        "-DENABLE_LOG=${ENABLE_LOG}",
+                        "-DTRANSPORT_LAYER=${result}"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+            version "3.6.0"
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

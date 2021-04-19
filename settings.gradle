@@ -21,7 +21,9 @@ include(
         ":hook:hookapp",
         ':hook:testapk',
         ":jni:jnitest",
-        ':jni:mktest'
+        ':jni:mktest',
+        ':jni:cmaketest'
+
 )
 
 // 三方框架
