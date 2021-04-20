@@ -20,6 +20,7 @@ Java_com_baiiu_cmaketest_MainActivity_hello(JNIEnv *env, jobject thiz) {
 #endif
 
 #ifdef ENABLE_FIBO
+    // 1 1 2 3 5 8
     __android_log_print(ANDROID_LOG_ERROR, "mLogU", "log: %d", test(5));
 #endif
 

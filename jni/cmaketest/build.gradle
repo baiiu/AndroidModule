@@ -27,6 +27,10 @@ android {
 
         printf("result: %d\n", result)
 
+        if (result & a) {
+            printf("result is a\n")
+        }
+
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11"

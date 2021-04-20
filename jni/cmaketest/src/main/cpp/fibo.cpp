@@ -11,7 +11,7 @@ int test(int n) {
     int second = 1;
     int num = 0;
 
-    while (n >= 2) {
+    while (n > 2) {
         num = first + second;
         --n;
         first = second;
