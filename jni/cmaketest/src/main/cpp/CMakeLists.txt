@@ -17,12 +17,23 @@ message(CMAKE_CURRENT_LIST_FILE: ${CMAKE_CURRENT_LIST_FILE})
 message(CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR})
 message(CMAKE_ANDROID_ARCH: ${CMAKE_ANDROID_ARCH})
 message(CMAKE_ANDROID_ARCH_ABI: ${CMAKE_ANDROID_ARCH_ABI})
+message(CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME})
+message(CMAKE_CXX_COMPILER_ID: ${CMAKE_CXX_COMPILER_ID})
+
+pkg_check_modules (GNUSTL REQUIRED gnustl)
+message(GNUSTL_LIBRARY_DIRS: ${GNUSTL_LIBRARY_DIRS})
 
 set(var hello)
 message(${var})
 
+# 参数可以传递到下级目录
 set(var 111)
 message(${var})
+
+add_subdirectory(boolean_test)
+add_subdirectory(function_test)
+#include(ndk-stl-config.cmake)
+
 
 option(SHOW_LOG "whether to show log" ON)
 #option(SHOW_LOG "whether to show log" OFF)
@@ -68,25 +79,4 @@ if (${TRANSPORT_LAYER} EQUAL 3)
     message(transport: 333333333333)
 ENDIF ()
 
-
-# test boolean
-if (TRUE)
-    message(testvar: ${var})
-ENDIF ()
-
-if (1)
-    message(test1)
-ENDIF ()
-
-if (0)
-    message(test0)
-ENDIF ()
-
-if (NO)
-    message(testNo)
-ENDIF ()
-
-if (YES)
-    message(testYES)
-ENDIF ()
 

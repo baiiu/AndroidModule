@@ -37,6 +37,11 @@ android {
                 arguments "-DANDROID_STL=c++_shared",
                         "-DENABLE_LOG=${ENABLE_LOG}",
                         "-DTRANSPORT_LAYER=${result}"
+
+//                arguments "-DANDROID_STL=c++_static" // android-ndk-r16b/sources/cxx-stl/llvm-libc++
+//                arguments "-DANDROID_STL=c++_shared" // android-ndk-r16b/sources/cxx-stl/llvm-libc++
+//                arguments "-DANDROID_STL=gnustl_static" // android-ndk-r16b/sources/cxx-stl/gnu-libstdc++
+
             }
         }
     }
