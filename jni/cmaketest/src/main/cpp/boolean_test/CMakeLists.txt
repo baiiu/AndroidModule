@@ -32,3 +32,14 @@ ENDIF ()
 if (YES)
     message(testYES)
 ENDIF ()
+
+
+# list操作
+set(helloList a b c d e)
+list(REMOVE_ITEM helloList a)
+list(REMOVE_AT helloList 0)
+list(INSERT helloList 0 /Users/baiiu/framework/android-ndk-r14b/sources/cxx-stl/llvm-libc++/libs/armeabi/libc++_shared.so)
+message(helloList: ${helloList})
+foreach (item ${helloList})
+    message(item: ${item})
+endforeach ()
