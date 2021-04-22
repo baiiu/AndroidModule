@@ -1,0 +1,45 @@
+// applicationName property to gradle.properties
+
+
+def ENABLE_LOG = false
+
+int a = 0x01;
+int b = 0x02;
+
+//        int result = 0
+//        int result = a
+//        int result = b
+int result = a | b
+
+printf("result: %d\n", result)
+
+if (result & a) {
+    printf("result is a\n")
+}
+
+
+android.defaultConfig.externalNativeBuild {
+    def list = [
+            "-DANDROID_STL=c++_shared",
+            "-DENABLE_LOG=${ENABLE_LOG}",
+            "-DTRANSPORT_LAYER=${result}",
+    ]
+    list.add("-DTEST_ONE=1")
+
+    println "class: " + list.class + ", " + list.toString()
+    list.each {
+        println "item: $it"
+    }
+
+    cmake {
+        cppFlags "-std=c++11"
+        list.each {
+            arguments it
+        }
+
+//                arguments "-DANDROID_STL=c++_static" // android-ndk-r16b/sources/cxx-stl/llvm-libc++
+//                arguments "-DANDROID_STL=c++_shared" // android-ndk-r16b/sources/cxx-stl/llvm-libc++
+//                arguments "-DANDROID_STL=gnustl_static" // android-ndk-r16b/sources/cxx-stl/gnu-libstdc++
+
+    }
+}

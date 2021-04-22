@@ -35,11 +35,17 @@ ENDIF ()
 
 
 # list操作
+# set(var a b c d e) creates a list with a;b;c;d;e, and set(var “a b c d e”) creates a string or a list with one item in it.
 set(helloList a b c d e)
 list(REMOVE_ITEM helloList a)
 list(REMOVE_AT helloList 0)
 list(INSERT helloList 0 /Users/baiiu/framework/android-ndk-r14b/sources/cxx-stl/llvm-libc++/libs/armeabi/libc++_shared.so)
+list(APPEND helloList last)
 message(helloList: ${helloList})
 foreach (item ${helloList})
     message(item: ${item})
+endforeach ()
+
+foreach (LIB ${CMAKE_CXX_IMPLICIT_LINK_LIBRARIES})
+    message(LIB: ${LIB})
 endforeach ()

@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
 }
+// cmake参数设置
+apply from: 'cmake.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion as Integer
@@ -14,36 +16,6 @@ android {
 
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        def ENABLE_LOG = false
-
-        int a = 0x01;
-        int b = 0x02;
-
-//        int result = 0
-        int result = a
-//        int result = b
-//        int result = a | b
-
-        printf("result: %d\n", result)
-
-        if (result & a) {
-            printf("result is a\n")
-        }
-
-        externalNativeBuild {
-            cmake {
-                cppFlags "-std=c++11"
-                arguments "-DANDROID_STL=c++_shared",
-                        "-DENABLE_LOG=${ENABLE_LOG}",
-                        "-DTRANSPORT_LAYER=${result}"
-
-//                arguments "-DANDROID_STL=c++_static" // android-ndk-r16b/sources/cxx-stl/llvm-libc++
-//                arguments "-DANDROID_STL=c++_shared" // android-ndk-r16b/sources/cxx-stl/llvm-libc++
-//                arguments "-DANDROID_STL=gnustl_static" // android-ndk-r16b/sources/cxx-stl/gnu-libstdc++
-
-            }
-        }
     }
 
     buildTypes {

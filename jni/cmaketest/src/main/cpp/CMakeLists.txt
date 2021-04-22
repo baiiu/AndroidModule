@@ -21,16 +21,11 @@ message(CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME})
 message(CMAKE_CXX_COMPILER_ID: ${CMAKE_CXX_COMPILER_ID})
 message(CMAKE_EXE_LINKER_FLAGS: ${CMAKE_EXE_LINKER_FLAGS})
 message(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES: ${CMAKE_CXX_IMPLICIT_LINK_LIBRARIES})
+message(CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX})
+message(CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH})
+message(HAI_BUILD_PROFILE: $ENV{HAI_BUILD_PROFILE})
+message(HAI_BUILD_PROFILE: $ENV{HAI_BUILD_PROFILE})
 
-#list(REMOVE_AT CMAKE_CXX_IMPLICIT_LINK_LIBRARIES 0)
-
-foreach (LIB ${CMAKE_CXX_IMPLICIT_LINK_LIBRARIES})
-    message(LIB: ${LIB})
-endforeach ()
-message(SRT_LIBS_PRIVATE: ${SRT_LIBS_PRIVATE})
-
-#pkg_check_modules (GNUSTL REQUIRED gnustl)
-message(GNUSTL_LIBRARY_DIRS: ${GNUSTL_LIBRARY_DIRS})
 
 set(var hello)
 message(${var})
@@ -39,6 +34,7 @@ message(${var})
 set(var 111)
 message(${var})
 
+# 添加即执行，添加顺序决定执行顺序
 add_subdirectory(boolean_test)
 add_subdirectory(function_test)
 #include(ndk-stl-config.cmake)
@@ -61,6 +57,9 @@ else ()
     message(log off)
 ENDIF ()
 
+if (TEST_ONE)
+    message(TEST_ONE: ${TEST_ONE})
+endif ()
 
 message(TRANSPORT_LAYER: ${TRANSPORT_LAYER})
 
@@ -78,14 +77,5 @@ ENDIF ()
 add_library(native-lib SHARED ${src_files})
 find_library(log-lib log)
 target_link_libraries(native-lib ${log-lib})
-
-
-if (${TRANSPORT_LAYER} EQUAL 2)
-    message(transport: 22222222222)
-ENDIF ()
-
-if (${TRANSPORT_LAYER} EQUAL 3)
-    message(transport: 333333333333)
-ENDIF ()
 
 
