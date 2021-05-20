@@ -34,6 +34,13 @@ message(${var})
 set(var 111)
 message(${var})
 
+# 声明变量并拼接
+set(str ${str})
+set(str ${str} 111)
+set(str ${str} 222)
+message(str: ${str})
+
+
 # 添加即执行，添加顺序决定执行顺序
 add_subdirectory(boolean_test)
 add_subdirectory(function_test)
