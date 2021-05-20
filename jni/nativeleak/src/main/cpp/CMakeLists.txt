@@ -5,6 +5,18 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+#aux_source_directory(xhook xhook_files)
+file(GLOB xhook_files xhook/*.c)
+
+add_library(
+        leak-monitor-lib
+
+        SHARED
+
+        native-lib.cpp
+        ${xhook_files}
+)
+
 # 添加动态库
 add_library(
         test-lib
@@ -21,5 +33,13 @@ find_library(
 
 # 关联动态库
 target_link_libraries(
+        leak-monitor-lib
+        ${log-lib}
+        -lz
+)
+
+target_link_libraries(
         test-lib
-        ${log-lib})
+        ${log-lib}
+        -lz
+)

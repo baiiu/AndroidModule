@@ -7,18 +7,16 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    static {
-        System.loadLibrary("test-lib");
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        testLeak();
+
+        XHook.get().init();
     }
 
     public void onClick(View view) {
+        System.loadLibrary("test-lib");
         testLeak();
     }
 
