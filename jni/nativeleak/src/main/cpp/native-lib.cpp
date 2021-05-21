@@ -23,9 +23,8 @@ static void xhook_fixLeak(JNIEnv *env, jobject thiz) {
 }
 
 static JNINativeMethod methods[] = {
-        {"_init", "()V", (void *) xhook_init},
-        {"_fixLeak", "()V", (void *) xhook_fixLeak}
-
+        {"_init",        "()V", (void *) xhook_init},
+        {"_fixLeak",     "()V", (void *) xhook_fixLeak},
 };
 
 JNIEXPORT int JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {

@@ -26,7 +26,9 @@ public class XHook {
         return xHook;
     }
 
-
+    /*
+        hook系统so加载器，hook dlopen方法，获取准备加载的so name，再hook malloc等方法
+     */
     public void init() {
         _init();
     }
@@ -34,6 +36,7 @@ public class XHook {
     public void fixLeak() {
         _fixLeak();
     }
+
 
     private native void _init();
 

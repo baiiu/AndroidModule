@@ -15,9 +15,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        XHook.get().init();
 
-        // 需要test-lib先加载进，再调用xhook才有效，也就说hook的是已经加载的so；
+        /*
+            需要test-lib先加载进，再调用xhook才有效，也就说hook的是已经加载的so；
+
+            所以一定要确保so先加载，再调用相关hook代码，否则不生效；
+         */
         XHook.get().fixLeak();
     }
 
