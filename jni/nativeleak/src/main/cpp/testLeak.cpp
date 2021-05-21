@@ -85,6 +85,7 @@ void leakIt() {
         strcpy(p, s);
     }
     __android_log_print(ANDROID_LOG_DEBUG, "mLogU", "%p has leaked 1M", p);
+//    free(p);
 }
 
 extern "C"

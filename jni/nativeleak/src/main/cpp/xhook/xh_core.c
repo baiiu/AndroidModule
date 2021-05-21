@@ -142,11 +142,11 @@ int xh_core_register(const char *pathname_regex_str, const char *symbol,
 
     if(NULL == pathname_regex_str || NULL == symbol || NULL == new_func) return XH_ERRNO_INVAL;
 
-    if(xh_core_inited)
-    {
-        XH_LOG_ERROR("do not register hook after refresh(): %s, %s", pathname_regex_str, symbol);
-        return XH_ERRNO_INVAL;
-    }
+//    if(xh_core_inited)
+//    {
+//        XH_LOG_ERROR("do not register hook after refresh(): %s, %s", pathname_regex_str, symbol);
+//        return XH_ERRNO_INVAL;
+//    }
 
     if(0 != regcomp(&regex, pathname_regex_str, REG_NOSUB)) return XH_ERRNO_INVAL;
 

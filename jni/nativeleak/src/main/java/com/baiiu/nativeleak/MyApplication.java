@@ -13,6 +13,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // hook so loader，放在Application中调用
         XHook.get().init();
     }
 
