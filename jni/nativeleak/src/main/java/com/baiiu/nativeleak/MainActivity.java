@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    static {
+        System.loadLibrary("test-lib");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,14 +16,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         XHook.get().init();
+
+        // 需要test-lib先加载进，再调用xhook才有效，也就说hook的是已经加载的so；
+        XHook.get().fixLeak();
     }
 
     public void onClick(View view) {
-        System.loadLibrary("test-lib");
+//        testASan();
         testLeak();
     }
 
     private native void testLeak();
+
+    /*
+        按照官方文档依赖进asan，可以检测如下错误：
+            堆栈和堆缓冲区上溢/下溢
+            释放之后的堆使用情况
+            超出范围的堆栈使用情况
+            重复释放/错误释放
+
+        asan不能检测内存泄露
+     */
+    private native void testASan();
 
 
 }

@@ -43,3 +43,9 @@ target_link_libraries(
         ${log-lib}
         -lz
 )
+
+target_compile_options(test-lib PUBLIC -fsanitize=address -fno-omit-frame-pointer)
+set_target_properties(test-lib PROPERTIES LINK_FLAGS -fsanitize=address)
+
+target_compile_options(leak-monitor-lib PUBLIC -fsanitize=address -fno-omit-frame-pointer)
+set_target_properties(leak-monitor-lib PROPERTIES LINK_FLAGS -fsanitize=address)

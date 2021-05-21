@@ -6,6 +6,10 @@ package com.baiiu.nativeleak;
  * description:
  */
 public class XHook {
+    static {
+        System.loadLibrary("leak-monitor-lib");
+    }
+
     private static volatile XHook xHook;
 
     private XHook() {
@@ -22,14 +26,17 @@ public class XHook {
         return xHook;
     }
 
-    static {
-        System.loadLibrary("leak-monitor-lib");
-    }
 
     public void init() {
         _init();
     }
 
+    public void fixLeak() {
+        _fixLeak();
+    }
+
     private native void _init();
+
+    private native void _fixLeak();
 
 }

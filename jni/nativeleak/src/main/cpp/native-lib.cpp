@@ -8,19 +8,24 @@
 
 #define ARRAY_LENGTH(a)  (sizeof(a) / sizeof(a[0]))
 
-void testLeakHook(JNIEnv *env, jobject thiz) {
+static void xhook_init(JNIEnv *env, jobject thiz) {
+
+}
+
+void leakItHook(JNIEnv *env, jobject thiz) {
     __android_log_print(ANDROID_LOG_DEBUG, "mLogU", "no leak, fix it");
 }
 
-static void xhook_init(JNIEnv *env, jobject thiz) {
-    xhook_register(".*test-lib.so", "Java_com_baiiu_nativeleak_MainActivity_testLeak",
-                   (void *) testLeakHook,
-                   NULL);
+static void xhook_fixLeak(JNIEnv *env, jobject thiz) {
+    int ret = xhook_register("libtest-lib.so", "_Z6leakItv", (void *) leakItHook, NULL);
+    __android_log_print(ANDROID_LOG_DEBUG, "mLogU", "xhook_init: %d", ret);
     xhook_refresh(0);
 }
 
 static JNINativeMethod methods[] = {
-        {"_init", "()V", (void *) (xhook_init)}
+        {"_init", "()V", (void *) xhook_init},
+        {"_fixLeak", "()V", (void *) xhook_fixLeak}
+
 };
 
 JNIEXPORT int JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
