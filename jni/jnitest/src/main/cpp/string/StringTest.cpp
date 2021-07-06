@@ -42,3 +42,40 @@ Java_com_baiiu_jnitest_string_StringTestFragment_stringMethod(JNIEnv *env, jobje
     env->ReleaseStringUTFChars(jStr, str);
 
 }
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_baiiu_jnitest_string_StringTestFragment_callJava(JNIEnv *env, jobject thiz) {
+
+    jclass clazz = env->FindClass("com/baiiu/jnitest/string/StringTestFragment");
+    jmethodID methodId = env->GetStaticMethodID(clazz, "decorateUrl",
+                                                "(Ljava/lang/String;)Ljava/lang/String;");
+
+    jstring jstr = env->NewStringUTF("test");
+    jobject decorateObject = env->CallStaticObjectMethod(clazz, methodId, jstr);
+
+    const char *afterUrl = env->GetStringUTFChars(static_cast<jstring>(decorateObject), JNI_FALSE);
+    LOGD("afterUrl %s", afterUrl);
+
+    env->ReleaseStringUTFChars(jstr, afterUrl);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_baiiu_jnitest_string_StringTestFragment_callJavaFree(JNIEnv *env, jobject thiz) {
+
+    jclass clazz = env->FindClass("com/baiiu/jnitest/string/StringTestFragment");
+    jmethodID methodId = env->GetMethodID(clazz, "decorateUrlFree",
+                                          "(Ljava/lang/String;)Ljava/lang/String;");
+
+    jstring jstr = env->NewStringUTF("test");
+    jobject decorateObject = env->CallObjectMethod(thiz, methodId, jstr);
+
+    if (decorateObject) {
+        const char *afterUrl = env->GetStringUTFChars(static_cast<jstring>(decorateObject),
+                                                      JNI_FALSE);
+        LOGD("afterUrl %s", afterUrl);
+
+        env->ReleaseStringUTFChars(jstr, afterUrl);
+    }
+}

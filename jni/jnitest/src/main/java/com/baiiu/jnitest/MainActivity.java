@@ -11,6 +11,7 @@ import com.baiiu.jnitest.epoll.EpollFragment;
 import com.baiiu.jnitest.exception.ExceptionFragment;
 import com.baiiu.jnitest.reference.PassReferenceFragment;
 import com.baiiu.jnitest.reference.ReferenceFragment;
+import com.baiiu.jnitest.string.StringTestFragment;
 import com.baiiu.jnitest.testSocket.TestSocketFragment;
 import com.baiiu.jnitest.thread.ThreadCallbackFragment;
 import com.baiiu.jnitest.thread.ThreadCreateFragment;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new TypeConvertFragment();
 
-//        return new StringTestFragment();
+        return new StringTestFragment();
 
 //        return new PassReferenceFragment();
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new DLOpenFragment();
 
-        return new EpollFragment();
+//        return new EpollFragment();
     }
 
 
