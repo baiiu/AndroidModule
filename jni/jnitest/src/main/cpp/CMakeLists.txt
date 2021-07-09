@@ -92,6 +92,11 @@ add_library(
         SHARED
         epoll/testepoll.cpp
 )
+add_library(
+        dns-lib
+        SHARED
+        dns/testdns.cpp
+)
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -163,5 +168,9 @@ target_link_libraries(
 )
 target_link_libraries(
         epoll-lib
+        ${log-lib}
+)
+target_link_libraries(
+        dns-lib
         ${log-lib}
 )

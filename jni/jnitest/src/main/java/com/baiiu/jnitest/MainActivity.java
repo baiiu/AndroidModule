@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.baiiu.jnitest.bitmap.BitmapFragment;
 import com.baiiu.jnitest.dlopen.DLOpenFragment;
+import com.baiiu.jnitest.dns.DNSFragment;
 import com.baiiu.jnitest.epoll.EpollFragment;
 import com.baiiu.jnitest.exception.ExceptionFragment;
 import com.baiiu.jnitest.reference.PassReferenceFragment;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        return new TypeConvertFragment();
 
-        return new StringTestFragment();
+//        return new StringTestFragment();
 
 //        return new PassReferenceFragment();
 
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 //        return new DLOpenFragment();
 
 //        return new EpollFragment();
+
+        return new DNSFragment();
     }
 
 
