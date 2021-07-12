@@ -1,6 +1,5 @@
 package com.baiiu.jnitest.dns;
 
-import android.os.Handler;
 import android.util.Log;
 
 import com.baiiu.jnitest.base.BaseFragment;
@@ -19,15 +18,26 @@ public class DNSFragment extends BaseFragment {
 
     private static final String TAG = "mLogU";
 
+    /*
+        ipv4和ipv6是分开缓存的
+
+        getaddrinfo(hostname, NULL, &hints, &ai); 和 getaddrinfo(hostname, portstr, &hints, &ai);
+        都是具有缓存效果，即这个portstr不作为缓存key的计算规则
+     */
     @Override
     protected void initOnCreateView() {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-//                nativeTest4();
-                nativeTest6();
-//                nativeTest();
+//                nativeTest4_NULL();
+                nativeTest4_443();
+                nativeTest4_1935();
+//                nativeTest6_NULL();
+//                nativeTest6_443();
+//                nativeTest6_1935();
+
+                nativeTest();
             }
         }).start();
 
@@ -127,9 +137,16 @@ public class DNSFragment extends BaseFragment {
 
     private native void nativeTest();
 
+    private native void nativeTest4_NULL();
 
-    private native void nativeTest4();
+    private native void nativeTest4_443();
 
-    private native void nativeTest6();
+    private native void nativeTest4_1935();
+
+    private native void nativeTest6_NULL();
+
+    private native void nativeTest6_443();
+
+    private native void nativeTest6_1935();
 
 }
