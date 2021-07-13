@@ -22,7 +22,8 @@ public class DNSFragment extends BaseFragment {
         ipv4和ipv6是分开缓存的
 
         getaddrinfo(hostname, NULL, &hints, &ai); 和 getaddrinfo(hostname, portstr, &hints, &ai);
-        都是具有缓存效果，即这个portstr不作为缓存key的计算规则
+        和端口号无关，即这个portstr不作为缓存key的计算规则，都具有缓存效果；
+        和请求方式无关，SOCK_STREAM和SOCK_DGRAM和0都具有缓存效果；
      */
     @Override
     protected void initOnCreateView() {
