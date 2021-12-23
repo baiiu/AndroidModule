@@ -58,11 +58,11 @@ JNIEXPORT void JNICALL
 Java_com_baiiu_jnitest_dns_DNSFragment_nativeTest4_11935(JNIEnv *env, jobject thiz) {
     struct addrinfo hints = {0}, *ai, *cur_ai;
     hints.ai_family = AF_INET; // 为0表示v4和v6都去查找
-//    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_socktype = SOCK_STREAM;
 
     const char *hostname = "mtplatform-tx-flv.meituan.net";
     char portstr[10];
-    int port = 1935;
+    int port = 443;
     snprintf(portstr, sizeof(portstr), "%d", port);
 
     int64_t dns_starttime = av_gettime_relative();

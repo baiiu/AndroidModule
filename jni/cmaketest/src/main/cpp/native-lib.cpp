@@ -11,6 +11,11 @@
 
 #endif
 
+
+void testBoolean(bool rtt) {
+    __android_log_print(ANDROID_LOG_ERROR, "mLogU", "testBoolean: %d", rtt);
+}
+
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_baiiu_cmaketest_MainActivity_hello(JNIEnv *env, jobject thiz) {
@@ -23,6 +28,16 @@ Java_com_baiiu_cmaketest_MainActivity_hello(JNIEnv *env, jobject thiz) {
     // 1 1 2 3 5 8
     __android_log_print(ANDROID_LOG_ERROR, "mLogU", "log: %d", test(5));
 #endif
+
+    jclass cls = env->GetObjectClass(thiz);
+
+    jmethodID callJavaMethodId = env->GetMethodID(cls, "cCallJava", "(ZJ)V");
+    jboolean b = 199; // 报错
+    jlong l = 1;
+
+    testBoolean(199);
+    env->CallVoidMethod(thiz, callJavaMethodId, b ? JNI_TRUE : JNI_FALSE, l);
+
 
     return env->NewStringUTF("hello");
 }

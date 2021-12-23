@@ -18,4 +18,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private native String hello();
+
+    private void cCallJava(boolean bool, long number) {
+        android.util.Log.e("mLogU", bool + ", " + number);
+    }
 }

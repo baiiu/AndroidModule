@@ -1,4 +1,3 @@
-include ':jni:nativeleak'
 import java.util.function.Consumer
 
 /*
@@ -23,7 +22,8 @@ include(
         ':hook:testapk',
         ":jni:jnitest",
         ':jni:mktest',
-        ':jni:cmaketest'
+        ':jni:cmaketest',
+        ':jni:nativeleak'
 
 )
 
@@ -49,7 +49,7 @@ include(
         //        ":someApplications:ptr-lib",
         //        ":someApplications:touchEventStudy",
         ':someApplications:researchStudy',
-
+        ':someApplications:multiprocess'
 )
 
 
