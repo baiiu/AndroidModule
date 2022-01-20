@@ -19,9 +19,9 @@ import static com.baiiu.multiprocess.BookManagerService.TAG_BINDER;
  * date: on 18/1/3 19:15
  * description:
  */
-public abstract class BookManagerImpl extends Binder implements IBookManager {
+public abstract class CustomBookManagerImpl extends Binder implements CustomBookManager {
 
-    protected BookManagerImpl() {
+    protected CustomBookManagerImpl() {
         this.attachInterface(this, DESCRIPTOR);
     }
 
@@ -32,15 +32,15 @@ public abstract class BookManagerImpl extends Binder implements IBookManager {
 
     // 将服务端的Binder对象转换成客户端所需的AIDL接口类型的对象
     // 这种转换是区分进程的
-    public static IBookManager asInterface(android.os.IBinder obj) {
+    public static CustomBookManager asInterface(android.os.IBinder obj) {
         if (obj == null) return null;
 
         IInterface inn = obj.queryLocalInterface(DESCRIPTOR);
-        if (inn != null && inn instanceof IBookManager) {
-            return (IBookManager) inn;
+        if (inn != null && inn instanceof CustomBookManager) {
+            return (CustomBookManager) inn;
         }
 
-        return new BookManagerImpl.Proxy(obj);
+        return new CustomBookManagerImpl.Proxy(obj);
     }
 
     // 运行在服务端中的Binder线程池中，当客户端发起跨进程请求时，远程请求会通过这个系统底层封装后交由此方法处理。
@@ -81,7 +81,7 @@ public abstract class BookManagerImpl extends Binder implements IBookManager {
         return super.onTransact(code, data, reply, flags);
     }
 
-    private static class Proxy implements IBookManager {
+    private static class Proxy implements CustomBookManager {
         private IBinder mRemote;
 
         Proxy(IBinder remote) {

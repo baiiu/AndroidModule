@@ -10,7 +10,6 @@ import android.os.RemoteException;
 import androidx.annotation.Nullable;
 
 import com.baiiu.library.LogUtil;
-import com.baiiu.multiprocess.custom.BookManagerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,8 @@ public class BookManagerService extends Service {
 
     private final List<Book> list = new ArrayList<>();
 
-    private Binder mBinder = new BookManagerImpl() {
+//    private Binder mBinder = new BookManagerImpl();
+    private Binder mBinder = new IBookManager.Stub() {
 
         @Override
         public List<Book> getBookList() throws RemoteException {

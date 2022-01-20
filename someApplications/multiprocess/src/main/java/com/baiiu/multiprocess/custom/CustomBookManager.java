@@ -13,7 +13,7 @@ import java.util.List;
  * date: on 18/1/3 14:25
  * description:
  */
-public interface IBookManager extends IInterface {
+public interface CustomBookManager extends IInterface {
 
     // Binder的唯一标识
     String DESCRIPTOR = "com.baiiu.mutiprocess.custom.IBookManager";
