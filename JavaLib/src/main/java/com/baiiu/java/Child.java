@@ -12,6 +12,7 @@ public class Child extends Parent {
     public static int b = 10;
 
     public int c = 10;
+    private final Object object;
 
     static {
         System.out.println("Child静态代码块 ==== " + b++);
@@ -21,9 +22,9 @@ public class Child extends Parent {
         System.out.println("Child构造代码块 ==== " + b++ + ", " + c++);
     }
 
-
     public Child() {
         System.out.println("Child构造函数 ==== " + b++ + ", " + c++);
+        object = "123";
     }
 
     @Override

@@ -10,7 +10,7 @@ include(
 
 //        ':plugin:pluginApplication',
 //        ':plugin:logkotplugin',
-        //        ':JavaLib',
+                ':JavaLib',
         //        ':plugin:testplugin',
         //        ':plugin:testKotlinPlugin',
 
